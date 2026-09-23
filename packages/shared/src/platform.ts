@@ -9,6 +9,8 @@ export interface PlatformMatch {
 interface Rule {
   platform: Platform;
   hosts: string[];
+  /** Matches any host ending in one of these (for platforms that serve content off subdomains, e.g. *.tumblr.com). */
+  hostSuffixes?: string[];
   guess: (url: URL) => ContentType;
 }
 
@@ -49,6 +51,42 @@ const RULES: Rule[] = [
     hosts: ['reddit.com', 'www.reddit.com', 'old.reddit.com', 'v.redd.it'],
     guess: () => 'reddit_video',
   },
+  {
+    platform: 'youtube',
+    hosts: ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'],
+    guess: (url) => (url.pathname.startsWith('/shorts/') ? 'youtube_short' : 'youtube_video'),
+  },
+  {
+    platform: 'pinterest',
+    hosts: ['pinterest.com', 'www.pinterest.com', 'pin.it'],
+    guess: () => 'pinterest_pin',
+  },
+  {
+    platform: 'snapchat',
+    hosts: ['snapchat.com', 'www.snapchat.com', 't.snapchat.com'],
+    guess: () => 'snapchat_spotlight',
+  },
+  {
+    platform: 'twitch',
+    hosts: ['twitch.tv', 'www.twitch.tv', 'clips.twitch.tv', 'm.twitch.tv'],
+    guess: () => 'twitch_clip',
+  },
+  {
+    platform: 'linkedin',
+    hosts: ['linkedin.com', 'www.linkedin.com'],
+    guess: () => 'linkedin_video',
+  },
+  {
+    platform: 'tumblr',
+    hosts: ['tumblr.com', 'www.tumblr.com'],
+    hostSuffixes: ['.tumblr.com'],
+    guess: () => 'tumblr_post',
+  },
+  {
+    platform: 'vimeo',
+    hosts: ['vimeo.com', 'www.vimeo.com', 'player.vimeo.com'],
+    guess: () => 'vimeo_video',
+  },
 ];
 
 /**
@@ -66,7 +104,8 @@ export function detectPlatform(rawUrl: string): PlatformMatch | null {
 
   const host = url.hostname.toLowerCase();
   for (const rule of RULES) {
-    if (rule.hosts.includes(host)) {
+    const matches = rule.hosts.includes(host) || (rule.hostSuffixes?.some((s) => host.endsWith(s)) ?? false);
+    if (matches) {
       return { platform: rule.platform, likelyContentType: rule.guess(url) };
     }
   }
@@ -81,4 +120,13 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   facebook: 'Facebook',
   twitter: 'X (Twitter)',
   reddit: 'Reddit',
+  youtube: 'YouTube',
+  pinterest: 'Pinterest',
+  snapchat: 'Snapchat',
+  twitch: 'Twitch',
+  linkedin: 'LinkedIn',
+  tumblr: 'Tumblr',
+  vimeo: 'Vimeo',
 };
+
+export const SUPPORTED_PLATFORM_COUNT = Object.keys(PLATFORM_LABELS).length;

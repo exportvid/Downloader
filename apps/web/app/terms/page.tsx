@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/JsonLd';
 import { LegalLayout } from '@/components/LegalLayout';
@@ -65,7 +66,7 @@ export default function TermsPage() {
 
       <h2>Contact</h2>
       <p>
-        Questions about these Terms can be sent through the <a href="/contact">Contact page</a>.
+        Questions about these Terms can be sent through the <Link href="/contact">Contact page</Link>.
       </p>
     </LegalLayout>
   );

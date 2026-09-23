@@ -1,4 +1,16 @@
-export type Platform = 'tiktok' | 'instagram' | 'facebook' | 'twitter' | 'reddit';
+export type Platform =
+  | 'tiktok'
+  | 'instagram'
+  | 'facebook'
+  | 'twitter'
+  | 'reddit'
+  | 'youtube'
+  | 'pinterest'
+  | 'snapchat'
+  | 'twitch'
+  | 'linkedin'
+  | 'tumblr'
+  | 'vimeo';
 
 export type ContentType =
   | 'tiktok_video'
@@ -16,6 +28,15 @@ export type ContentType =
   | 'reddit_video'
   | 'reddit_gif'
   | 'reddit_image'
+  | 'youtube_video'
+  | 'youtube_short'
+  | 'pinterest_pin'
+  | 'pinterest_video'
+  | 'snapchat_spotlight'
+  | 'twitch_clip'
+  | 'linkedin_video'
+  | 'tumblr_post'
+  | 'vimeo_video'
   | 'unknown';
 
 export interface MediaAsset {

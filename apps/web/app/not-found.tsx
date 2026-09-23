@@ -2,10 +2,11 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="container-tool flex flex-col items-center justify-center py-32 text-center">
-      <h1 className="font-display text-3xl font-semibold text-ink">Page not found</h1>
-      <p className="mt-3 text-ink-dim">The page you’re looking for doesn’t exist.</p>
-      <Link href="/" className="mt-6 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-contrast">
+    <div className="container-tool flex flex-col items-center py-28 text-center sm:py-36">
+      <p className="bg-brand-gradient bg-clip-text font-[family-name:var(--font-studio-display)] text-[110px] leading-none text-transparent sm:text-[150px]">404</p>
+      <h1 className="mt-2 text-xl font-semibold text-ink">Page not found</h1>
+      <p className="mt-2 text-[15px] text-ink-dim">This page doesn’t exist or has moved.</p>
+      <Link href="/" className="press mt-8 inline-flex h-12 items-center rounded-2xl bg-brand-gradient px-7 text-[15px] font-bold text-white shadow-glow transition-[filter] hover:brightness-110">
         Back to ExportVid
       </Link>
     </div>

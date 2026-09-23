@@ -23,26 +23,27 @@ async function runFfmpegMerge(data: MergeJobData): Promise<string> {
   // Re-validate both source URLs at merge time — they were extracted minutes
   // earlier and this process is about to fetch them directly.
   await assertSafeUrl(data.videoUrl);
-  await assertSafeUrl(data.audioUrl);
+  if (data.audioUrl) await assertSafeUrl(data.audioUrl);
 
   const outPath = path.join(localTmpDir(), `${randomUUID()}.${data.container}`);
+  const inputs = [data.videoUrl, ...(data.audioUrl ? [data.audioUrl] : [])].flatMap((u) => [
+    ...headersArg(data.httpHeaders),
+    '-i',
+    u,
+  ]);
+  // Stream copy only, never a re-encode. An HLS remux needs the ADTS-to-ASC fix so AAC audio lands in mp4 correctly.
   const args = [
     '-y',
-    ...headersArg(data.httpHeaders),
-    '-i',
-    data.videoUrl,
-    ...headersArg(data.httpHeaders),
-    '-i',
-    data.audioUrl,
+    ...inputs,
     '-c',
     'copy',
-    '-movflags',
-    '+faststart',
+    ...(data.audioUrl ? [] : ['-bsf:a', 'aac_adtstoasc']),
+    ...(data.container === 'mp4' ? ['-movflags', '+faststart'] : []),
     outPath,
   ];
 
   await new Promise<void>((resolve, reject) => {
-    execFile(config.FFMPEG_PATH, args, { timeout: 120_000, maxBuffer: 16 * 1024 * 1024 }, (err, _stdout, stderr) => {
+    execFile(config.FFMPEG_PATH, args, { timeout: 300_000, maxBuffer: 16 * 1024 * 1024 }, (err, _stdout, stderr) => {
       if (err) {
         reject(new Error(`ffmpeg failed: ${stderr?.slice(-2000) || err.message}`));
         return;

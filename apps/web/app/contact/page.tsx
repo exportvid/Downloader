@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { pageMetadata, breadcrumbJsonLd } from '@/lib/seo';
+import { PageHeader } from '@/components/PageHeader';
 import { JsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = pageMetadata({
@@ -28,22 +29,17 @@ const CHANNELS = [
 
 export default function ContactPage() {
   return (
-    <div className="container-tool py-16 sm:py-20">
+    <div className="container-tool py-14 sm:py-20">
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])} />
-      <h1 className="mb-3 text-center font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Contact</h1>
-      <p className="mx-auto mb-12 max-w-lg text-center text-base text-ink-dim">
-        ExportVid has no live chat or ticketing system yet — email is the fastest way to reach us.
-      </p>
+      <PageHeader eyebrow="Contact" title="Get in touch" intro="Email is the fastest way to reach us. There is no live chat yet." />
 
-      <div className="space-y-4">
+      <div className="mt-10 space-y-3">
         {CHANNELS.map((c) => (
-          <div key={c.title} className="card p-5">
-            <h2 className="text-sm font-semibold text-ink">{c.title}</h2>
-            <p className="mt-1.5 text-sm leading-relaxed text-ink-faint">{c.body}</p>
-            <a href={`mailto:${c.email}`} className="mt-3 inline-block text-sm text-accent hover:underline">
-              {c.email}
-            </a>
-          </div>
+          <a key={c.title} href={`mailto:${c.email}`} className="card lift group block p-6 hover:bg-base-raised">
+            <h2 className="text-[16px] font-semibold text-ink">{c.title}</h2>
+            <p className="mt-1.5 text-[14px] leading-relaxed text-ink-dim">{c.body}</p>
+            <span className="mt-3 inline-block text-sm font-medium text-accent">{c.email}</span>
+          </a>
         ))}
       </div>
     </div>

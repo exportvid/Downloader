@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/JsonLd';
 import { LegalLayout } from '@/components/LegalLayout';
@@ -43,9 +44,8 @@ export default function PrivacyPage() {
 
       <h2>Third-party platforms</h2>
       <p>
-        ExportVid retrieves publicly available media from third-party platforms (TikTok, Instagram, Facebook, X, and
-        Reddit). Your use of those platforms remains subject to their own privacy policies and terms, which we do not
-        control.
+        ExportVid retrieves publicly available media from third-party platforms. Your use of those platforms remains
+        subject to their own privacy policies and terms, which we do not control.
       </p>
 
       <h2>Data retention</h2>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
       <p>
         Because ExportVid does not maintain accounts or persistent personal data, there is generally nothing tied to you
         to access, export, or delete. If you have a specific privacy concern or request, contact us using the details on
-        the <a href="/contact">Contact page</a>.
+        the <Link href="/contact">Contact page</Link>.
       </p>
 
       <h2>Changes to this policy</h2>

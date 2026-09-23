@@ -39,6 +39,15 @@ const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
   reddit_video: 'Reddit Video',
   reddit_gif: 'Reddit GIF',
   reddit_image: 'Reddit Image',
+  youtube_video: 'YouTube Video',
+  youtube_short: 'YouTube Short',
+  pinterest_pin: 'Pinterest Pin',
+  pinterest_video: 'Pinterest Video',
+  snapchat_spotlight: 'Snapchat Spotlight',
+  twitch_clip: 'Twitch Clip',
+  linkedin_video: 'LinkedIn Video',
+  tumblr_post: 'Tumblr Post',
+  vimeo_video: 'Vimeo Video',
   unknown: 'Media',
 };
 

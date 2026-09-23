@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/JsonLd';
 import { LegalLayout } from '@/components/LegalLayout';
@@ -16,7 +17,7 @@ export default function CopyrightPage() {
 
       <p>
         ExportVid respects the intellectual property rights of others and expects users of the Service to do the same.
-        ExportVid does not host or store copyrighted media — it retrieves publicly available content directly from
+        ExportVid does not host or store copyrighted media. It retrieves publicly available content directly from
         the source platform at the time of a request. If you believe your copyrighted work is being made available
         through the Service in a way that infringes your rights, you may submit a takedown request.
       </p>
@@ -24,12 +25,12 @@ export default function CopyrightPage() {
       <h2>Before you file a request</h2>
       <p>
         Because ExportVid only retrieves content that is already publicly accessible on the source platform, removing
-        access at the source (e.g. filing a takedown directly with TikTok, Instagram, Facebook, X, or Reddit, or setting
-        the content to private) is typically the fastest way to prevent further access, including through ExportVid.
+        access at the source (filing a takedown directly with that platform, or setting the content to private) is
+        typically the fastest way to prevent further access, including through ExportVid.
       </p>
 
       <h2>Submitting a takedown request to ExportVid</h2>
-      <p>To submit a request, contact us via the <a href="/contact">Contact page</a> and include:</p>
+      <p>To submit a request, contact us via the <Link href="/contact">Contact page</Link> and include:</p>
       <ul>
         <li>Identification of the copyrighted work you claim has been infringed.</li>
         <li>The specific URL(s) or description of the content in question.</li>
@@ -52,7 +53,7 @@ export default function CopyrightPage() {
 
       <h2>Contact</h2>
       <p>
-        Send copyright and takedown requests through the <a href="/contact">Contact page</a>, selecting the Copyright
+        Send copyright and takedown requests through the <Link href="/contact">Contact page</Link>, selecting the Copyright
         category so it reaches the right team.
       </p>
     </LegalLayout>

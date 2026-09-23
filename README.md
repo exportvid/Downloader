@@ -1,6 +1,6 @@
 # ExportVid
 
-A fast, minimal downloader for public social media content — TikTok, Instagram, Facebook, X (Twitter), and Reddit. Paste a link, get the real available formats, download instantly. No accounts, no logins, no app.
+A fast, minimal downloader for public social media content across 12 platforms: TikTok, Instagram, Facebook, X, Reddit, YouTube, Pinterest, Snapchat, Twitch, LinkedIn, Tumblr, and Vimeo. Paste a link, get the real available formats, download instantly. No accounts, no logins, no app.
 
 ## Architecture
 
@@ -48,6 +48,12 @@ npx tsx apps/api/src/worker.ts # merge worker, in a third terminal (only needed 
 - **TikTok and Instagram actively block requests from cloud/datacenter IPs.** Testing from this environment, both returned bot-detection errors even for known-good public URLs, while the same yt-dlp version reached X and Reddit's page layer fine. This is an industry-wide problem for this category of tool, not a bug in this codebase — expect to need a residential/rotating proxy pool for reliable TikTok and Instagram extraction in production, and budget for yt-dlp needing frequent updates as these platforms change their pages.
 - **Reddit's extractor now requires authenticated cookies for most posts** (a recent Reddit API lockdown affecting yt-dlp broadly, not specific to this deployment). A no-login downloader will hit `PRIVATE_OR_PROTECTED_CONTENT` for a meaningful share of Reddit links until/unless a cookie-based workaround is added — which would need its own privacy/ToS review before adding.
 - X/Twitter extraction was verified working end-to-end against a live post, including correct muxed-format detection (see the note in `apps/api/src/extraction/normalize.ts` about `vcodec`/`acodec` being `null` vs the literal string `"none"` on Twitter's progressive formats — a real bug caught and fixed during this build).
+- **YouTube works** with browser impersonation (`curl_cffi`) plus the `android_vr` player client, which returns the full 144p to 2160p ladder as split video/audio streams. The merge worker stream-copies them into one file. yt-dlp needs to be kept current, and YouTube is the platform with the most legal risk for download tools (see the 2020 RIAA/youtube-dl DMCA case), so get a legal read before promoting it.
+- **Verified live from a datacenter IP**: X, YouTube, Pinterest (video pins), Twitch clips, LinkedIn, Snapchat Spotlight.
+- **Blocked by IP reputation from a datacenter IP (403 even with impersonation)**: TikTok, Instagram, Tumblr, Vimeo. Set `YTDLP_PROXY` to a residential egress in production. Reddit and some Vimeo videos also require login, which this product never uses, so those return `PRIVATE_OR_PROTECTED_CONTENT`.
+- **Threads was removed.** yt-dlp has no extractor for it, and logged-out Threads pages don't contain the post media at all (`og:image` is the author's avatar), so supporting it would require a logged-in session.
+- Pinterest image-only pins and Snapchat Stories aren't supported (yt-dlp errors or has no extractor); only video pins and Spotlight are claimed on the site.
+- The ffmpeg merge path (YouTube 480p and above, HLS-only sources) was not run here because ffmpeg isn't installed in this environment. The normalizer output was verified against live data; the merge worker itself needs a test on a machine with ffmpeg and Redis.
 
 ## Deployment notes
 
@@ -57,4 +63,6 @@ npx tsx apps/api/src/worker.ts # merge worker, in a third terminal (only needed 
 
 ## Explicitly out of scope (per product spec)
 
-No accounts, profiles, download history, favorites, comments, social features, mobile app, browser extension, editor, AI tools, cloud storage, bulk downloading, or a general platform catalog beyond the five launch platforms. Pinterest is a planned follow-up, not launch scope.
+No accounts, profiles, download history, favorites, comments, social features, mobile app, browser extension, editor, AI tools, cloud storage, or bulk downloading.
+
+Every platform has its own landing page (`/[slug]`, driven by `apps/web/lib/platforms.ts`) that reuses the homepage download hero.

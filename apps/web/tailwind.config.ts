@@ -7,21 +7,24 @@ const config: Config = {
     extend: {
       colors: {
         base: {
-          DEFAULT: '#0a0b0d',
-          surface: '#111316',
-          raised: '#17191d',
+          DEFAULT: '#0a0a0f',
+          surface: '#131319',
+          raised: '#1a1a22',
         },
         line: 'rgba(255,255,255,0.08)',
-        'line-strong': 'rgba(255,255,255,0.14)',
+        'line-strong': 'rgba(255,255,255,0.15)',
         ink: {
-          DEFAULT: '#f3f5f4',
-          dim: '#a4aaa8',
-          faint: '#6b7270',
+          DEFAULT: '#f5f3f0',
+          dim: '#a8a5ad',
+          faint: '#6e6b76',
         },
         accent: {
-          DEFAULT: '#00e6a8',
-          dim: '#0ba87f',
-          contrast: '#04120d',
+          DEFAULT: '#ff5a3c',
+          from: '#ffab5c',
+          via: '#ff5a3c',
+          to: '#c81f2e',
+          dim: '#c8402c',
+          contrast: '#1a0906',
         },
       },
       fontFamily: {
@@ -33,10 +36,25 @@ const config: Config = {
         xl2: '1.25rem',
       },
       boxShadow: {
-        glow: '0 0 0 1px rgba(0,230,168,0.15), 0 8px 30px -10px rgba(0,230,168,0.25)',
+        glow: '0 0 0 1px rgba(255,90,60,0.18), 0 10px 34px -10px rgba(255,90,60,0.35)',
+        card: '0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 40px -24px rgba(0,0,0,0.55)',
       },
       backgroundImage: {
-        'grid-fade': 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,230,168,0.12), transparent)',
+        'grid-fade': 'radial-gradient(ellipse 70% 55% at 50% -8%, rgba(255,138,61,0.16), transparent)',
+        'brand-gradient': 'linear-gradient(135deg, #ffab5c 0%, #ff5a3c 55%, #c81f2e 100%)',
+      },
+      transitionTimingFunction: {
+        out: 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'in-out': 'cubic-bezier(0.77, 0, 0.175, 1)',
+      },
+      keyframes: {
+        fadeUp: {
+          from: { opacity: '0', transform: 'translateY(10px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'fade-up': 'fadeUp 420ms cubic-bezier(0.23, 1, 0.32, 1) both',
       },
     },
   },

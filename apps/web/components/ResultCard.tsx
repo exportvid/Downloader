@@ -8,13 +8,13 @@ export function ResultCard({ result }: { result: ExtractionResult }) {
 
   return (
     <div className="card overflow-hidden">
-      <div className="flex flex-col gap-4 border-b border-line p-5 sm:flex-row">
+      <div className="flex flex-col gap-4 border-b border-line bg-base-raised/40 p-5 sm:flex-row">
         {result.thumbnail && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={result.thumbnail}
             alt={result.title ?? 'Media thumbnail'}
-            className="h-40 w-full rounded-lg object-cover sm:h-24 sm:w-24"
+            className="h-40 w-full rounded-lg object-cover ring-1 ring-inset ring-white/5 sm:h-24 sm:w-24"
             loading="lazy"
           />
         )}
@@ -23,7 +23,7 @@ export function ResultCard({ result }: { result: ExtractionResult }) {
             <span className="rounded-full border border-line-strong px-2.5 py-0.5 text-xs font-medium text-ink-dim">
               {PLATFORM_LABELS[result.platform]}
             </span>
-            <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
+            <span className="rounded-full bg-accent/12 px-2.5 py-0.5 text-xs font-medium text-accent">
               {contentTypeLabel(result.contentType)}
             </span>
             {duration && <span className="text-xs text-ink-faint">{duration}</span>}
@@ -34,8 +34,12 @@ export function ResultCard({ result }: { result: ExtractionResult }) {
       </div>
 
       <ul className="divide-y divide-line">
-        {result.assets.map((asset) => (
-          <li key={asset.id} className="flex items-center justify-between gap-4 p-4 sm:px-5">
+        {result.assets.map((asset, i) => (
+          <li
+            key={asset.id}
+            className="stagger-item flex items-center justify-between gap-4 p-4 transition-colors hover:bg-base-raised/30 sm:px-5"
+            style={{ animationDelay: `${Math.min(i, 6) * 45}ms` }}
+          >
             <div className="min-w-0">
               <p className="text-sm font-medium text-ink">{asset.label}</p>
               <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-ink-faint">

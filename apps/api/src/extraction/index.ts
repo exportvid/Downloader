@@ -36,7 +36,7 @@ export async function runExtraction(rawUrl: string): Promise<NormalizedExtractio
 
   let info;
   try {
-    info = await fetchInfo(rawUrl, { timeoutMs: config.EXTRACTION_TIMEOUT_MS });
+    info = await fetchInfo(rawUrl, { timeoutMs: config.EXTRACTION_TIMEOUT_MS, platform: match.platform });
   } catch (e) {
     if (e instanceof YtDlpError) {
       if (e.kind === 'PRIVATE_OR_PROTECTED') throw new ExtractionInputError(e.message, 'PRIVATE_OR_PROTECTED_CONTENT');

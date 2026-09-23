@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { pageMetadata, breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/JsonLd';
+import { SUPPORTED_PLATFORM_COUNT } from '@exportvid/shared';
+import { PageHeader } from '@/components/PageHeader';
+import { Accordion } from '@/components/Section';
+import { ALL_PLATFORMS } from '@/components/PlatformMark';
 
 export const metadata: Metadata = pageMetadata({
   title: 'FAQ',
@@ -11,19 +15,19 @@ export const metadata: Metadata = pageMetadata({
 const FAQS = [
   {
     q: 'Is ExportVid free?',
-    a: 'Yes. Pasting a link and downloading the available media is free, with no account or subscription required.',
+    a: 'Yes. Pasting a link and downloading the available media is free, with no subscription.',
   },
   {
     q: 'Which platforms are supported?',
-    a: 'TikTok, Instagram, Facebook, X (Twitter), and Reddit. See the Supported Sites page for the full breakdown by content type.',
+    a: `${SUPPORTED_PLATFORM_COUNT} platforms: ${ALL_PLATFORMS.map((p) => p.label).join(', ')}. See the Supported Sites page for the full breakdown by content type.`,
   },
   {
-    q: 'Why doesn’t ExportVid say a video is "4K" or "watermark-free"?',
-    a: 'ExportVid only shows quality information that is actually true of the file you’re about to download. If the source doesn’t provide 4K, we won’t claim it does, and we never fabricate a watermark-free version that doesn’t exist on the source.',
+    q: 'Will I get a watermark-free file?',
+    a: 'When the source offers a clean file, ExportVid picks it. TikTok is one example. When a source only has a watermarked version, we cannot remove the mark and we do not claim to. The same applies to quality: we list only what the source provides, so there is no fake 4K.',
   },
   {
     q: 'Does ExportVid re-encode videos?',
-    a: 'No, not unless required. Whenever a platform serves video and audio as separate files, ExportVid combines them using a direct stream copy rather than re-encoding, which preserves the original quality exactly.',
+    a: 'Only when needed. When a platform serves video and audio as separate files, ExportVid combines them with a direct stream copy instead of re-encoding, which keeps the original quality.',
   },
   {
     q: 'Can ExportVid download private accounts or login-protected content?',
@@ -31,7 +35,7 @@ const FAQS = [
   },
   {
     q: 'Do I need to install anything?',
-    a: 'No. ExportVid runs entirely in your browser — no app, extension, or account.',
+    a: 'No. ExportVid runs entirely in your browser. No app, extension, or account.',
   },
   {
     q: 'Is it legal to download social media videos?',
@@ -39,25 +43,18 @@ const FAQS = [
   },
   {
     q: 'How long are downloads available?',
-    a: 'Extraction results are only cached briefly to serve concurrent requests efficiently. If a link expires before you download, simply paste it again.',
+    a: 'Extraction results are only cached briefly to serve concurrent requests efficiently. If a link expires before you download, paste it again.',
   },
 ];
 
 export default function FaqPage() {
   return (
-    <div className="container-tool py-16 sm:py-20">
+    <div className="container-tool py-14 sm:py-20">
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }])} />
       <JsonLd data={faqJsonLd(FAQS)} />
-      <h1 className="mb-10 text-center font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-        Frequently asked questions
-      </h1>
-      <div className="divide-y divide-line rounded-xl2 border border-line">
-        {FAQS.map((f) => (
-          <div key={f.q} className="p-5">
-            <p className="text-sm font-medium text-ink">{f.q}</p>
-            <p className="mt-2 text-sm leading-relaxed text-ink-faint">{f.a}</p>
-          </div>
-        ))}
+      <PageHeader eyebrow="FAQ" title="Frequently asked questions" />
+      <div className="mt-10">
+        <Accordion items={FAQS} />
       </div>
     </div>
   );

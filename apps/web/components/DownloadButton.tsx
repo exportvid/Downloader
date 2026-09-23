@@ -57,13 +57,13 @@ export function DownloadButton({ requestId, assetId, label }: { requestId: strin
         type="button"
         onClick={startDownload}
         disabled={isBusy}
-        className="inline-flex min-w-[112px] items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-contrast transition-transform hover:brightness-110 active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
+        className="press inline-flex min-w-[112px] items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-contrast transition-[filter,opacity] duration-200 ease-out hover:brightness-110 disabled:cursor-wait disabled:opacity-70"
       >
         {status === 'preparing' && <Spinner />}
         {status === 'processing' && <Spinner />}
         {isBusy ? (status === 'processing' ? 'Merging…' : 'Preparing…') : label}
       </button>
-      {status === 'error' && error && <p className="max-w-[220px] text-right text-xs text-red-400">{error}</p>}
+      {status === 'error' && error && <p className="reveal max-w-[220px] text-right text-xs text-rose-400">{error}</p>}
     </div>
   );
 }

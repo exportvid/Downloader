@@ -5,7 +5,7 @@ export interface MergeJobData {
   requestId: string;
   assetId: string;
   videoUrl: string;
-  audioUrl: string;
+  audioUrl?: string;
   container: string;
   httpHeaders?: Record<string, string>;
   titleHint: string;

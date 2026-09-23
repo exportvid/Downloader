@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Inter, Space_Grotesk, Bebas_Neue } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -8,22 +8,23 @@ import { organizationJsonLd, websiteJsonLd } from '@/lib/seo';
 import { SITE_URL } from '@/lib/config';
 
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+const studio = Bebas_Neue({ subsets: ['latin'], weight: '400', variable: '--font-studio-display', display: 'swap' });
 const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display', display: 'swap', weight: ['500', '600', '700'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ExportVid — Download social media content fast',
+    default: 'ExportVid | Download social media content fast',
     template: '%s | ExportVid',
   },
   description:
-    'Paste a public social media link and download the available media in the highest quality. No account, no app, no watermarks claims — just a fast, direct download.',
+    'Paste a link and download videos and photos from TikTok, Instagram, YouTube, X, and more. Free, fast, and no watermark.',
   icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+    <html lang="en" className={`${sans.variable} ${display.variable} ${studio.variable}`}>
       <body className="flex min-h-screen flex-col">
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />

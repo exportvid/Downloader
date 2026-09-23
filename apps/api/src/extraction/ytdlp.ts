@@ -21,6 +21,8 @@ export interface YtDlpFormat {
   height?: number;
   fps?: number;
   tbr?: number; // total bitrate, kbps
+  abr?: number; // audio bitrate, kbps
+  protocol?: string;
   filesize?: number;
   filesize_approx?: number;
   url: string;
@@ -49,32 +51,38 @@ export interface YtDlpInfo {
   acodec?: string;
   filesize?: number;
   http_headers?: Record<string, string>;
+  protocol?: string;
   // Photo/carousel posts (Instagram) surface additional entries here.
   entries?: YtDlpInfo[];
 }
 
-/**
- * Runs `yt-dlp -J <url>` to fetch metadata only — never downloads media here.
- * Arguments are passed as an array (execFile, no shell) so the URL can never
- * inject shell syntax.
- */
-export function fetchInfo(url: string, opts: { timeoutMs: number }): Promise<YtDlpInfo> {
-  return new Promise((resolve, reject) => {
-    const args = [
-      '-J',
-      '--no-warnings',
-      '--no-playlist',
-      '--skip-download',
-      '--no-check-certificates',
-      '--socket-timeout',
-      '15',
-      url,
-    ];
+let impersonationAvailable: Promise<boolean> | null = null;
 
+/** True when yt-dlp can impersonate a browser TLS fingerprint (curl_cffi installed). Checked once. */
+function canImpersonate(): Promise<boolean> {
+  if (!config.YTDLP_IMPERSONATE) return Promise.resolve(false);
+  impersonationAvailable ??= new Promise((resolve) => {
+    execFile(config.YTDLP_PATH, ['--list-impersonate-targets'], { timeout: 10_000 }, (err, stdout) => {
+      resolve(!err && /curl_cffi/i.test(stdout));
+    });
+  });
+  return impersonationAvailable;
+}
+
+async function buildArgs(url: string, extra: string[]): Promise<string[]> {
+  const args = ['-J', '--no-warnings', '--no-playlist', '--skip-download', '--socket-timeout', '15'];
+  if (await canImpersonate()) args.push('--impersonate', config.YTDLP_IMPERSONATE);
+  if (config.YTDLP_PROXY) args.push('--proxy', config.YTDLP_PROXY);
+  args.push(...extra, url);
+  return args;
+}
+
+function runYtDlp(args: string[], timeoutMs: number): Promise<YtDlpInfo> {
+  return new Promise((resolve, reject) => {
     const child = execFile(
       config.YTDLP_PATH,
       args,
-      { timeout: opts.timeoutMs, maxBuffer: 32 * 1024 * 1024 },
+      { timeout: timeoutMs, maxBuffer: 32 * 1024 * 1024 },
       (err, stdout, stderr) => {
         if (err) {
           const execErr = err as ExecFileException;
@@ -89,6 +97,7 @@ export function fetchInfo(url: string, opts: { timeoutMs: number }): Promise<YtD
             combined.includes('requires authentication') ||
             combined.includes('account authentication') ||
             combined.includes('rate-limit reached or login') ||
+            combined.includes('only works when logged-in') ||
             combined.includes('this account is private') ||
             combined.includes('use --cookies')
           ) {
@@ -100,8 +109,7 @@ export function fetchInfo(url: string, opts: { timeoutMs: number }): Promise<YtD
           return reject(new YtDlpError(stderr || err.message, 'UNKNOWN'));
         }
         try {
-          const parsed = JSON.parse(stdout) as YtDlpInfo;
-          resolve(parsed);
+          resolve(JSON.parse(stdout) as YtDlpInfo);
         } catch {
           reject(new YtDlpError('Could not parse extractor output', 'UNKNOWN'));
         }
@@ -109,4 +117,21 @@ export function fetchInfo(url: string, opts: { timeoutMs: number }): Promise<YtD
     );
     child.on('error', (e) => reject(new YtDlpError(e.message, 'UNKNOWN')));
   });
+}
+
+/**
+ * Runs `yt-dlp -J <url>` to fetch metadata only, never downloading media.
+ * Arguments are passed as an array (execFile, no shell) so the URL can never
+ * inject shell syntax. YouTube tries the android_vr client first (it returns the
+ * full resolution ladder without a PO token) and falls back to yt-dlp's defaults.
+ */
+export async function fetchInfo(url: string, opts: { timeoutMs: number; platform?: string }): Promise<YtDlpInfo> {
+  if (opts.platform === 'youtube') {
+    try {
+      return await runYtDlp(await buildArgs(url, ['--extractor-args', 'youtube:player_client=android_vr']), opts.timeoutMs);
+    } catch (e) {
+      if (e instanceof YtDlpError && e.kind === 'TIMEOUT') throw e;
+    }
+  }
+  return runYtDlp(await buildArgs(url, []), opts.timeoutMs);
 }

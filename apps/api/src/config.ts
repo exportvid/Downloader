@@ -11,6 +11,10 @@ const schema = z.object({
   REDIS_URL: z.string().default('redis://localhost:6379'),
 
   YTDLP_PATH: z.string().default('yt-dlp'),
+  // Browser TLS impersonation target (needs curl_cffi installed alongside yt-dlp). Empty disables it.
+  YTDLP_IMPERSONATE: z.string().default('chrome'),
+  // Optional outbound proxy (e.g. a residential egress) for platforms that block datacenter IPs.
+  YTDLP_PROXY: z.string().optional(),
   FFMPEG_PATH: z.string().default('ffmpeg'),
 
   R2_ACCOUNT_ID: z.string().optional(),
