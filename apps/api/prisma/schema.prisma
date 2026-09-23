@@ -1,0 +1,47 @@
+// Minimal persistence: monitoring only. No media is ever stored here.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ExtractionOutcome {
+  SUCCESS
+  UNSUPPORTED_URL
+  INVALID_URL
+  PRIVATE_OR_PROTECTED_CONTENT
+  NOT_FOUND
+  EXTRACTION_FAILED
+  TIMEOUT
+  RATE_LIMITED
+  INTERNAL_ERROR
+}
+
+/// One row per extraction attempt. Powers the success-rate / failure /
+/// processing-time monitoring called out in the product spec.
+model ExtractionEvent {
+  id             String            @id @default(uuid())
+  platform       String
+  outcome        ExtractionOutcome
+  processingMs   Int
+  createdAt      DateTime          @default(now())
+
+  @@index([platform, createdAt])
+  @@index([outcome, createdAt])
+}
+
+/// One row per merge (ffmpeg) worker job, for worker-error monitoring.
+model MergeJobEvent {
+  id           String   @id @default(uuid())
+  requestId    String
+  assetId      String
+  succeeded    Boolean
+  errorMessage String?
+  processingMs Int
+  createdAt    DateTime @default(now())
+
+  @@index([succeeded, createdAt])
+}
