@@ -6,14 +6,14 @@ import { detectPlatform } from '@exportvid/shared';
 import { extractMedia, ExtractionApiError } from './api';
 
 export const DOWNLOADER_ERROR_MESSAGES: Record<string, string> = {
-  UNSUPPORTED_URL: "That link isn't from a supported platform.",
-  INVALID_URL: "That doesn't look like a valid link.",
-  PRIVATE_OR_PROTECTED_CONTENT: 'This content is private or requires login.',
-  NOT_FOUND: 'No downloadable media found at that link.',
-  EXTRACTION_FAILED: 'The source didn’t return usable media. It may be removed or temporarily blocked.',
-  RATE_LIMITED: "You're going a bit too fast. Try again in a moment.",
-  TIMEOUT: 'The source took too long to respond. Please try again.',
-  INTERNAL_ERROR: 'Something went wrong. Please try again.',
+  UNSUPPORTED_URL: "ExportVid doesn't support that site yet. Check the supported sites list.",
+  INVALID_URL: "That doesn't look like a link. Copy the full address of the post and paste it again.",
+  PRIVATE_OR_PROTECTED_CONTENT: "This post is private or needs a login, so ExportVid can't reach it.",
+  NOT_FOUND: "We couldn't find a video or photo at that link. Check that the post still exists.",
+  EXTRACTION_FAILED: 'The platform didn’t return a file. The post may be removed, or the platform may be blocking the request. Try again in a minute.',
+  RATE_LIMITED: 'Too many requests. Wait a moment and try again.',
+  TIMEOUT: 'The platform took too long to respond. Try again.',
+  INTERNAL_ERROR: 'Something went wrong on our end. Try again.',
 };
 
 export type DownloaderStatus = 'idle' | 'loading' | 'error' | 'success';

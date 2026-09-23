@@ -95,8 +95,8 @@ export function DownloadHero({
                     spellCheck={false}
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="Paste a video or post link"
-                    aria-label="Video or post link"
+                    placeholder="Paste a video or photo link"
+                    aria-label="Video or photo link"
                     className="h-16 min-w-0 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-ink-faint"
                   />
                   {detected && (

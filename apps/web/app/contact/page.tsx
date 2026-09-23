@@ -5,24 +5,24 @@ import { JsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Contact',
-  description: 'Get in touch with ExportVid for support, copyright requests, or privacy questions.',
+  description: 'Contact ExportVid for help with a download, copyright requests, or privacy questions.',
   path: '/contact',
 });
 
 const CHANNELS = [
   {
     title: 'General support',
-    body: 'Questions about how ExportVid works, a platform that isn’t extracting correctly, or general feedback.',
+    body: 'Questions about how ExportVid works, a link that won’t download, or general feedback.',
     email: 'support@exportvid.com',
   },
   {
-    title: 'Copyright & takedowns',
-    body: 'Submit a takedown request or counter-notice. See the Copyright page for what to include.',
+    title: 'Copyright and takedowns',
+    body: 'Send a takedown request or counter-notice. The Copyright page lists what to include.',
     email: 'copyright@exportvid.com',
   },
   {
     title: 'Privacy & security',
-    body: 'Privacy questions, or reporting a security issue.',
+    body: 'Questions about your data, or a security issue to report.',
     email: 'privacy@exportvid.com',
   },
 ];

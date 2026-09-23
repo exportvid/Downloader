@@ -36,15 +36,15 @@ export function DownloadButton({ requestId, assetId, label }: { requestId: strin
           return;
         }
         if (job.status === 'failed') {
-          setError('Could not prepare this file. Please try a different quality.');
+          setError('Couldn’t prepare this file. Try a different quality.');
           setStatus('error');
           return;
         }
       }
-      setError('This is taking longer than expected. Please try again.');
+      setError('This is taking longer than expected. Try again.');
       setStatus('error');
     } catch {
-      setError('Something went wrong. Please try again.');
+      setError('Something went wrong. Try again.');
       setStatus('error');
     }
   }, [requestId, assetId]);

@@ -29,7 +29,7 @@ export default function OgImage() {
           </div>
         </div>
         <div style={{ display: 'flex', marginTop: 24, fontSize: 28, color: '#a8a5ad' }}>
-          Download social media content fast.
+          Download videos and photos from social media.
         </div>
       </div>
     ),

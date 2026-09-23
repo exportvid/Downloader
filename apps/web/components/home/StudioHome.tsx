@@ -4,21 +4,27 @@ import { ALL_PLATFORMS, PLATFORM_COLORS, PlatformMark } from '@/components/Platf
 import { Accordion, Section } from '@/components/Section';
 
 const STEPS = [
-  { n: '1', title: 'Paste a link', body: 'Copy the link to a post and paste it in the box above.' },
-  { n: '2', title: 'Pick a format', body: 'ExportVid reads the link and lists every format the source offers.' },
-  { n: '3', title: 'Download', body: 'The file goes from the source to your device.' },
+  { n: '1', title: 'Paste a link', body: 'Copy the link to a video or photo and paste it in the box above.' },
+  { n: '2', title: 'Choose a quality', body: 'ExportVid checks the link and lists every quality and format available.' },
+  { n: '3', title: 'Download', body: 'Save the file to your phone or computer.' },
 ];
 
 const FAQS = [
-  { q: 'Is ExportVid free?', a: 'Yes. There are no subscriptions or hidden fees.' },
-  { q: 'Do I need to sign up or install anything?', a: 'No. ExportVid runs in your browser. Paste a link and download.' },
-  { q: 'Which platforms are supported?', a: `${ALL_PLATFORMS.map((p) => p.label).join(', ')}.` },
+  { q: 'Is ExportVid free?', a: 'Yes. ExportVid is free to use. There are no fees or subscriptions.' },
   {
-    q: 'Does ExportVid re-encode my video?',
-    a: 'No. Files are copied directly from the source. When video and audio are served separately, we merge them without touching the original quality.',
+    q: 'How do I download a video from social media?',
+    a: 'Copy the link to the video, paste it into the box at the top of the page, and select Download. Choose a quality from the list, then save the file to your device.',
   },
-  { q: 'Can ExportVid download private accounts?', a: 'No. It only works with public content and never attempts to access private or login-protected posts.' },
-  { q: 'What quality will I get?', a: 'Whatever the source provides. We list every resolution it offers and never add a quality tier that doesn’t exist.' },
+  { q: 'Which sites can I download from?', a: `${ALL_PLATFORMS.map((p) => p.label).join(', ')}.` },
+  {
+    q: 'Can I download videos without a watermark?',
+    a: 'Yes, when the platform offers a clean file. ExportVid picks that version automatically. TikTok is one example. If a video only exists with a watermark, ExportVid can’t remove it.',
+  },
+  {
+    q: 'Does ExportVid lower the video quality?',
+    a: 'No. You get the quality the platform provides, and the list shows every option. When video and audio come as separate files, ExportVid joins them without re-encoding.',
+  },
+  { q: 'Can I download from private accounts?', a: 'No. ExportVid only works with posts anyone can view. It never tries to open private or login-protected content.' },
 ];
 
 export function StudioHome() {
@@ -26,15 +32,15 @@ export function StudioHome() {
     <div className="pb-8">
       <DownloadHero
         title="Download videos and photos"
-        intro="Paste a link and download the media in the best available quality, with no watermark."
+        intro="Paste a link from YouTube, Facebook, Instagram, TikTok, and more. Get the video or photo in the best quality available, with no watermark."
       />
       <HowItWorks />
       <WhyExportVid />
       <SupportedPlatforms />
-      <Section eyebrow="FAQ" title="Common questions" narrow>
+      <Section eyebrow="FAQ" title="Frequently asked questions" narrow>
         <Accordion items={FAQS} />
         <p className="mt-6 text-center text-sm text-ink-faint">
-          More answers are in the{' '}
+          You can find more answers in the{' '}
           <Link href="/faq" className="text-accent transition-colors hover:text-[#ffab5c]">
             full FAQ
           </Link>
@@ -48,7 +54,7 @@ export function StudioHome() {
 
 function HowItWorks() {
   return (
-    <Section eyebrow="How it works" title="Three steps">
+    <Section eyebrow="How it works" title="How to download in three steps">
       <ol className="grid gap-4 sm:grid-cols-3">
         {STEPS.map((s, i) => (
           <li key={s.n} className="card scroll-reveal relative overflow-hidden p-6 sm:p-7" style={{ animationDelay: `${i * 60}ms` }}>
@@ -87,20 +93,20 @@ function Icon({ d }: { d: string }) {
 
 function WhyExportVid() {
   const small = [
-    { d: icon.gauge, title: 'Honest quality labels', body: 'You see the quality the source provides. No fake 4K.' },
-    { d: icon.copy, title: 'Original quality', body: 'Video and audio are combined with a stream copy, never re-encoded.' },
-    { d: icon.lock, title: 'Nothing stored', body: 'Files are not kept on our servers once you have them.' },
-    { d: icon.device, title: 'Works in any browser', body: 'Desktop or phone. No app to install.' },
+    { d: icon.gauge, title: 'Honest quality labels', body: 'Every quality label matches the real file. No fake 4K.' },
+    { d: icon.copy, title: 'Original quality', body: 'When video and audio come separately, we join them without re-encoding.' },
+    { d: icon.lock, title: 'Nothing stored', body: 'We don’t keep your downloads. Temporary files are deleted after about 15 minutes.' },
+    { d: icon.device, title: 'Works in any browser', body: 'Use it on your phone or computer. Nothing to install.' },
   ];
   return (
-    <Section eyebrow="Why ExportVid" title="Simple and honest">
+    <Section eyebrow="Why ExportVid" title="Why use ExportVid">
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="card scroll-reveal relative overflow-hidden bg-gradient-to-br from-accent/[0.16] via-base-surface to-base-surface p-7 sm:p-8 lg:col-span-2">
           <Icon d={icon.drop} />
           <h3 className="mt-6 font-[family-name:var(--font-studio-display)] text-3xl tracking-wide text-ink sm:text-4xl">No watermark</h3>
           <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-dim">
-            When the source offers a clean file, that is the one you get. TikTok’s unmarked video is one example. If a source only has a watermarked version,
-            we tell you.
+            When a platform offers a clean file, ExportVid gives you that one. TikTok’s unmarked video is one example. If a video only exists with a
+            watermark, we can’t remove it.
           </p>
         </div>
         <Tile {...small[0]} />
@@ -124,7 +130,7 @@ function Tile({ d, title, body }: { d: string; title: string; body: string }) {
 
 function SupportedPlatforms() {
   return (
-    <Section eyebrow="Platforms" title="Pick your platform" intro="Every downloader works the same way. Open the one you need.">
+    <Section eyebrow="Platforms" title="Video downloaders for every platform" intro="Each one works the same way. Paste a link, choose a quality, and download.">
       <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
         {ALL_PLATFORMS.map((p) => {
           const c = PLATFORM_COLORS[p.id];
@@ -167,7 +173,7 @@ function ClosingCta() {
       <div className="scroll-reveal relative overflow-hidden rounded-[28px] bg-brand-gradient px-6 py-14 text-center sm:py-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_0%,rgba(255,255,255,0.22),transparent_70%)]" aria-hidden />
         <h2 className="relative font-[family-name:var(--font-studio-display)] text-5xl tracking-wide text-white sm:text-6xl">Got a link?</h2>
-        <p className="relative mx-auto mt-3 max-w-md text-[15px] text-white/85">Paste it and get your file in a few seconds.</p>
+        <p className="relative mx-auto mt-3 max-w-md text-[15px] text-white/85">Paste it above and download your video or photo.</p>
         <a
           href="#download"
           className="press relative mt-8 inline-flex h-14 items-center gap-2.5 rounded-2xl bg-white px-8 text-[16px] font-bold text-[#c81f2e] shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)] transition-transform hover:-translate-y-0.5"
@@ -175,7 +181,7 @@ function ClosingCta() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M12 19V5m0 0l-5 5m5-5l5 5" />
           </svg>
-          Back to the downloader
+          Paste a link
         </a>
       </div>
     </section>

@@ -1,5 +1,3 @@
-import { SUPPORTED_PLATFORM_COUNT as N } from '@exportvid/shared';
-
 export interface FaqItem {
   q: string;
   a: string;
@@ -18,383 +16,464 @@ export interface PlatformPageConfig {
   related: string[];
 }
 
+const ALL_SLUGS = [
+  'youtube-video-downloader',
+  'facebook-video-downloader',
+  'instagram-video-downloader',
+  'tiktok-video-downloader',
+  'x-video-downloader',
+  'reddit-video-downloader',
+  'pinterest-video-downloader',
+  'snapchat-video-downloader',
+  'twitch-clip-downloader',
+  'linkedin-video-downloader',
+  'tumblr-video-downloader',
+  'vimeo-video-downloader',
+];
+
 export const platformPages: Record<string, PlatformPageConfig> = {
   'video-downloader': {
     slug: 'video-downloader',
-    metaTitle: `Video Downloader | Download Videos from ${N} Platforms`,
+    metaTitle: 'Free Video Downloader for Social Media',
     metaDescription:
-      `Paste a video link from any of ${N} supported platforms and download it in the best quality available.`,
-    h1: 'Download videos from any supported platform',
-    intro: `One downloader for ${N} platforms. Paste a link, get the real formats available, and download instantly.`,
+      'Download videos from YouTube, Facebook, Instagram, TikTok, X, and more. Paste a link, pick a quality, and save the MP4 to your device for free.',
+    h1: 'Download videos from any supported site',
+    intro: 'Paste a link from YouTube, Facebook, Instagram, TikTok, or another supported site and save the video in the best quality available.',
     about: [
-      'ExportVid reads the public page you link to and finds the media files the platform itself serves. We never guess, re-encode, or upscale it.',
-      'Every platform serves video differently, so ExportVid handles that under the hood while giving you one consistent interface.',
+      'ExportVid reads the link you paste, finds the video files the platform serves, and lists every quality and format available. Nothing is upscaled or relabeled, so what you see is what you download.',
+      'Each platform delivers video differently. ExportVid handles those differences for you, so the steps are the same everywhere: paste, choose a quality, download.',
     ],
     supportedContentTypes: [
-      { label: 'Standard video posts', description: 'Regular feed videos and uploads.' },
-      { label: 'Short-form video', description: 'TikTok, Reels, Shorts, and Spotlight.' },
-      { label: 'Social video posts', description: 'Posts, clips, pins, and tweets with video.' },
+      { label: 'Standard videos', description: 'Regular uploads and feed videos.' },
+      { label: 'Short-form videos', description: 'TikToks, Reels, YouTube Shorts, and Snapchat Spotlight.' },
+      { label: 'Posts, clips, and pins', description: 'Video posts on X, Twitch clips, Pinterest pins, and more.' },
     ],
-    formats: ['MP4 with video and audio, at every resolution the source provides', 'Original quality preserved with a direct stream copy, not a re-encode'],
+    formats: ['MP4 with video and audio, in every resolution the source offers', 'Original quality. Separate video and audio are joined without re-encoding.'],
     faqs: [
       {
-        q: 'Which platforms does ExportVid support?',
-        a: `${N} platforms: TikTok, Instagram, Facebook, X, Reddit, YouTube, Pinterest, Snapchat, Twitch, LinkedIn, Tumblr, and Vimeo.`,
+        q: 'How do I download a video from social media?',
+        a: 'Copy the link to the video, paste it into the box at the top of this page, and select Download. Then choose a quality and save the file to your device.',
       },
       {
-        q: 'Do I need an account to download?',
-        a: 'No. ExportVid has no accounts, logins, or installs. Paste a link and download.',
+        q: 'Which sites can I download from?',
+        a: 'YouTube, Facebook, Instagram, TikTok, X, Reddit, Pinterest, Snapchat, Twitch, LinkedIn, Tumblr, and Vimeo.',
       },
       {
-        q: 'Can ExportVid download private content?',
-        a: 'No. ExportVid only works with public, unprotected content. It never attempts to access private accounts, login-gated posts, or content that requires authentication.',
+        q: 'Is ExportVid free?',
+        a: 'Yes. There are no fees and no sign-up, and nothing to install.',
+      },
+      {
+        q: 'Can I download private videos?',
+        a: 'No. ExportVid works only with videos that anyone can watch without signing in. It never tries to reach private accounts or login-protected posts.',
       },
     ],
-    related: ['tiktok-video-downloader', 'instagram-video-downloader', 'facebook-video-downloader', 'x-video-downloader', 'reddit-video-downloader', 'youtube-video-downloader', 'pinterest-video-downloader', 'snapchat-video-downloader', 'twitch-clip-downloader', 'linkedin-video-downloader', 'tumblr-video-downloader', 'vimeo-video-downloader'],
+    related: ALL_SLUGS,
   },
 
-  'tiktok-video-downloader': {
-    slug: 'tiktok-video-downloader',
-    metaTitle: 'TikTok Video Downloader | Save TikTok Videos in Original Quality',
+  'youtube-video-downloader': {
+    slug: 'youtube-video-downloader',
+    metaTitle: 'YouTube Downloader: Save Videos and Shorts',
     metaDescription:
-      'Download public TikTok videos in the highest quality available from the source. Paste a TikTok link and get a direct MP4 download. No account, no app.',
-    h1: 'TikTok video downloader',
-    intro: 'Paste a public TikTok link and download the video in the best quality TikTok serves.',
+      'Download YouTube videos and Shorts as MP4. Paste a youtube.com or youtu.be link, choose a quality, and save it to your device for free.',
+    h1: 'YouTube video downloader',
+    intro: 'Paste a YouTube link and download the video or Short in the best quality available.',
     about: [
-      'TikTok video URLs look like tiktok.com/@username/video/1234567890123456789, or a shortened vm.tiktok.com / vt.tiktok.com link. ExportVid accepts either form.',
-      'TikTok typically serves one primary encoded quality per video rather than a full ladder of resolutions, so you will usually see a single MP4 option reflecting exactly what TikTok provides. ExportVid never fabricates additional quality tiers.',
-    ],
-    supportedContentTypes: [{ label: 'TikTok video', description: 'Any public video post on a standard or shortened TikTok link.' }],
-    formats: ['MP4, video + audio, without the watermark when TikTok provides a clean file', 'MP4 at the resolution TikTok serves for that video'],
-    faqs: [
-      {
-        q: 'Why is there only one quality option for some TikTok videos?',
-        a: 'TikTok often serves a single encoded version per video rather than multiple resolutions. ExportVid shows exactly what is available. It never adds a guessed or invented alternative.',
-      },
-      {
-        q: 'Does the download have the TikTok watermark?',
-        a: 'ExportVid picks the version without the TikTok watermark whenever TikTok provides one. If only a watermarked version is available for a video, that is what you get, and ExportVid never fakes a clean copy.',
-      },
-      {
-        q: 'Can I download a private TikTok account’s videos?',
-        a: 'No. Private accounts and login-restricted videos are intentionally unsupported.',
-      },
-    ],
-    related: ['video-downloader', 'instagram-reels-downloader', 'facebook-reels-downloader'],
-  },
-
-  'instagram-video-downloader': {
-    slug: 'instagram-video-downloader',
-    metaTitle: 'Instagram Video Downloader | Reels, Posts, Stories & Photos',
-    metaDescription:
-      'Download public Instagram Reels, video posts, photos, carousels, and Stories. Paste an Instagram link and ExportVid detects the content type automatically.',
-    h1: 'Instagram video & photo downloader',
-    intro: 'Paste any public Instagram link (Reel, post, photo, carousel, or Story) and ExportVid detects what it is automatically.',
-    about: [
-      'Instagram hosts several distinct content types under similar-looking URLs. ExportVid detects whether a link is a Reel (/reel/), a feed post (/p/), a Story, or a profile, and extracts accordingly.',
-      'For carousel posts, ExportVid lists every image or video in the carousel individually so you can download the specific item you want.',
+      'ExportVid accepts full youtube.com/watch links, short youtu.be links, and youtube.com/shorts links.',
+      'YouTube usually offers several resolutions for each video. ExportVid lists every one of them, up to the highest quality the upload provides. Higher resolutions store video and audio separately, so ExportVid joins them into one MP4 without re-encoding.',
     ],
     supportedContentTypes: [
-      { label: 'Instagram Reel', description: 'Short-form vertical video posted as a Reel.' },
-      { label: 'Instagram post (video)', description: 'A video shared as a standard feed post.' },
-      { label: 'Instagram photo', description: 'A single image feed post.' },
-      { label: 'Instagram carousel', description: 'Multi-photo or multi-video posts, listed item by item.' },
-      { label: 'Instagram Story', description: 'A currently-active public Story.' },
-      { label: 'Profile picture', description: 'The public profile photo for an account.' },
+      { label: 'YouTube videos', description: 'Standard uploads from any channel.' },
+      { label: 'YouTube Shorts', description: 'Short vertical videos from the Shorts feed.' },
     ],
+    formats: ['MP4 with video and audio, in every resolution YouTube offers for the video'],
     faqs: [
       {
-        q: 'Can ExportVid download from a private Instagram account?',
-        a: 'No. ExportVid only extracts from public accounts and public posts. Private accounts are never accessed.',
+        q: 'How do I download a YouTube video?',
+        a: 'Copy the video link from YouTube, paste it into the box above, and select Download. Choose a quality from the list and save the file.',
       },
       {
-        q: 'Does ExportVid support Instagram carousels?',
-        a: 'Yes. Each photo or video in a carousel post is listed separately with its own download option.',
+        q: 'Can I download YouTube Shorts?',
+        a: 'Yes. Paste the Shorts link and ExportVid recognizes it automatically.',
       },
       {
-        q: 'Can I download Instagram Highlights?',
-        a: 'Highlights are supported where Instagram exposes them publicly on a profile. Individual Highlight items are detected the same way as Stories.',
+        q: 'Do youtu.be links work?',
+        a: 'Yes. Short youtu.be links and full youtube.com links both work.',
+      },
+      {
+        q: 'Can I download private or members-only videos?',
+        a: 'No. Private and members-only videos need a login, and ExportVid never accesses login-protected content.',
       },
     ],
-    formats: ['MP4 for video content, video + audio', 'JPEG for photos, carousel images, and profile pictures'],
-    related: ['instagram-reels-downloader', 'video-downloader', 'tiktok-video-downloader'],
-  },
-
-  'instagram-reels-downloader': {
-    slug: 'instagram-reels-downloader',
-    metaTitle: 'Instagram Reels Downloader | Download Reels in Original Quality',
-    metaDescription: 'Download public Instagram Reels fast. Paste a Reel link and get an MP4 in the highest quality Instagram provides.',
-    h1: 'Instagram Reels downloader',
-    intro: 'Paste a public Instagram Reel link (instagram.com/reel/...) and download it as an MP4.',
-    about: [
-      'Reels are Instagram’s short-form vertical video format. ExportVid recognizes reel and reels URL paths and extracts the underlying video file directly.',
-      'Quality shown reflects exactly what Instagram serves for that Reel. ExportVid doesn’t upscale or relabel resolutions.',
-    ],
-    supportedContentTypes: [{ label: 'Instagram Reel', description: 'Public Reels from any account, including business and creator profiles.' }],
-    formats: ['MP4, video + audio, at the resolution Instagram serves'],
-    faqs: [
-      {
-        q: 'What Reel links work?',
-        a: 'Any public instagram.com/reel/... or instagram.com/reels/... link, including reels shared via direct post link.',
-      },
-      {
-        q: 'Is the audio included?',
-        a: 'Yes, when Instagram serves audio and video together for that Reel, which is the case for most Reels.',
-      },
-    ],
-    related: ['instagram-video-downloader', 'tiktok-video-downloader', 'facebook-reels-downloader'],
+    related: ['facebook-video-downloader', 'instagram-video-downloader', 'tiktok-video-downloader', 'video-downloader'],
   },
 
   'facebook-video-downloader': {
     slug: 'facebook-video-downloader',
-    metaTitle: 'Facebook Video Downloader | Download Public Facebook Videos',
-    metaDescription: 'Download public Facebook videos and Reels. Paste a facebook.com or fb.watch link and get the highest quality MP4 available.',
+    metaTitle: 'Facebook Video Downloader: Save Videos and Reels',
+    metaDescription:
+      'Download Facebook videos and Reels as MP4. Paste a facebook.com or fb.watch link, choose a quality, and save it to your device for free.',
     h1: 'Facebook video downloader',
-    intro: 'Paste a public Facebook video link, including fb.watch short links, and download the MP4.',
+    intro: 'Paste a Facebook video link, including fb.watch short links, and download the MP4.',
     about: [
-      'Facebook serves video through several URL shapes: standard watch links, fb.watch short links, and Reel links. ExportVid handles all of them the same way.',
-      'Only videos from public pages, public profiles, and public groups can be extracted. Content shared inside private or closed groups is not accessible.',
+      'Facebook shares video through standard watch links, fb.watch short links, and Reel links. ExportVid handles all three the same way.',
+      'Videos from public pages, profiles, and groups can be downloaded. Videos inside private or closed groups cannot.',
     ],
     supportedContentTypes: [
-      { label: 'Facebook video', description: 'Standard video posts on public pages, profiles, and groups.' },
-      { label: 'Facebook Reel', description: 'Short-form vertical video posted as a Facebook Reel.' },
+      { label: 'Facebook videos', description: 'Video posts on public pages, profiles, and groups.' },
+      { label: 'Facebook Reels', description: 'Short vertical videos posted as Reels.' },
     ],
-    formats: ['MP4, video + audio, at every resolution Facebook provides for the video'],
+    formats: ['MP4 with video and audio, in every resolution Facebook offers for the video'],
     faqs: [
       {
-        q: 'Does this work with fb.watch links?',
-        a: 'Yes, fb.watch short links are supported directly.',
+        q: 'How do I download a Facebook video?',
+        a: 'Copy the video link, paste it into the box above, and select Download. Then pick a quality and save the file.',
+      },
+      {
+        q: 'Do fb.watch links work?',
+        a: 'Yes. fb.watch short links work directly.',
       },
       {
         q: 'Can I download videos from a private Facebook group?',
-        a: 'No. ExportVid only works with public content and never attempts to bypass privacy settings.',
+        a: 'No. ExportVid only works with content anyone can view and never bypasses privacy settings.',
       },
     ],
-    related: ['facebook-reels-downloader', 'video-downloader', 'instagram-video-downloader'],
+    related: ['facebook-reels-downloader', 'instagram-video-downloader', 'youtube-video-downloader', 'video-downloader'],
   },
 
   'facebook-reels-downloader': {
     slug: 'facebook-reels-downloader',
-    metaTitle: 'Facebook Reels Downloader | Download Facebook Reels Fast',
-    metaDescription: 'Download public Facebook Reels in the best quality available. Paste a Reel link and download the MP4 directly.',
+    metaTitle: 'Facebook Reels Downloader: Save Reels as MP4',
+    metaDescription: 'Download Facebook Reels as MP4. Paste a Reel link, choose a quality, and save the video to your device for free.',
     h1: 'Facebook Reels downloader',
-    intro: 'Paste a public Facebook Reel link and download it as an MP4.',
-    about: ['Facebook Reels use a distinct /reel/ URL path, which ExportVid detects automatically and routes to the correct extraction logic.'],
-    supportedContentTypes: [{ label: 'Facebook Reel', description: 'Public Reels from Facebook pages and profiles.' }],
-    formats: ['MP4, video + audio, at the resolution Facebook serves'],
+    intro: 'Paste a Facebook Reel link and download it as an MP4.',
+    about: ['Facebook Reels use a /reel/ link. ExportVid recognizes it automatically and finds the video file for you.'],
+    supportedContentTypes: [{ label: 'Facebook Reels', description: 'Reels from Facebook pages and profiles.' }],
+    formats: ['MP4 with video and audio, at the resolution Facebook offers'],
     faqs: [
       {
-        q: 'What if the link redirects to the Facebook app?',
-        a: 'Paste the web link (facebook.com/reel/... or fb.watch/...) rather than an in-app share link. Both resolve the same underlying video.',
+        q: 'How do I download a Facebook Reel?',
+        a: 'Copy the Reel link, paste it into the box above, and select Download.',
+      },
+      {
+        q: 'The link opens the Facebook app. What should I paste?',
+        a: 'Paste the web link, which starts with facebook.com/reel or fb.watch, instead of an in-app share link. Both point to the same video.',
       },
     ],
     related: ['facebook-video-downloader', 'instagram-reels-downloader', 'tiktok-video-downloader'],
   },
 
-  'x-video-downloader': {
-    slug: 'x-video-downloader',
-    metaTitle: 'X (Twitter) Video Downloader | Download Video Tweets',
-    metaDescription: 'Download videos from X (Twitter). Paste an x.com or twitter.com link and get the highest quality MP4 the post offers.',
-    h1: 'X (Twitter) video downloader',
-    intro: 'Paste a public x.com or twitter.com post link and download the video.',
+  'instagram-video-downloader': {
+    slug: 'instagram-video-downloader',
+    metaTitle: 'Instagram Downloader: Reels, Videos, Photos',
+    metaDescription:
+      'Download Instagram Reels, videos, photos, carousels, and Stories. Paste an Instagram link and ExportVid detects the content type for you. Free.',
+    h1: 'Instagram video and photo downloader',
+    intro: 'Paste an Instagram link for a Reel, post, photo, carousel, or Story. ExportVid detects the type and lists what you can download.',
     about: [
-      'X serves video through adaptive formats with several resolutions per post. ExportVid lists each resolution X provides, typically up to 1080p, with accurate file sizes.',
-      'Only videos attached to public posts can be extracted. Posts from protected (locked) accounts are not accessible.',
+      'Instagram uses similar-looking links for different kinds of posts. ExportVid tells them apart: Reels (/reel/), feed posts (/p/), Stories, and profiles.',
+      'For carousel posts, every photo and video is listed on its own, so you can download only the one you want.',
     ],
-    supportedContentTypes: [{ label: 'X video post', description: 'Videos attached to public posts on x.com or twitter.com.' }],
-    formats: ['MP4, video + audio, at every resolution the post provides (typically up to 1080p)'],
+    supportedContentTypes: [
+      { label: 'Reels', description: 'Short vertical videos posted as Reels.' },
+      { label: 'Video posts', description: 'Videos shared as regular feed posts.' },
+      { label: 'Photos', description: 'Single-image feed posts.' },
+      { label: 'Carousels', description: 'Posts with several photos or videos, listed one by one.' },
+      { label: 'Stories', description: 'Stories that are currently live.' },
+      { label: 'Profile pictures', description: 'The profile photo of an account.' },
+    ],
     faqs: [
       {
-        q: 'Does this work with both x.com and twitter.com links?',
-        a: 'Yes, both domains are supported since they point to the same platform.',
+        q: 'How do I download an Instagram video or photo?',
+        a: 'Copy the post link from Instagram, paste it into the box above, and select Download. Then choose the file you want.',
       },
       {
-        q: 'Can I download from a protected (locked) account?',
-        a: 'No. Protected accounts require login on X itself, and ExportVid does not access login-gated content.',
+        q: 'Can I download from a private Instagram account?',
+        a: 'No. ExportVid only works with posts anyone can view. It never accesses private accounts.',
       },
       {
-        q: 'Why does a post show no video option?',
-        a: 'The post may only contain images, or no downloadable video was found. ExportVid never fabricates a download option that doesn’t exist.',
+        q: 'Can I download every photo in a carousel?',
+        a: 'Yes. Each photo or video in the carousel appears in the list with its own download button.',
+      },
+      {
+        q: 'Can I download Instagram Highlights?',
+        a: 'Yes, when Instagram shows them on a profile that anyone can view. Highlight items are handled the same way as Stories.',
       },
     ],
-    related: ['video-downloader', 'reddit-video-downloader', 'tiktok-video-downloader'],
+    formats: ['MP4 for videos, with audio', 'JPEG for photos, carousel images, and profile pictures'],
+    related: ['instagram-reels-downloader', 'facebook-video-downloader', 'tiktok-video-downloader', 'video-downloader'],
+  },
+
+  'instagram-reels-downloader': {
+    slug: 'instagram-reels-downloader',
+    metaTitle: 'Instagram Reels Downloader: Save Reels as MP4',
+    metaDescription: 'Download Instagram Reels as MP4 in the best quality available. Paste a Reel link and save the video to your device for free.',
+    h1: 'Instagram Reels downloader',
+    intro: 'Paste an Instagram Reel link and download it as an MP4.',
+    about: [
+      'Reels are Instagram’s short vertical videos. ExportVid recognizes /reel/ and /reels/ links and finds the video file directly.',
+      'The quality you see is the quality Instagram provides for that Reel. ExportVid never upscales or relabels it.',
+    ],
+    supportedContentTypes: [{ label: 'Instagram Reels', description: 'Reels from any account, including business and creator profiles.' }],
+    formats: ['MP4 with video and audio, at the resolution Instagram offers'],
+    faqs: [
+      {
+        q: 'How do I download an Instagram Reel?',
+        a: 'Open the Reel, copy its link, paste it into the box above, and select Download.',
+      },
+      {
+        q: 'Which Reel links work?',
+        a: 'Any instagram.com/reel/ or instagram.com/reels/ link, including Reels shared as a regular post link.',
+      },
+      {
+        q: 'Does the download include audio?',
+        a: 'Yes. Most Reels come with audio and video together, and ExportVid keeps both.',
+      },
+    ],
+    related: ['instagram-video-downloader', 'tiktok-video-downloader', 'facebook-reels-downloader'],
+  },
+
+  'tiktok-video-downloader': {
+    slug: 'tiktok-video-downloader',
+    metaTitle: 'TikTok Downloader: Save Videos Without Watermark',
+    metaDescription:
+      'Download TikTok videos as MP4, without the watermark when TikTok offers a clean file. Paste a TikTok link and save it to your device for free.',
+    h1: 'TikTok video downloader',
+    intro: 'Paste a TikTok link and download the video in the best quality TikTok offers, without the watermark when a clean file exists.',
+    about: [
+      'ExportVid accepts full links like tiktok.com/@username/video/123 and short vm.tiktok.com or vt.tiktok.com links.',
+      'TikTok usually serves one quality per video instead of a range of resolutions, so you will often see a single MP4. That is the real file TikTok provides. ExportVid does not invent extra options.',
+    ],
+    supportedContentTypes: [{ label: 'TikTok videos', description: 'Videos from a standard or shortened TikTok link.' }],
+    formats: ['MP4 with video and audio, without the watermark when TikTok offers a clean file', 'MP4 at the resolution TikTok serves for that video'],
+    faqs: [
+      {
+        q: 'How do I download a TikTok video without a watermark?',
+        a: 'Paste the TikTok link into the box above and select Download. ExportVid picks the version without the watermark whenever TikTok provides one.',
+      },
+      {
+        q: 'Why does my download still have a watermark?',
+        a: 'Some videos only exist with a watermark. When that happens, ExportVid can’t remove it and gives you the file as TikTok serves it.',
+      },
+      {
+        q: 'Why is there only one quality option?',
+        a: 'TikTok often serves a single version of each video. ExportVid shows exactly what exists and never adds a quality that isn’t there.',
+      },
+      {
+        q: 'Can I download videos from a private TikTok account?',
+        a: 'No. Private accounts and login-protected videos are not supported.',
+      },
+    ],
+    related: ['instagram-reels-downloader', 'facebook-reels-downloader', 'youtube-video-downloader', 'video-downloader'],
+  },
+
+  'x-video-downloader': {
+    slug: 'x-video-downloader',
+    metaTitle: 'X (Twitter) Video Downloader: Save Videos as MP4',
+    metaDescription: 'Download videos from X (Twitter) posts as MP4. Paste an x.com or twitter.com link and save the video to your device for free.',
+    h1: 'X (Twitter) video downloader',
+    intro: 'Paste an x.com or twitter.com post link and download the video.',
+    about: [
+      'X offers several resolutions for each video, usually up to 1080p. ExportVid lists every one, with the file size next to it.',
+      'Only videos in posts that anyone can view can be downloaded. Posts from protected accounts cannot.',
+    ],
+    supportedContentTypes: [{ label: 'X video posts', description: 'Videos attached to posts on x.com or twitter.com.' }],
+    formats: ['MP4 with video and audio, in every resolution the post offers (usually up to 1080p)'],
+    faqs: [
+      {
+        q: 'How do I download a video from X or Twitter?',
+        a: 'Copy the post link, paste it into the box above, and select Download. Pick a resolution and save the file.',
+      },
+      {
+        q: 'Do both x.com and twitter.com links work?',
+        a: 'Yes. Both domains lead to the same platform, and ExportVid accepts either.',
+      },
+      {
+        q: 'Why does my post show no video?',
+        a: 'The post may contain only images, or no downloadable video could be found. ExportVid only lists files that exist.',
+      },
+      {
+        q: 'Can I download from a protected account?',
+        a: 'No. Protected accounts require a login on X, and ExportVid does not access login-protected content.',
+      },
+    ],
+    related: ['reddit-video-downloader', 'tiktok-video-downloader', 'youtube-video-downloader', 'video-downloader'],
   },
 
   'reddit-video-downloader': {
     slug: 'reddit-video-downloader',
-    metaTitle: 'Reddit Video Downloader | Download Public Reddit Videos',
-    metaDescription: 'Download public Reddit videos, including v.redd.it posts, in the best quality Reddit provides. Paste a Reddit link and download instantly.',
+    metaTitle: 'Reddit Video Downloader: Save Videos with Sound',
+    metaDescription: 'Download Reddit videos, including v.redd.it posts, as MP4 with sound. Paste a Reddit link and save the video to your device for free.',
     h1: 'Reddit video downloader',
-    intro: 'Paste a public Reddit post link and download the video, including native v.redd.it hosted videos.',
+    intro: 'Paste a Reddit post link and download the video, with sound, including videos hosted on v.redd.it.',
     about: [
-      'Reddit often hosts video and audio as separate streams. When that is the case, ExportVid combines them into a single downloadable file automatically, using a direct stream copy so quality is preserved.',
-      'Only videos from public subreddits and public posts are supported. Quarantined, private, or login-gated subreddits are not accessible.',
+      'Reddit stores video and audio as separate files. ExportVid joins them into one MP4 with a direct stream copy, so quality stays the same and the sound is included.',
+      'Only videos in open subreddits and posts can be downloaded. Quarantined, private, and login-only subreddits cannot.',
     ],
     supportedContentTypes: [
-      { label: 'Reddit video', description: 'Native v.redd.it hosted video posts.' },
-      { label: 'Reddit GIF', description: 'Looping video posts served as GIF-style clips.' },
+      { label: 'Reddit videos', description: 'Videos hosted on v.redd.it.' },
+      { label: 'Reddit GIFs', description: 'Looping posts that Reddit serves as short video clips.' },
     ],
-    formats: ['MP4, video + audio (merged from separate streams when the source requires it)'],
+    formats: ['MP4 with video and audio, joined from separate files when needed'],
     faqs: [
       {
-        q: 'Why does a Reddit download take slightly longer sometimes?',
-        a: 'Reddit frequently stores video and audio as two separate files. When that happens, ExportVid needs a brief merge step to combine them into one file, without re-encoding the video or audio.',
+        q: 'How do I download a Reddit video with sound?',
+        a: 'Copy the post link, paste it into the box above, and select Download. ExportVid joins the video and audio into one file for you.',
       },
       {
-        q: 'Can ExportVid download from private or quarantined subreddits?',
-        a: 'No. Only fully public subreddits and posts are supported.',
-      },
-    ],
-    related: ['x-video-downloader', 'video-downloader'],
-  },
-
-  'youtube-video-downloader': {
-    slug: 'youtube-video-downloader',
-    metaTitle: 'YouTube Video Downloader | Download YouTube Videos and Shorts',
-    metaDescription:
-      'Download public YouTube videos and Shorts in the best quality available. Paste a YouTube link and get a direct MP4 download. No account, no app.',
-    h1: 'YouTube video downloader',
-    intro: 'Paste a public YouTube video or Shorts link and download it in the best quality YouTube provides.',
-    about: [
-      'YouTube links work as full youtube.com/watch?v=... links, short youtu.be/... links, or youtube.com/shorts/... links. ExportVid accepts all three.',
-      'YouTube usually serves several resolutions per video. ExportVid lists each one exactly as YouTube provides it, up to the highest quality available for that upload.',
-    ],
-    supportedContentTypes: [
-      { label: 'YouTube video', description: 'Standard uploads on any public channel.' },
-      { label: 'YouTube Shorts', description: 'Short-form vertical videos posted as Shorts.' },
-    ],
-    formats: ['MP4, video + audio, at every resolution YouTube provides for that video'],
-    faqs: [
-      {
-        q: 'Does this work with youtu.be links?',
-        a: 'Yes. Short youtu.be links are supported directly, along with full youtube.com links.',
+        q: 'Why does a Reddit download take a little longer?',
+        a: 'Reddit keeps video and audio in two files. ExportVid needs a short step to join them, without re-encoding either one.',
       },
       {
-        q: 'Can I download YouTube Shorts?',
-        a: 'Yes. Shorts are detected automatically from the /shorts/ link.',
-      },
-      {
-        q: 'Can ExportVid download private or members-only videos?',
-        a: 'No. Only fully public videos are supported. Private and members-only videos require login and are not accessible.',
+        q: 'Can I download from private or quarantined subreddits?',
+        a: 'No. Only posts in open subreddits are supported.',
       },
     ],
-    related: ['video-downloader', 'tiktok-video-downloader', 'instagram-reels-downloader'],
+    related: ['x-video-downloader', 'youtube-video-downloader', 'video-downloader'],
   },
 
   'pinterest-video-downloader': {
     slug: 'pinterest-video-downloader',
-    metaTitle: 'Pinterest Video Downloader | Save Pinterest Video Pins',
-    metaDescription: 'Download public Pinterest video pins as MP4. Paste a pinterest.com or pin.it link and get the best quality Pinterest provides. No account, no app.',
+    metaTitle: 'Pinterest Video Downloader: Save Video Pins',
+    metaDescription: 'Download Pinterest video pins as MP4. Paste a pinterest.com or pin.it link and save the video to your device for free.',
     h1: 'Pinterest video downloader',
-    intro: 'Paste a public Pinterest video pin link and download it as an MP4.',
+    intro: 'Paste a Pinterest video pin link and download it as an MP4.',
     about: [
-      'ExportVid accepts pinterest.com/pin/... links and pin.it short links, and finds the video file Pinterest serves for that pin.',
-      'Pinterest often offers the video at one main resolution, so you will usually see a single MP4 option that matches what Pinterest provides.',
+      'ExportVid accepts pinterest.com/pin links and short pin.it links, then finds the video file Pinterest serves for that pin.',
+      'Pinterest usually offers one main resolution per video, so you will typically see a single MP4 that matches what Pinterest provides.',
     ],
-    supportedContentTypes: [{ label: 'Video pins', description: 'Public pins that contain a video.' }],
-    formats: ['MP4, video + audio, at the resolution Pinterest serves for that pin'],
+    supportedContentTypes: [{ label: 'Video pins', description: 'Pins that contain a video.' }],
+    formats: ['MP4 with video and audio, at the resolution Pinterest offers for the pin'],
     faqs: [
-      { q: 'Can I download image pins?', a: 'Not yet. ExportVid currently supports Pinterest pins that contain a video.' },
-      { q: 'Does this work with pin.it links?', a: 'Yes. Short pin.it links are supported.' },
+      {
+        q: 'How do I download a Pinterest video?',
+        a: 'Copy the pin link, paste it into the box above, and select Download.',
+      },
+      { q: 'Can I download image pins?', a: 'Not yet. ExportVid supports Pinterest pins that contain a video.' },
+      { q: 'Do pin.it links work?', a: 'Yes. Short pin.it links work directly.' },
     ],
-    related: ['video-downloader', 'youtube-video-downloader', 'tumblr-video-downloader'],
+    related: ['tumblr-video-downloader', 'instagram-video-downloader', 'youtube-video-downloader', 'video-downloader'],
   },
 
   'snapchat-video-downloader': {
     slug: 'snapchat-video-downloader',
-    metaTitle: 'Snapchat Spotlight Downloader | Save Spotlight Videos',
-    metaDescription: 'Download public Snapchat Spotlight videos as MP4. Paste a snapchat.com/spotlight link. No account, no app.',
+    metaTitle: 'Snapchat Spotlight Downloader: Save as MP4',
+    metaDescription: 'Download Snapchat Spotlight videos as MP4. Paste a snapchat.com/spotlight link and save the video to your device for free.',
     h1: 'Snapchat Spotlight downloader',
-    intro: 'Paste a public Snapchat Spotlight link and download the video as an MP4.',
+    intro: 'Paste a Snapchat Spotlight link and download the video as an MP4.',
     about: [
-      'ExportVid accepts snapchat.com/spotlight/... links and downloads the video file Snapchat serves for that Spotlight.',
+      'ExportVid accepts snapchat.com/spotlight links and downloads the video file Snapchat serves for that Spotlight.',
       'Spotlight videos come as a single MP4, so you will see one download option.',
     ],
-    supportedContentTypes: [{ label: 'Spotlight video', description: 'Public videos shared to Snapchat Spotlight.' }],
-    formats: ['MP4, video + audio, as Snapchat serves it'],
+    supportedContentTypes: [{ label: 'Spotlight videos', description: 'Videos shared to Snapchat Spotlight.' }],
+    formats: ['MP4 with video and audio, as Snapchat serves it'],
     faqs: [
-      { q: 'Can I download Snapchat Stories?', a: 'Not yet. ExportVid currently supports public Spotlight videos.' },
-      { q: 'Can I download private snaps?', a: 'No. ExportVid only works with public content.' },
+      {
+        q: 'How do I download a Snapchat Spotlight video?',
+        a: 'Copy the Spotlight link, paste it into the box above, and select Download.',
+      },
+      { q: 'Can I download Snapchat Stories?', a: 'Not yet. ExportVid supports Spotlight videos.' },
+      { q: 'Can I download private snaps?', a: 'No. ExportVid only works with content that anyone can view.' },
     ],
-    related: ['video-downloader', 'tiktok-video-downloader', 'instagram-reels-downloader'],
+    related: ['tiktok-video-downloader', 'instagram-reels-downloader', 'youtube-video-downloader', 'video-downloader'],
   },
 
   'twitch-clip-downloader': {
     slug: 'twitch-clip-downloader',
-    metaTitle: 'Twitch Clip Downloader | Download Twitch Clips as MP4',
-    metaDescription: 'Download public Twitch clips as MP4. Paste a clips.twitch.tv link and get the best quality Twitch provides. No account, no app.',
+    metaTitle: 'Twitch Clip Downloader: Save Clips as MP4',
+    metaDescription: 'Download Twitch clips as MP4. Paste a clips.twitch.tv link and save the clip to your device for free.',
     h1: 'Twitch clip downloader',
-    intro: 'Paste a public Twitch clip link and download it as an MP4.',
+    intro: 'Paste a Twitch clip link and download it as an MP4.',
     about: [
-      'ExportVid accepts clips.twitch.tv/... links and twitch.tv/channel/clip/... links.',
-      'Twitch serves clips in the quality the clip was created at, and ExportVid shows that quality exactly as provided.',
+      'ExportVid accepts clips.twitch.tv links and twitch.tv/channel/clip links.',
+      'Twitch serves each clip at the quality it was created in, and ExportVid shows that quality as it is.',
     ],
-    supportedContentTypes: [{ label: 'Twitch clip', description: 'Public clips from any channel.' }],
-    formats: ['MP4, video + audio, at the resolution Twitch serves for the clip'],
+    supportedContentTypes: [{ label: 'Twitch clips', description: 'Clips from any channel.' }],
+    formats: ['MP4 with video and audio, at the resolution Twitch offers for the clip'],
     faqs: [
+      {
+        q: 'How do I download a Twitch clip?',
+        a: 'Copy the clip link, paste it into the box above, and select Download.',
+      },
       { q: 'Can I download full streams or VODs?', a: 'No. ExportVid supports clips only.' },
-      { q: 'Which links work?', a: 'clips.twitch.tv links and twitch.tv/channel/clip links.' },
+      { q: 'Which Twitch links work?', a: 'Links that start with clips.twitch.tv, and twitch.tv/channel/clip links.' },
     ],
-    related: ['video-downloader', 'youtube-video-downloader', 'vimeo-video-downloader'],
+    related: ['youtube-video-downloader', 'vimeo-video-downloader', 'video-downloader'],
   },
 
   'linkedin-video-downloader': {
     slug: 'linkedin-video-downloader',
-    metaTitle: 'LinkedIn Video Downloader | Download Public LinkedIn Videos',
-    metaDescription: 'Download videos from public LinkedIn posts as MP4. Paste a linkedin.com/posts link. No account, no app.',
+    metaTitle: 'LinkedIn Video Downloader: Save Videos as MP4',
+    metaDescription: 'Download videos from LinkedIn posts as MP4. Paste a linkedin.com/posts link and save the video to your device for free.',
     h1: 'LinkedIn video downloader',
-    intro: 'Paste a public LinkedIn post link and download the video as an MP4.',
+    intro: 'Paste a LinkedIn post link and download the video as an MP4.',
     about: [
-      'ExportVid accepts linkedin.com/posts/... links for posts that are visible without signing in.',
-      'LinkedIn serves the video as a single MP4, so you will see one download option.',
+      'ExportVid accepts linkedin.com/posts links for posts you can view without signing in.',
+      'LinkedIn serves each video as a single MP4, so you will see one download option.',
     ],
-    supportedContentTypes: [{ label: 'Video posts', description: 'Public posts that include a video.' }],
-    formats: ['MP4, video + audio, as LinkedIn serves it'],
+    supportedContentTypes: [{ label: 'Video posts', description: 'Posts that include a video.' }],
+    formats: ['MP4 with video and audio, as LinkedIn serves it'],
     faqs: [
-      { q: 'Why does my link say the content is private?', a: 'The post is only visible to signed-in LinkedIn members. ExportVid only works with public posts.' },
+      {
+        q: 'How do I download a LinkedIn video?',
+        a: 'Copy the post link, paste it into the box above, and select Download.',
+      },
+      {
+        q: 'Why does my link say the content is private?',
+        a: 'The post is only visible to signed-in LinkedIn members, and ExportVid can only reach posts that anyone can view.',
+      },
       { q: 'Can I download LinkedIn Learning courses?', a: 'No. Course content requires an account and is not supported.' },
     ],
-    related: ['video-downloader', 'youtube-video-downloader', 'x-video-downloader'],
+    related: ['youtube-video-downloader', 'x-video-downloader', 'facebook-video-downloader', 'video-downloader'],
   },
 
   'tumblr-video-downloader': {
     slug: 'tumblr-video-downloader',
-    metaTitle: 'Tumblr Video Downloader | Download Tumblr Videos',
-    metaDescription: 'Download videos from public Tumblr posts as MP4. Paste a link to a post on any tumblr.com blog. No account, no app.',
+    metaTitle: 'Tumblr Video Downloader: Save Videos as MP4',
+    metaDescription: 'Download videos from Tumblr posts as MP4. Paste a link to a post on any Tumblr blog and save the video for free.',
     h1: 'Tumblr video downloader',
-    intro: 'Paste a link to a public Tumblr video post and download it as an MP4.',
+    intro: 'Paste a link to a Tumblr video post and download it as an MP4.',
     about: [
-      'ExportVid accepts links to posts on tumblr.com and on any blog.tumblr.com address.',
-      'Only videos in public blogs and posts can be downloaded.',
+      'ExportVid accepts links to posts on tumblr.com and on any blogname.tumblr.com address.',
+      'Only videos on blogs and posts that anyone can view can be downloaded.',
     ],
-    supportedContentTypes: [{ label: 'Video posts', description: 'Public Tumblr posts that include a video.' }],
-    formats: ['MP4, video + audio, as Tumblr serves it'],
+    supportedContentTypes: [{ label: 'Video posts', description: 'Tumblr posts that include a video.' }],
+    formats: ['MP4 with video and audio, as Tumblr serves it'],
     faqs: [
-      { q: 'Does this work with blog subdomains?', a: 'Yes. Links like blogname.tumblr.com/post/... are supported.' },
-      { q: 'Can I download from a private or explicit-only blog?', a: 'No. Blogs that require signing in are not supported.' },
+      {
+        q: 'How do I download a Tumblr video?',
+        a: 'Copy the post link, paste it into the box above, and select Download.',
+      },
+      { q: 'Do blog subdomains work?', a: 'Yes. Links like blogname.tumblr.com/post/... work.' },
+      { q: 'Can I download from a private blog?', a: 'No. Blogs that require signing in are not supported.' },
     ],
-    related: ['video-downloader', 'pinterest-video-downloader', 'instagram-video-downloader'],
+    related: ['pinterest-video-downloader', 'instagram-video-downloader', 'youtube-video-downloader', 'video-downloader'],
   },
 
   'vimeo-video-downloader': {
     slug: 'vimeo-video-downloader',
-    metaTitle: 'Vimeo Video Downloader | Download Public Vimeo Videos',
-    metaDescription: 'Download public Vimeo videos as MP4. Paste a vimeo.com link and get the best quality available. No account, no app.',
+    metaTitle: 'Vimeo Video Downloader: Save Videos as MP4',
+    metaDescription: 'Download Vimeo videos as MP4. Paste a vimeo.com link, choose a quality, and save the video to your device for free.',
     h1: 'Vimeo video downloader',
-    intro: 'Paste a public Vimeo video link and download it as an MP4.',
+    intro: 'Paste a Vimeo video link and download it as an MP4.',
     about: [
-      'ExportVid accepts vimeo.com/... links and player.vimeo.com/video/... links.',
-      'Videos the owner has made private, password-protected, or limited to specific sites cannot be downloaded.',
+      'ExportVid accepts vimeo.com links and player.vimeo.com embed links.',
+      'Videos the owner has set to private, password-protected, or limited to certain sites cannot be downloaded.',
     ],
-    supportedContentTypes: [{ label: 'Vimeo video', description: 'Public videos that can be viewed without signing in.' }],
-    formats: ['MP4, video + audio, at every resolution Vimeo provides for the video'],
+    supportedContentTypes: [{ label: 'Vimeo videos', description: 'Videos you can watch without signing in.' }],
+    formats: ['MP4 with video and audio, in every resolution Vimeo offers for the video'],
     faqs: [
-      { q: 'Why can’t I download my Vimeo link?', a: 'The video is private, password-protected, or restricted to certain domains. ExportVid only works with public videos.' },
-      { q: 'Does it work with embed links?', a: 'Yes. player.vimeo.com links are supported.' },
+      {
+        q: 'How do I download a Vimeo video?',
+        a: 'Copy the video link, paste it into the box above, and select Download. Then choose a quality.',
+      },
+      {
+        q: 'Why can’t I download my Vimeo link?',
+        a: 'The video is probably private, password-protected, or limited to certain domains. ExportVid can only reach videos anyone can watch.',
+      },
+      { q: 'Do embed links work?', a: 'Yes. player.vimeo.com links work.' },
     ],
-    related: ['video-downloader', 'youtube-video-downloader', 'twitch-clip-downloader'],
+    related: ['youtube-video-downloader', 'twitch-clip-downloader', 'video-downloader'],
   },
-
 };
 
 export function getPlatformPage(slug: string): PlatformPageConfig | undefined {

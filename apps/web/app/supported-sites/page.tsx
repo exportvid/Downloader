@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SUPPORTED_PLATFORM_COUNT } from '@exportvid/shared';
 import { pageMetadata, breadcrumbJsonLd } from '@/lib/seo';
 import { PageHeader } from '@/components/PageHeader';
 import { JsonLd } from '@/components/JsonLd';
@@ -8,7 +7,7 @@ import { ALL_PLATFORMS, PlatformMark, type PlatformId } from '@/components/Platf
 
 export const metadata: Metadata = pageMetadata({
   title: 'Supported Sites',
-  description: `All ${SUPPORTED_PLATFORM_COUNT} platforms and content types ExportVid supports.`,
+  description: 'Every site you can download videos and photos from with ExportVid, and the link formats that work for each one.',
   path: '/supported-sites',
 });
 
@@ -31,7 +30,7 @@ export default function SupportedSitesPage() {
   return (
     <div className="container-wide py-14 sm:py-20">
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Supported sites', path: '/supported-sites' }])} />
-      <PageHeader eyebrow="Supported sites" title={`${SUPPORTED_PLATFORM_COUNT} platforms`} intro="Every platform ExportVid works with, and what you can download from each." />
+      <PageHeader eyebrow="Supported sites" title="Sites you can download from" intro="Every platform ExportVid works with, and the links that work for each one." />
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {ALL_PLATFORMS.map((p) => (
@@ -55,9 +54,9 @@ export default function SupportedSitesPage() {
       </div>
 
       <p className="mt-10 text-center text-sm text-ink-faint">
-        Don&apos;t see a platform you need?{' '}
+        Missing a site you need?{' '}
         <Link href="/contact" className="text-accent hover:underline">
-          Let us know
+          Tell us which one
         </Link>
         .
       </p>

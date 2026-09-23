@@ -5,13 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
-import { ALL_PLATFORMS, PlatformMark } from './PlatformMark';
+import { ALL_PLATFORMS, PLATFORM_COLORS, PlatformMark } from './PlatformMark';
 
 const MAIN_PLATFORMS = ALL_PLATFORMS.slice(0, 5);
 const MORE_PLATFORMS = ALL_PLATFORMS.slice(5);
 
 const SECONDARY_LINKS = [
-  { href: '/supported-sites', label: 'All supported sites' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -28,7 +27,11 @@ export function Header() {
     const onDown = (e: MouseEvent) => {
       if (!moreRef.current?.contains(e.target as Node)) setOpen(false);
     };
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setOpen(false);
+      moreRef.current?.querySelector('button')?.focus();
+    };
     document.addEventListener('mousedown', onDown);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -84,26 +87,74 @@ export function Header() {
               </button>
 
               {open && (
-                <div className="reveal absolute right-0 top-full z-50 mt-3 w-[22rem] rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]">
-                  <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">More platforms</p>
+                <div
+                  role="menu"
+                  aria-label="More platforms"
+                  className="dropdown-in absolute right-0 top-full z-50 mt-3 w-[25rem] origin-top-right rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]"
+                >
+                  <p className="px-3 pb-2 pt-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-faint">More downloaders</p>
                   <ul className="grid grid-cols-2 gap-0.5">
-                    {MORE_PLATFORMS.map((p) => (
-                      <li key={p.id}>
-                        <Link href={p.href} aria-current={pathname === p.href ? 'page' : undefined} className={linkClass(p.href)}>
-                          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-gradient text-white">
-                            <PlatformMark id={p.id} className="h-3 w-3" />
-                          </span>
-                          {p.label}
-                        </Link>
-                      </li>
-                    ))}
+                    {MORE_PLATFORMS.map((p) => {
+                      const c = PLATFORM_COLORS[p.id];
+                      const active = pathname === p.href;
+                      return (
+                        <li key={p.id}>
+                          <Link
+                            href={p.href}
+                            role="menuitem"
+                            aria-current={active ? 'page' : undefined}
+                            className={`group/item flex items-center gap-3 rounded-xl p-2 pr-3 text-[14px] font-medium transition-colors ${
+                              active ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/6 hover:text-ink'
+                            }`}
+                          >
+                            <span
+                              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-transform duration-200 group-hover/item:scale-105 ${c.dark ? 'text-[#111]' : 'text-white'}`}
+                              style={{ backgroundColor: c.bg }}
+                            >
+                              <PlatformMark id={p.id} className="h-4 w-4" />
+                            </span>
+                            <span className="flex-1 truncate">{p.label}</span>
+                            {active && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 border-t border-line px-3 pb-2 pt-3 text-[13px]">
-                    {SECONDARY_LINKS.map((l) => (
-                      <Link key={l.href} href={l.href} className="text-ink-faint transition-colors hover:text-ink">
-                        {l.label}
-                      </Link>
-                    ))}
+
+                  <div className="mt-2 space-y-1 rounded-xl bg-hl/5 p-1.5">
+                    <Link
+                      href="/supported-sites"
+                      role="menuitem"
+                      className="group/all flex items-center justify-between rounded-lg px-2.5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-hl/6"
+                    >
+                      All supported sites
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-ink-faint transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:text-accent"
+                        aria-hidden
+                      >
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                      </svg>
+                    </Link>
+                    <div className="grid grid-cols-2 gap-1">
+                      {SECONDARY_LINKS.map((l) => (
+                        <Link
+                          key={l.href}
+                          href={l.href}
+                          role="menuitem"
+                          className="rounded-lg px-2.5 py-2 text-[13px] text-ink-dim transition-colors hover:bg-hl/6 hover:text-ink"
+                        >
+                          {l.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}

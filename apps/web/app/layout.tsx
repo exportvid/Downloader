@@ -14,11 +14,11 @@ const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display', 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ExportVid | Download social media content fast',
+    default: 'Download Videos and Photos from Social Media | ExportVid',
     template: '%s | ExportVid',
   },
   description:
-    'Paste a link and download videos and photos from TikTok, Instagram, YouTube, X, and more. Free, fast, and no watermark.',
+    'Download videos and photos from YouTube, Facebook, Instagram, TikTok, and more. Paste a link, pick a quality, and save it. Free, with no watermark.',
   icons: { icon: '/favicon.svg' },
 };
 

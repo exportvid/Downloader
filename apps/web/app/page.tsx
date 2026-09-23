@@ -1,14 +1,20 @@
 import type { Metadata } from 'next';
 import { StudioHome } from '@/components/home/StudioHome';
-import { pageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { pageMetadata, webApplicationJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
-  title: 'ExportVid | Download social media content fast',
+  title: 'Download Videos and Photos from Social Media | ExportVid',
   description:
-    'Paste a link and download videos and photos from TikTok, Instagram, YouTube, X, and more. Free, fast, and no watermark.',
+    'Download videos and photos from YouTube, Facebook, Instagram, TikTok, and more. Paste a link, pick a quality, and save it. Free, with no watermark.',
   path: '/',
 });
 
 export default function HomePage() {
-  return <StudioHome />;
+  return (
+    <>
+      <JsonLd data={webApplicationJsonLd()} />
+      <StudioHome />
+    </>
+  );
 }

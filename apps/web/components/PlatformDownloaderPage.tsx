@@ -20,7 +20,7 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
 
       <DownloadHero title={config.h1} intro={config.intro} breadcrumb={config.h1} activeId={active?.id} />
 
-      <Section eyebrow="How it works" title={active ? `Downloading from ${active.label}` : 'Download from any platform'} narrow>
+      <Section eyebrow="How it works" title={active ? `How to download from ${active.label}` : 'How to download a video'} narrow>
         <div className="mx-auto max-w-2xl space-y-5">
           {config.about.map((p) => (
             <p key={p} className="text-[16px] leading-[1.75] text-ink-dim">
@@ -41,7 +41,7 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
         </CardGrid>
       </Section>
 
-      <Section eyebrow="Formats" title="Available formats">
+      <Section eyebrow="Formats" title="File formats">
         <CardGrid maxCols={2} count={config.formats.length}>
           {config.formats.map((f) => (
             <div key={f} className="card scroll-reveal h-full p-6 text-[14px] leading-relaxed text-ink-dim">
@@ -52,13 +52,13 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
       </Section>
 
       {config.faqs.length > 0 && (
-        <Section eyebrow="FAQ" title="Common questions" narrow>
+        <Section eyebrow="FAQ" title="Frequently asked questions" narrow>
           <Accordion items={config.faqs} />
         </Section>
       )}
 
       {config.related.length > 0 && (
-        <Section eyebrow="More downloaders" title="Related downloaders">
+        <Section eyebrow="More downloaders" title="Other downloaders">
           <div className="flex flex-wrap justify-center gap-2">
             {config.related.map((slug) => {
               const page = platformPages[slug];
