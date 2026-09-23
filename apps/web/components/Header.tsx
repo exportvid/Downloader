@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
+import { ThemeToggle } from './ThemeToggle';
 import { ALL_PLATFORMS, PlatformMark } from './PlatformMark';
 
 const MAIN_PLATFORMS = ALL_PLATFORMS.slice(0, 5);
@@ -38,13 +39,13 @@ export function Header() {
 
   const linkClass = (href: string) =>
     `flex items-center gap-2 rounded-xl px-3 py-2 text-[13px] font-medium transition-colors ${
-      pathname === href ? 'bg-white/8 text-ink' : 'text-ink-dim hover:bg-white/5 hover:text-ink'
+      pathname === href ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/5 hover:text-ink'
     }`;
   const moreActive = MORE_PLATFORMS.some((p) => p.href === pathname);
 
   return (
     <header className="sticky top-0 z-40 px-2 pt-2 sm:px-3">
-      <div className="rounded-2xl bg-base-surface/90 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-md">
+      <div className="rounded-2xl bg-base-surface/90 shadow-[0_10px_40px_-20px_rgb(var(--shadow)/var(--shadow-a))] backdrop-blur-md">
         <div className="flex h-14 items-center justify-between gap-4 px-4">
           <Logo />
 
@@ -63,7 +64,7 @@ export function Header() {
                 aria-expanded={open}
                 aria-haspopup="true"
                 className={`flex items-center gap-1.5 rounded-xl px-3 py-2 text-[13px] font-medium transition-colors ${
-                  open || moreActive ? 'bg-white/8 text-ink' : 'text-ink-dim hover:bg-white/5 hover:text-ink'
+                  open || moreActive ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/5 hover:text-ink'
                 }`}
               >
                 More
@@ -83,7 +84,7 @@ export function Header() {
               </button>
 
               {open && (
-                <div className="reveal absolute right-0 top-full z-50 mt-3 w-[22rem] rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)]">
+                <div className="reveal absolute right-0 top-full z-50 mt-3 w-[22rem] rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]">
                   <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">More platforms</p>
                   <ul className="grid grid-cols-2 gap-0.5">
                     {MORE_PLATFORMS.map((p) => (
@@ -109,9 +110,12 @@ export function Header() {
             </div>
           </nav>
 
-          <Link href="/supported-sites" className="text-[13px] font-medium text-ink-dim transition-colors hover:text-ink lg:hidden">
-            All sites
-          </Link>
+          <div className="flex items-center gap-1">
+            <Link href="/supported-sites" className="rounded-xl px-3 py-2 text-[13px] font-medium text-ink-dim transition-colors hover:text-ink lg:hidden">
+              All sites
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Below lg every platform stays visible in a swipeable strip instead of hiding behind a menu. */}

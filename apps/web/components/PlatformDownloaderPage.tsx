@@ -8,7 +8,10 @@ import { JsonLd } from './JsonLd';
 import { breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
 
 export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig }) {
-  const active = ALL_PLATFORMS.find((p) => p.href === `/${config.slug}`);
+  // Reels pages have no card of their own, so fall back to the parent platform (instagram-*, facebook-*).
+  const active =
+    ALL_PLATFORMS.find((p) => p.href === `/${config.slug}`) ??
+    ALL_PLATFORMS.find((p) => p.href.startsWith(`/${config.slug.split('-')[0]}-`));
 
   return (
     <div className="pb-16">
@@ -17,10 +20,10 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
 
       <DownloadHero title={config.h1} intro={config.intro} breadcrumb={config.h1} activeId={active?.id} />
 
-      <Section eyebrow="How it works" title={`Downloading from ${active?.label ?? 'any platform'}`} narrow>
-        <div className="space-y-4 text-center">
+      <Section eyebrow="How it works" title={active ? `Downloading from ${active.label}` : 'Download from any platform'} narrow>
+        <div className="mx-auto max-w-2xl space-y-5">
           {config.about.map((p) => (
-            <p key={p} className="text-[15px] leading-relaxed text-ink-dim">
+            <p key={p} className="text-[16px] leading-[1.75] text-ink-dim">
               {p}
             </p>
           ))}
@@ -28,24 +31,24 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
       </Section>
 
       <Section eyebrow="Content types" title="What you can download">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <CardGrid maxCols={3} count={config.supportedContentTypes.length}>
           {config.supportedContentTypes.map((c) => (
-            <div key={c.label} className="card scroll-reveal p-6">
-              <p className="text-[15px] font-semibold text-ink">{c.label}</p>
+            <div key={c.label} className="card scroll-reveal h-full p-6">
+              <p className="text-[16px] font-semibold text-ink">{c.label}</p>
               <p className="mt-2 text-[14px] leading-relaxed text-ink-dim">{c.description}</p>
             </div>
           ))}
-        </div>
+        </CardGrid>
       </Section>
 
       <Section eyebrow="Formats" title="Available formats">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <CardGrid maxCols={2} count={config.formats.length}>
           {config.formats.map((f) => (
-            <div key={f} className="card scroll-reveal p-6 text-[14px] leading-relaxed text-ink-dim">
+            <div key={f} className="card scroll-reveal h-full p-6 text-[14px] leading-relaxed text-ink-dim">
               {f}
             </div>
           ))}
-        </div>
+        </CardGrid>
       </Section>
 
       {config.faqs.length > 0 && (
@@ -73,6 +76,31 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
           </div>
         </Section>
       )}
+    </div>
+  );
+}
+
+/**
+ * Centers cards in rows instead of stretching them: one card stays a readable
+ * width, and a short last row sits in the middle rather than hugging the left.
+ */
+function CardGrid({ count, maxCols, children }: { count: number; maxCols: 2 | 3; children: React.ReactNode }) {
+  const cols = Math.min(count, maxCols);
+  const basis =
+    cols === 1
+      ? 'sm:max-w-xl'
+      : cols === 2
+        ? 'sm:w-[calc(50%-0.5rem)]'
+        : 'sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.7rem)]';
+  return (
+    <div className="flex flex-wrap justify-center gap-4 [&>*]:w-full">
+      {Array.isArray(children)
+        ? children.map((child, i) => (
+            <div key={i} className={`w-full ${basis}`}>
+              {child}
+            </div>
+          ))
+        : <div className={`w-full ${basis}`}>{children}</div>}
     </div>
   );
 }

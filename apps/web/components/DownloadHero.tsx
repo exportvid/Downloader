@@ -58,10 +58,10 @@ export function DownloadHero({
         </div>
       )}
 
-      <h1 className="mx-auto max-w-4xl bg-gradient-to-r from-white via-[#ffc07a] to-accent bg-clip-text font-[family-name:var(--font-studio-display)] text-6xl leading-[0.92] tracking-wide text-transparent sm:text-8xl">
+      <h1 className="mx-auto max-w-4xl bg-gradient-to-r from-head-from via-head-via to-accent bg-clip-text font-[family-name:var(--font-studio-display)] text-6xl leading-[0.92] tracking-wide text-transparent text-balance sm:text-8xl">
         {title}
       </h1>
-      <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#d4d0d9] sm:text-base">{intro}</p>
+      <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft text-balance sm:text-base">{intro}</p>
 
       <div className="relative mx-auto mt-10 max-w-3xl text-left">
         <div
@@ -107,7 +107,7 @@ export function DownloadHero({
                   <button
                     type="button"
                     onClick={handlePaste}
-                    className="flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-white/6 px-3 text-[13px] font-medium text-ink-dim transition-colors hover:bg-white/10 hover:text-ink"
+                    className="flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-hl/6 px-3 text-[13px] font-medium text-ink-dim transition-colors hover:bg-hl/10 hover:text-ink"
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                       <rect x="9" y="2.5" width="6" height="3" rx="1" />
@@ -134,7 +134,7 @@ export function DownloadHero({
               <div className="reveal px-1 pb-1 pt-4" aria-live="polite">
                 {loading && <p className="px-2 py-3 text-[13px] text-ink-faint">{STATUS_LINES[tick]}</p>}
                 {status === 'error' && error && (
-                  <p role="alert" className="px-2 py-3 text-[13px] text-rose-400">
+                  <p role="alert" className="px-2 py-3 text-[13px] text-danger">
                     {error}
                   </p>
                 )}

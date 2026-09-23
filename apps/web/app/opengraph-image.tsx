@@ -21,10 +21,8 @@ export default function OgImage() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <svg width="84" height="84" viewBox="0 0 100 100">
-            <rect x="8" y="8" width="84" height="84" rx="26" fill="#ff5a3c" />
-            <rect x="45" y="22" width="10" height="32" rx="5" fill="#ffffff" />
-            <path d="M29 46L71 46L50 70Z" fill="#ffffff" stroke="#ffffff" strokeWidth="4" strokeLinejoin="round" />
-            <path d="M30 79H70" stroke="#ffffff" strokeWidth="7" strokeLinecap="round" />
+            <circle cx="50" cy="50" r="46" fill="#ff5a3c" />
+            <path d="M50 18V24M50 32V42M50 50V62M35 52L50 67L65 52" fill="none" stroke="#ffffff" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <div style={{ display: 'flex', fontSize: 72, fontWeight: 700, color: '#f5f3f0' }}>
             Export<span style={{ color: '#ff5a3c' }}>Vid</span>

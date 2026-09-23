@@ -9,13 +9,14 @@ export interface PlatformEntry {
   types: string[];
 }
 
-/** Single source of truth for every platform listing on the site (header, homepage, footer, supported sites). */
+/** Single source of truth for every platform listing on the site (header, homepage, footer, supported sites).
+ * YouTube, Facebook, Instagram, and TikTok always come first; the header shows the first five. */
 export const ALL_PLATFORMS: PlatformEntry[] = [
-  { id: 'tiktok', label: 'TikTok', href: '/tiktok-video-downloader', types: ['Video'] },
-  { id: 'instagram', label: 'Instagram', href: '/instagram-video-downloader', types: ['Reels', 'Posts', 'Stories', 'Carousels'] },
-  { id: 'facebook', label: 'Facebook', href: '/facebook-video-downloader', types: ['Video', 'Reels'] },
-  { id: 'twitter', label: 'X', href: '/x-video-downloader', types: ['Video'] },
   { id: 'youtube', label: 'YouTube', href: '/youtube-video-downloader', types: ['Video', 'Shorts'] },
+  { id: 'facebook', label: 'Facebook', href: '/facebook-video-downloader', types: ['Video', 'Reels'] },
+  { id: 'instagram', label: 'Instagram', href: '/instagram-video-downloader', types: ['Reels', 'Posts', 'Stories', 'Carousels'] },
+  { id: 'tiktok', label: 'TikTok', href: '/tiktok-video-downloader', types: ['Video'] },
+  { id: 'twitter', label: 'X', href: '/x-video-downloader', types: ['Video'] },
   { id: 'reddit', label: 'Reddit', href: '/reddit-video-downloader', types: ['Video', 'GIFs'] },
   { id: 'pinterest', label: 'Pinterest', href: '/pinterest-video-downloader', types: ['Video pins'] },
   { id: 'snapchat', label: 'Snapchat', href: '/snapchat-video-downloader', types: ['Spotlight'] },
@@ -118,3 +119,19 @@ export function PlatformMark({ id, className }: { id: PlatformId; className?: st
       );
   }
 }
+
+/** Each platform's recognizable color, used only for its small icon chip. `dark` marks colors that need a dark glyph. */
+export const PLATFORM_COLORS: Record<PlatformId, { bg: string; dark?: boolean }> = {
+  tiktok: { bg: '#fe2c55' },
+  instagram: { bg: '#e1306c' },
+  facebook: { bg: '#1877f2' },
+  twitter: { bg: '#26262c' },
+  reddit: { bg: '#ff4500' },
+  youtube: { bg: '#e5001f' },
+  pinterest: { bg: '#e60023' },
+  snapchat: { bg: '#fffc00', dark: true },
+  twitch: { bg: '#9146ff' },
+  linkedin: { bg: '#0a66c2' },
+  tumblr: { bg: '#35465c' },
+  vimeo: { bg: '#1ab7ea' },
+};

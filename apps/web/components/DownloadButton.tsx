@@ -63,7 +63,7 @@ export function DownloadButton({ requestId, assetId, label }: { requestId: strin
         {status === 'processing' && <Spinner />}
         {isBusy ? (status === 'processing' ? 'Merging…' : 'Preparing…') : label}
       </button>
-      {status === 'error' && error && <p className="reveal max-w-[220px] text-right text-xs text-rose-400">{error}</p>}
+      {status === 'error' && error && <p className="reveal max-w-[220px] text-right text-xs text-danger">{error}</p>}
     </div>
   );
 }

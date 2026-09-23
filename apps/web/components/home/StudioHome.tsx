@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { DownloadHero } from '@/components/DownloadHero';
-import { ALL_PLATFORMS, PlatformMark } from '@/components/PlatformMark';
+import { ALL_PLATFORMS, PLATFORM_COLORS, PlatformMark } from '@/components/PlatformMark';
 import { Accordion, Section } from '@/components/Section';
 
 const STEPS = [
@@ -125,19 +125,38 @@ function Tile({ d, title, body }: { d: string; title: string; body: string }) {
 function SupportedPlatforms() {
   return (
     <Section eyebrow="Platforms" title="Pick your platform" intro="Every downloader works the same way. Open the one you need.">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-        {ALL_PLATFORMS.map((p) => (
-          <Link key={p.id} href={p.href} className="card scroll-reveal lift group flex flex-col gap-4 p-5 hover:bg-base-raised">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-glow transition-transform duration-300 group-hover:scale-110">
-              <PlatformMark id={p.id} className="h-5 w-5" />
-            </span>
-            <span>
-              <span className="block text-[15px] font-semibold text-ink">{p.label}</span>
-              <span className="mt-1 block text-[12px] leading-snug text-ink-faint">{p.types.join(' · ')}</span>
-            </span>
-          </Link>
-        ))}
-      </div>
+      <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
+        {ALL_PLATFORMS.map((p) => {
+          const c = PLATFORM_COLORS[p.id];
+          return (
+            <li key={p.id} className="scroll-reveal">
+              <Link href={p.href} className="card lift group flex items-center gap-3 p-3 pr-4 hover:bg-base-raised">
+                <span
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105 ${c.dark ? 'text-[#111]' : 'text-white'}`}
+                  style={{ backgroundColor: c.bg }}
+                >
+                  <PlatformMark id={p.id} className="h-[18px] w-[18px]" />
+                </span>
+                <span className="min-w-0 flex-1 truncate text-[14px] font-semibold text-ink">{p.label}</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="shrink-0 -translate-x-1 text-ink-faint opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+                  aria-hidden
+                >
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </Section>
   );
 }

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Logo } from './Logo';
-import { ALL_PLATFORMS } from './PlatformMark';
+import { ALL_PLATFORMS, PlatformMark } from './PlatformMark';
 
-const PLATFORM_LINKS = ALL_PLATFORMS.map((p) => ({ href: p.href, label: p.label }));
+const PLATFORM_LINKS = ALL_PLATFORMS.map((p) => ({ href: p.href, label: p.label, id: p.id }));
 const EXTRA_LINKS = [
   { href: '/instagram-reels-downloader', label: 'Instagram Reels' },
   { href: '/facebook-reels-downloader', label: 'Facebook Reels' },
@@ -20,43 +20,84 @@ const LEGAL_LINKS = [
   { href: '/copyright', label: 'Copyright / DMCA' },
 ];
 
+const linkClass = 'group/link inline-flex items-center gap-2 text-[14px] text-ink-dim transition-colors hover:text-ink';
+
+/** Floating panel that mirrors the header: same inset, same surface, same radius family. */
 export function Footer() {
   return (
-    <footer className="border-t border-line">
-      <div className="container-wide grid gap-10 py-12 sm:grid-cols-2 sm:py-16 md:grid-cols-[1fr_2fr_1fr_1fr]">
-        <div className="space-y-4 md:col-span-1">
-          <Logo />
-          <p className="max-w-[30ch] text-sm leading-relaxed text-ink-faint">
-            A free video and photo downloader for social media.
-          </p>
+    <footer className="px-2 pb-2 pt-10 sm:px-3 sm:pb-3">
+      <div className="rounded-3xl bg-base-surface">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[1.1fr_2.2fr_1fr]">
+          <div className="flex flex-col items-start gap-4">
+            <Logo />
+            <p className="max-w-[28ch] text-[14px] leading-relaxed text-ink-faint">A free video and photo downloader for social media.</p>
+            <a
+              href="#top"
+              className="press mt-2 inline-flex h-10 items-center gap-2 rounded-xl bg-hl/6 px-4 text-[13px] font-medium text-ink-dim transition-colors hover:bg-hl/10 hover:text-ink"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M12 19V5m0 0l-6 6m6-6l6 6" />
+              </svg>
+              Back to top
+            </a>
+          </div>
+
+          <nav aria-label="Downloaders">
+            <Heading>Downloaders</Heading>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-3.5 sm:grid-cols-3">
+              {PLATFORM_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className={linkClass}>
+                    <PlatformMark id={l.id} className="h-3.5 w-3.5 shrink-0 text-ink-faint transition-colors group-hover/link:text-accent" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              {EXTRA_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className={linkClass}>
+                    <span className="h-3.5 w-3.5 shrink-0 text-center text-ink-faint transition-colors group-hover/link:text-accent" aria-hidden>
+                      ↳
+                    </span>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="grid grid-cols-2 gap-10 lg:grid-cols-1 lg:gap-8">
+            <FooterList title="Company" links={COMPANY_LINKS} />
+            <FooterList title="Legal" links={LEGAL_LINKS} />
+          </div>
         </div>
-        <FooterColumn title="Downloaders" links={[...PLATFORM_LINKS, ...EXTRA_LINKS]} columns />
-        <FooterColumn title="Company" links={COMPANY_LINKS} />
-        <FooterColumn title="Legal" links={LEGAL_LINKS} />
-      </div>
-      <div className="border-t border-line py-6">
-        <p className="container-wide text-xs text-ink-faint">
-          &copy; {new Date().getFullYear()} ExportVid. Not affiliated with any supported platform. You are responsible for having
-          the rights to any content you download.
-        </p>
+
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 border-t border-line px-6 py-6 text-xs leading-relaxed text-ink-faint sm:px-10 md:flex-row md:items-center md:justify-between">
+          <p>&copy; {new Date().getFullYear()} ExportVid</p>
+          <p className="md:text-right">Not affiliated with any supported platform. Download only what you have the right to use.</p>
+        </div>
       </div>
     </footer>
   );
 }
 
-function FooterColumn({ title, links, columns }: { title: string; links: { href: string; label: string }[]; columns?: boolean }) {
+function Heading({ children }: { children: React.ReactNode }) {
+  return <h3 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-faint">{children}</h3>;
+}
+
+function FooterList({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
-    <div>
-      <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-faint">{title}</h3>
-      <ul className={columns ? 'grid grid-cols-2 gap-x-6 gap-y-3' : 'space-y-3'}>
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href} className="inline-block text-[14px] text-ink-dim transition-[color,transform] duration-200 hover:translate-x-0.5 hover:text-ink">
-              {link.label}
+    <nav aria-label={title}>
+      <Heading>{title}</Heading>
+      <ul className="space-y-3.5">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className={linkClass}>
+              {l.label}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </nav>
   );
 }

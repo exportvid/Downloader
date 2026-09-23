@@ -18,8 +18,8 @@ export function Section({
     <section className="container-wide py-12 sm:py-20">
       <div className="scroll-reveal mx-auto max-w-2xl text-center">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{eyebrow}</p>
-        <h2 className="mt-3 font-[family-name:var(--font-studio-display)] text-4xl tracking-wide text-ink sm:text-5xl">{title}</h2>
-        {intro && <p className="mt-3 text-[15px] leading-relaxed text-ink-dim">{intro}</p>}
+        <h2 className="mt-3 font-[family-name:var(--font-studio-display)] text-4xl tracking-wide text-ink text-balance sm:text-5xl">{title}</h2>
+        {intro && <p className="mt-3 text-[15px] leading-relaxed text-ink-dim text-balance">{intro}</p>}
       </div>
       <div className={`mx-auto mt-10 sm:mt-12 ${narrow ? 'max-w-3xl' : ''}`}>{children}</div>
     </section>

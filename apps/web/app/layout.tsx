@@ -22,10 +22,17 @@ export const metadata: Metadata = {
   icons: { icon: '/favicon.svg' },
 };
 
+// Runs before first paint so the chosen theme never flashes the wrong colors.
+// No saved choice means System: follow the device setting.
+const THEME_INIT = `try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable} ${studio.variable}`}>
-      <body className="flex min-h-screen flex-col">
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${sans.variable} ${display.variable} ${studio.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
+      <body id="top" className="flex min-h-screen flex-col">
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <Header />

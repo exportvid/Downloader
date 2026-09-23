@@ -14,7 +14,7 @@ export function ResultCard({ result }: { result: ExtractionResult }) {
           <img
             src={result.thumbnail}
             alt={result.title ?? 'Media thumbnail'}
-            className="h-40 w-full rounded-lg object-cover ring-1 ring-inset ring-white/5 sm:h-24 sm:w-24"
+            className="h-40 w-full rounded-lg object-cover ring-1 ring-inset ring-hl/5 sm:h-24 sm:w-24"
             loading="lazy"
           />
         )}

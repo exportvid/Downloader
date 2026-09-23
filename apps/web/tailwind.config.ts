@@ -7,19 +7,26 @@ const config: Config = {
     extend: {
       colors: {
         base: {
-          DEFAULT: '#0a0a0f',
-          surface: '#131319',
-          raised: '#1a1a22',
+          DEFAULT: 'rgb(var(--base) / <alpha-value>)',
+          surface: 'rgb(var(--surface) / <alpha-value>)',
+          raised: 'rgb(var(--raised) / <alpha-value>)',
         },
-        line: 'rgba(255,255,255,0.08)',
-        'line-strong': 'rgba(255,255,255,0.15)',
+        hl: 'rgb(var(--hl) / <alpha-value>)',
+        line: 'rgb(var(--hl) / 0.08)',
+        'line-strong': 'rgb(var(--hl) / 0.15)',
         ink: {
-          DEFAULT: '#f5f3f0',
-          dim: '#a8a5ad',
-          faint: '#6e6b76',
+          DEFAULT: 'rgb(var(--ink) / <alpha-value>)',
+          dim: 'rgb(var(--ink-dim) / <alpha-value>)',
+          faint: 'rgb(var(--ink-faint) / <alpha-value>)',
+          soft: 'rgb(var(--ink-soft) / <alpha-value>)',
         },
+        head: {
+          from: 'rgb(var(--head-from) / <alpha-value>)',
+          via: 'rgb(var(--head-via) / <alpha-value>)',
+        },
+        danger: 'rgb(var(--danger) / <alpha-value>)',
         accent: {
-          DEFAULT: '#ff5a3c',
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
           from: '#ffab5c',
           via: '#ff5a3c',
           to: '#c81f2e',
