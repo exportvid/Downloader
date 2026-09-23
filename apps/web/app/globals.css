@@ -42,6 +42,7 @@
 }
 
 :root {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -179,4 +180,57 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Languages -------------------------------------------------------------- */
+
+/* Russian and Vietnamese need Cyrillic and Vietnamese glyphs, which Bebas Neue lacks. */
+html[lang='ru'],
+html[lang='vi'] {
+  --font-studio-display: var(--font-condensed), ui-sans-serif, system-ui, sans-serif;
+}
+html[lang='ru'] [class*='--font-studio-display'],
+html[lang='vi'] [class*='--font-studio-display'] {
+  font-weight: 600;
+}
+
+/* Arabic, Hindi, Bengali, Japanese, and Korean use each device's own high-quality system fonts, so there is no
+   webfont to download. Latin text (brand names, URLs) still uses Inter first. */
+html[lang='ar'] {
+  --font-sans: var(--font-inter), 'Segoe UI', 'Geeza Pro', 'Noto Sans Arabic', Tahoma, system-ui, sans-serif;
+}
+html[lang='hi'] {
+  --font-sans: var(--font-inter), 'Nirmala UI', 'Kohinoor Devanagari', 'Noto Sans Devanagari', Mangal, system-ui, sans-serif;
+}
+html[lang='bn'] {
+  --font-sans: var(--font-inter), 'Nirmala UI', 'Kohinoor Bangla', 'Noto Sans Bengali', Vrinda, system-ui, sans-serif;
+}
+html[lang='ja'] {
+  --font-sans: var(--font-inter), 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo, 'Noto Sans JP', system-ui, sans-serif;
+}
+html[lang='ko'] {
+  --font-sans: var(--font-inter), 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', system-ui, sans-serif;
+}
+html[data-script='system'] {
+  --font-studio-display: var(--font-sans);
+  --font-display: var(--font-sans);
+}
+/* Letter spacing breaks Arabic joining and Indic conjuncts, and the condensed display look does not exist in these scripts. */
+html[data-script='system'] * {
+  letter-spacing: normal !important;
+}
+html[data-script='system'] [class*='--font-studio-display'] {
+  font-weight: 700;
+  line-height: 1.2 !important;
+}
+html[data-script='system'] h1[class*='--font-studio-display'] {
+  font-size: clamp(2.25rem, 8vw, 4rem) !important;
+}
+html[data-script='system'] h2[class*='--font-studio-display'] {
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem) !important;
+}
+
+/* Long words in any language should wrap instead of overflowing. */
+[class*='--font-studio-display'] {
+  overflow-wrap: break-word;
 }

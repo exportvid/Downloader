@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 import { prepareDownload, pollJob } from '@/lib/api';
+import { useI18n } from './I18nProvider';
 
 type Status = 'idle' | 'preparing' | 'processing' | 'error';
 
@@ -9,6 +10,7 @@ const POLL_INTERVAL_MS = 1500;
 const MAX_POLLS = 80; // ~2 minutes
 
 export function DownloadButton({ requestId, assetId, label }: { requestId: string; assetId: string; label: string }) {
+  const { t } = useI18n();
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
   const cancelled = useRef(false);
@@ -36,18 +38,18 @@ export function DownloadButton({ requestId, assetId, label }: { requestId: strin
           return;
         }
         if (job.status === 'failed') {
-          setError('Couldn’t prepare this file. Try a different quality.');
+          setError(t.button.errorPrepare);
           setStatus('error');
           return;
         }
       }
-      setError('This is taking longer than expected. Try again.');
+      setError(t.button.errorSlow);
       setStatus('error');
     } catch {
-      setError('Something went wrong. Try again.');
+      setError(t.button.errorGeneric);
       setStatus('error');
     }
-  }, [requestId, assetId]);
+  }, [requestId, assetId, t]);
 
   const isBusy = status === 'preparing' || status === 'processing';
 
@@ -61,9 +63,9 @@ export function DownloadButton({ requestId, assetId, label }: { requestId: strin
       >
         {status === 'preparing' && <Spinner />}
         {status === 'processing' && <Spinner />}
-        {isBusy ? (status === 'processing' ? 'Merging…' : 'Preparing…') : label}
+        {isBusy ? (status === 'processing' ? t.button.merging : t.button.preparing) : label}
       </button>
-      {status === 'error' && error && <p className="reveal max-w-[220px] text-right text-xs text-danger">{error}</p>}
+      {status === 'error' && error && <p className="reveal max-w-[220px] text-end text-xs text-danger">{error}</p>}
     </div>
   );
 }

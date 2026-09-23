@@ -1,4 +1,6 @@
 import type { ContentType } from '@exportvid/shared';
+import { fmt } from './i18n/config';
+import type { ClientMessages } from './i18n/messages';
 
 export function formatDuration(seconds?: number): string | null {
   if (!seconds || seconds <= 0) return null;
@@ -23,34 +25,48 @@ export function formatBytes(bytes?: number): string | null {
   return `${value.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
 }
 
-const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
-  tiktok_video: 'TikTok Video',
-  instagram_reel: 'Instagram Reel',
-  instagram_story: 'Instagram Story',
-  instagram_post: 'Instagram Post',
-  instagram_photo: 'Instagram Photo',
-  instagram_carousel: 'Instagram Carousel',
-  instagram_profile_picture: 'Instagram Profile Picture',
-  instagram_highlight: 'Instagram Highlight',
-  facebook_video: 'Facebook Video',
-  facebook_reel: 'Facebook Reel',
-  twitter_video: 'X Video',
-  twitter_photo: 'X Photo',
-  reddit_video: 'Reddit Video',
-  reddit_gif: 'Reddit GIF',
-  reddit_image: 'Reddit Image',
-  youtube_video: 'YouTube Video',
-  youtube_short: 'YouTube Short',
-  pinterest_pin: 'Pinterest Pin',
-  pinterest_video: 'Pinterest Video',
-  snapchat_spotlight: 'Snapchat Spotlight',
-  twitch_clip: 'Twitch Clip',
-  linkedin_video: 'LinkedIn Video',
-  tumblr_post: 'Tumblr Post',
-  vimeo_video: 'Vimeo Video',
-  unknown: 'Media',
+type Kind = keyof ClientMessages['kinds'];
+
+const CONTENT_TYPES: Record<ContentType, { brand?: string; kind: Kind }> = {
+  tiktok_video: { brand: 'TikTok', kind: 'video' },
+  instagram_reel: { brand: 'Instagram', kind: 'reel' },
+  instagram_story: { brand: 'Instagram', kind: 'story' },
+  instagram_post: { brand: 'Instagram', kind: 'post' },
+  instagram_photo: { brand: 'Instagram', kind: 'photo' },
+  instagram_carousel: { brand: 'Instagram', kind: 'carousel' },
+  instagram_profile_picture: { brand: 'Instagram', kind: 'profilePicture' },
+  instagram_highlight: { brand: 'Instagram', kind: 'highlight' },
+  facebook_video: { brand: 'Facebook', kind: 'video' },
+  facebook_reel: { brand: 'Facebook', kind: 'reel' },
+  twitter_video: { brand: 'X', kind: 'video' },
+  twitter_photo: { brand: 'X', kind: 'photo' },
+  reddit_video: { brand: 'Reddit', kind: 'video' },
+  reddit_gif: { brand: 'Reddit', kind: 'gif' },
+  reddit_image: { brand: 'Reddit', kind: 'image' },
+  youtube_video: { brand: 'YouTube', kind: 'video' },
+  youtube_short: { brand: 'YouTube', kind: 'short' },
+  pinterest_pin: { brand: 'Pinterest', kind: 'pin' },
+  pinterest_video: { brand: 'Pinterest', kind: 'video' },
+  snapchat_spotlight: { brand: 'Snapchat', kind: 'spotlight' },
+  twitch_clip: { brand: 'Twitch', kind: 'clip' },
+  linkedin_video: { brand: 'LinkedIn', kind: 'video' },
+  tumblr_post: { brand: 'Tumblr', kind: 'post' },
+  vimeo_video: { brand: 'Vimeo', kind: 'video' },
+  unknown: { kind: 'media' },
 };
 
-export function contentTypeLabel(type: ContentType): string {
-  return CONTENT_TYPE_LABELS[type] ?? 'Media';
+/** Builds a label like "Instagram Reel" in the current language, keeping the platform name untranslated. */
+export function contentTypeLabel(type: ContentType, t: ClientMessages): string {
+  const entry = CONTENT_TYPES[type] ?? CONTENT_TYPES.unknown;
+  const kind = t.kinds[entry.kind];
+  return entry.brand ? fmt(t.kindFormat, { brand: entry.brand, kind }) : kind;
+}
+
+/** The API names some files in English ("Original JPG", "Audio (M4A)"). Translate those; leave "1080p MP4" as is. */
+export function assetLabel(label: string, t: ClientMessages): string {
+  const original = /^Original (\w+)$/.exec(label);
+  if (original) return fmt(t.hero.assetOriginal, { ext: original[1] });
+  const audio = /^Audio \((\w+)\)$/.exec(label);
+  if (audio) return fmt(t.hero.assetAudio, { ext: audio[1] });
+  return label;
 }

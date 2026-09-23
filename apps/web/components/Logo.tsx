@@ -9,9 +9,9 @@ export function LogoMark({ size = 32 }: { size?: number }) {
   );
 }
 
-export function Logo() {
+export function Logo({ href = '/', label = 'ExportVid home' }: { href?: string; label?: string }) {
   return (
-    <Link href="/" className="group flex items-center gap-2.5" aria-label="ExportVid home">
+    <Link href={href} className="group flex items-center gap-2.5" aria-label={label}>
       <LogoMark />
       <span className="font-display text-[16px] font-semibold tracking-tight text-ink">
         Export<span className="text-accent">Vid</span>

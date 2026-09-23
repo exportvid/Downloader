@@ -4,19 +4,23 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
+import { LanguageMenu } from './LanguageMenu';
+import { useI18n } from './I18nProvider';
+import { localePath } from '@/lib/i18n/config';
 import { ThemeToggle } from './ThemeToggle';
 import { ALL_PLATFORMS, PLATFORM_COLORS, PlatformMark } from './PlatformMark';
 
 const MAIN_PLATFORMS = ALL_PLATFORMS.slice(0, 5);
 const MORE_PLATFORMS = ALL_PLATFORMS.slice(5);
 
-const SECONDARY_LINKS = [
-  { href: '/faq', label: 'FAQ' },
-  { href: '/contact', label: 'Contact' },
-];
-
 export function Header() {
+  const { locale, t } = useI18n();
   const pathname = usePathname();
+  const href = (path: string) => localePath(locale, path);
+  const secondaryLinks = [
+    { href: '/faq', label: t.header.faq },
+    { href: '/contact', label: t.header.contact },
+  ];
   const [open, setOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
 
@@ -40,21 +44,22 @@ export function Header() {
     };
   }, [open]);
 
-  const linkClass = (href: string) =>
+  // Compare against the localized URL so the current page stays highlighted in every language.
+  const linkClass = (path: string) =>
     `flex items-center gap-2 rounded-xl px-3 py-2 text-[13px] font-medium transition-colors ${
-      pathname === href ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/5 hover:text-ink'
+      pathname === href(path) ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/5 hover:text-ink'
     }`;
-  const moreActive = MORE_PLATFORMS.some((p) => p.href === pathname);
+  const moreActive = MORE_PLATFORMS.some((p) => href(p.href) === pathname);
 
   return (
     <header className="sticky top-0 z-40 px-2 pt-2 sm:px-3">
       <div className="rounded-2xl bg-base-surface/90 shadow-[0_10px_40px_-20px_rgb(var(--shadow)/var(--shadow-a))] backdrop-blur-md">
         <div className="flex h-14 items-center justify-between gap-4 px-4">
-          <Logo />
+          <Logo href={href('/')} label={t.header.logoAria} />
 
-          <nav aria-label="Supported platforms" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label={t.header.platformsAria} className="hidden items-center gap-1 lg:flex">
             {MAIN_PLATFORMS.map((p) => (
-              <Link key={p.id} href={p.href} aria-current={pathname === p.href ? 'page' : undefined} className={linkClass(p.href)}>
+              <Link key={p.id} href={href(p.href)} aria-current={pathname === href(p.href) ? 'page' : undefined} className={linkClass(p.href)}>
                 <PlatformMark id={p.id} className="h-3.5 w-3.5 opacity-80" />
                 {p.label}
               </Link>
@@ -70,7 +75,7 @@ export function Header() {
                   open || moreActive ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/5 hover:text-ink'
                 }`}
               >
-                More
+                {t.header.more}
                 <svg
                   width="12"
                   height="12"
@@ -89,21 +94,21 @@ export function Header() {
               {open && (
                 <div
                   role="menu"
-                  aria-label="More platforms"
-                  className="dropdown-in absolute right-0 top-full z-50 mt-3 w-[25rem] origin-top-right rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]"
+                  aria-label={t.header.moreAria}
+                  className="dropdown-in absolute end-0 top-full z-50 mt-3 w-[25rem] ltr:origin-top-right rtl:origin-top-left rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]"
                 >
-                  <p className="px-3 pb-2 pt-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-faint">More downloaders</p>
+                  <p className="px-3 pb-2 pt-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-faint">{t.header.moreDownloaders}</p>
                   <ul className="grid grid-cols-2 gap-0.5">
                     {MORE_PLATFORMS.map((p) => {
                       const c = PLATFORM_COLORS[p.id];
-                      const active = pathname === p.href;
+                      const active = pathname === href(p.href);
                       return (
                         <li key={p.id}>
                           <Link
-                            href={p.href}
+                            href={href(p.href)}
                             role="menuitem"
                             aria-current={active ? 'page' : undefined}
-                            className={`group/item flex items-center gap-3 rounded-xl p-2 pr-3 text-[14px] font-medium transition-colors ${
+                            className={`group/item flex items-center gap-3 rounded-xl p-2 pe-3 text-[14px] font-medium transition-colors ${
                               active ? 'bg-hl/8 text-ink' : 'text-ink-dim hover:bg-hl/6 hover:text-ink'
                             }`}
                           >
@@ -123,11 +128,11 @@ export function Header() {
 
                   <div className="mt-2 space-y-1 rounded-xl bg-hl/5 p-1.5">
                     <Link
-                      href="/supported-sites"
+                      href={href('/supported-sites')}
                       role="menuitem"
                       className="group/all flex items-center justify-between rounded-lg px-2.5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-hl/6"
                     >
-                      All supported sites
+                      {t.header.allSupportedSites}
                       <svg
                         width="14"
                         height="14"
@@ -137,17 +142,17 @@ export function Header() {
                         strokeWidth="2.2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="text-ink-faint transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:text-accent"
+                        className="text-ink-faint transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:text-accent rtl:-scale-x-100 rtl:group-hover/all:-translate-x-0.5"
                         aria-hidden
                       >
                         <path d="M5 12h14M13 6l6 6-6 6" />
                       </svg>
                     </Link>
                     <div className="grid grid-cols-2 gap-1">
-                      {SECONDARY_LINKS.map((l) => (
+                      {secondaryLinks.map((l) => (
                         <Link
                           key={l.href}
-                          href={l.href}
+                          href={href(l.href)}
                           role="menuitem"
                           className="rounded-lg px-2.5 py-2 text-[13px] text-ink-dim transition-colors hover:bg-hl/6 hover:text-ink"
                         >
@@ -161,21 +166,22 @@ export function Header() {
             </div>
           </nav>
 
-          <div className="flex items-center gap-1">
-            <Link href="/supported-sites" className="rounded-xl px-3 py-2 text-[13px] font-medium text-ink-dim transition-colors hover:text-ink lg:hidden">
-              All sites
+          <div className="flex items-center gap-0.5">
+            <Link href={href('/supported-sites')} className="rounded-xl px-3 py-2 text-[13px] font-medium text-ink-dim transition-colors hover:text-ink lg:hidden">
+              {t.header.allSitesShort}
             </Link>
+            <LanguageMenu />
             <ThemeToggle />
           </div>
         </div>
 
         {/* Below lg every platform stays visible in a swipeable strip instead of hiding behind a menu. */}
         <nav
-          aria-label="Supported platforms"
-          className="scrollbar-none flex gap-1 overflow-x-auto px-3 pb-3 [mask-image:linear-gradient(to_right,black_92%,transparent)] lg:hidden"
+          aria-label={t.header.platformsAria}
+          className="scrollbar-none flex gap-1 overflow-x-auto px-3 pb-3 [mask-image:linear-gradient(to_right,black_92%,transparent)] rtl:[mask-image:linear-gradient(to_left,black_92%,transparent)] lg:hidden"
         >
           {ALL_PLATFORMS.map((p) => (
-            <Link key={p.id} href={p.href} aria-current={pathname === p.href ? 'page' : undefined} className={`${linkClass(p.href)} shrink-0`}>
+            <Link key={p.id} href={href(p.href)} aria-current={pathname === href(p.href) ? 'page' : undefined} className={`${linkClass(p.href)} shrink-0`}>
               <PlatformMark id={p.id} className="h-3.5 w-3.5 opacity-80" />
               {p.label}
             </Link>

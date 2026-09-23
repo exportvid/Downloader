@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { PLATFORM_LABELS } from '@exportvid/shared';
 import { useDownloader } from '@/lib/useDownloader';
-import { formatBytes, formatDuration, contentTypeLabel } from '@/lib/format';
+import { formatBytes, formatDuration, contentTypeLabel, assetLabel } from '@/lib/format';
+import { localePath } from '@/lib/i18n/config';
+import type { ClientMessages } from '@/lib/i18n/messages';
+import { useI18n } from './I18nProvider';
 import { DownloadButton } from '@/components/DownloadButton';
 import { ALL_PLATFORMS, PlatformMark, type PlatformId } from '@/components/PlatformMark';
-
-const STATUS_LINES = ['Reading the link…', 'Checking available formats…', 'Almost done…'];
 
 /**
  * The ExportVid download hero. One focal object: a large paste console whose
@@ -29,22 +30,23 @@ export function DownloadHero({
   breadcrumb?: string;
   activeId?: PlatformId;
 }) {
+  const { locale, t } = useI18n();
   const { url, setUrl, status, error, result, detected, inputRef, handleSubmit, handlePaste } = useDownloader();
   const [tick, setTick] = useState(0);
   const loading = status === 'loading';
 
   useEffect(() => {
     if (!loading) return;
-    const id = setInterval(() => setTick((t) => (t + 1) % STATUS_LINES.length), 600);
+    const id = setInterval(() => setTick((n) => (n + 1) % t.hero.statusLines.length), 600);
     return () => clearInterval(id);
-  }, [loading]);
+  }, [loading, t.hero.statusLines.length]);
 
   return (
-    <section id="download" className="container-wide relative scroll-mt-24 pb-4 pt-10 text-center sm:pt-16">
+    <section id="download" className="container-wide relative scroll-mt-24 overflow-x-clip pb-4 pt-10 text-center sm:pt-16">
       {breadcrumb && (
-        <nav aria-label="Breadcrumb" className="mb-6 flex justify-center gap-2 text-xs text-ink-faint">
-          <Link href="/" className="transition-colors hover:text-ink-dim">
-            Home
+        <nav aria-label={t.hero.breadcrumbAria} className="mb-6 flex justify-center gap-2 text-xs text-ink-faint">
+          <Link href={localePath(locale, '/')} className="transition-colors hover:text-ink-dim">
+            {t.hero.home}
           </Link>
           <span>/</span>
           <span className="text-ink-dim">{breadcrumb}</span>
@@ -63,7 +65,7 @@ export function DownloadHero({
       </h1>
       <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft text-balance sm:text-base">{intro}</p>
 
-      <div className="relative mx-auto mt-10 max-w-3xl text-left">
+      <div className="relative mx-auto mt-10 max-w-3xl text-start">
         <div
           className="pointer-events-none absolute -inset-x-10 -inset-y-10 -z-10 opacity-70 blur-3xl"
           style={{ background: 'radial-gradient(55% 60% at 50% 50%, rgba(255,90,60,0.22), transparent 70%)' }}
@@ -95,8 +97,8 @@ export function DownloadHero({
                     spellCheck={false}
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="Paste a video or photo link"
-                    aria-label="Video or photo link"
+                    placeholder={t.hero.placeholder}
+                    aria-label={t.hero.inputAria}
                     className="h-16 min-w-0 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-ink-faint"
                   />
                   {detected && (
@@ -113,7 +115,7 @@ export function DownloadHero({
                       <rect x="9" y="2.5" width="6" height="3" rx="1" />
                       <rect x="6" y="4.5" width="12" height="16" rx="2" />
                     </svg>
-                    Paste
+                    {t.hero.paste}
                   </button>
                 </div>
 
@@ -125,20 +127,20 @@ export function DownloadHero({
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover/dl:translate-y-0.5">
                     <path d="M12 4v10m0 0l-3.5-3.5M12 14l3.5-3.5M5.5 19h13" />
                   </svg>
-                  {loading ? 'Checking' : 'Download'}
+                  {loading ? t.hero.checking : t.hero.download}
                 </button>
               </div>
             </form>
 
             {status !== 'idle' && (
               <div className="reveal px-1 pb-1 pt-4" aria-live="polite">
-                {loading && <p className="px-2 py-3 text-[13px] text-ink-faint">{STATUS_LINES[tick]}</p>}
+                {loading && <p className="px-2 py-3 text-[13px] text-ink-faint">{t.hero.statusLines[tick]}</p>}
                 {status === 'error' && error && (
                   <p role="alert" className="px-2 py-3 text-[13px] text-danger">
                     {error}
                   </p>
                 )}
-                {status === 'success' && result && <ResultList result={result} />}
+                {status === 'success' && result && <ResultList result={result} t={t} />}
               </div>
             )}
           </div>
@@ -149,7 +151,7 @@ export function DownloadHero({
         {ALL_PLATFORMS.map((p) => (
           <Link
             key={p.id}
-            href={p.href}
+            href={localePath(locale, p.href)}
             aria-current={p.id === activeId ? 'page' : undefined}
             className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-colors ${
               p.id === activeId ? 'bg-brand-gradient text-white' : 'bg-base-surface text-ink-dim hover:bg-base-raised hover:text-ink'
@@ -164,7 +166,7 @@ export function DownloadHero({
   );
 }
 
-function ResultList({ result }: { result: NonNullable<ReturnType<typeof useDownloader>['result']> }) {
+function ResultList({ result, t }: { result: NonNullable<ReturnType<typeof useDownloader>['result']>; t: ClientMessages }) {
   const duration = formatDuration(result.duration);
   return (
     <div>
@@ -175,7 +177,7 @@ function ResultList({ result }: { result: NonNullable<ReturnType<typeof useDownl
         )}
         <div className="min-w-0">
           <p className="text-xs font-medium text-accent">
-            {contentTypeLabel(result.contentType)}
+            {contentTypeLabel(result.contentType, t)}
             {duration ? ` · ${duration}` : ''}
           </p>
           {result.title && <p className="mt-0.5 line-clamp-1 text-sm font-medium text-ink">{result.title}</p>}
@@ -189,14 +191,14 @@ function ResultList({ result }: { result: NonNullable<ReturnType<typeof useDownl
             style={{ animationDelay: `${Math.min(i, 6) * 45}ms` }}
           >
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-ink">{asset.label}</p>
+              <p className="text-sm font-semibold text-ink">{assetLabel(asset.label, t)}</p>
               <p className="text-xs text-ink-faint">
-                {[asset.width && asset.height ? `${asset.width}×${asset.height}` : null, asset.hasAudio ? 'Video + audio' : 'Video only', formatBytes(asset.filesize)]
+                {[asset.width && asset.height ? `${asset.width}×${asset.height}` : null, asset.hasAudio ? t.hero.videoAudio : t.hero.videoOnly, formatBytes(asset.filesize)]
                   .filter(Boolean)
                   .join(' · ')}
               </p>
             </div>
-            <DownloadButton requestId={result.requestId} assetId={asset.id} label="Download" />
+            <DownloadButton requestId={result.requestId} assetId={asset.id} label={t.hero.download} />
           </li>
         ))}
       </ul>

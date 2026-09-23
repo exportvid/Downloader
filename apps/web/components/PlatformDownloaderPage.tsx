@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import type { PlatformPageConfig } from '@/lib/platforms';
-import { platformPages } from '@/lib/platforms';
+import { getPlatformPage } from '@/lib/platforms';
+import { fmt, localePath, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
 import { DownloadHero } from './DownloadHero';
 import { ALL_PLATFORMS } from './PlatformMark';
 import { Accordion, Section } from './Section';
 import { JsonLd } from './JsonLd';
 import { breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
 
-export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig }) {
+export function PlatformDownloaderPage({ config, locale }: { config: PlatformPageConfig; locale: Locale }) {
+  const m = getMessages(locale);
+  const pp = m.site.platformPage;
   // Reels pages have no card of their own, so fall back to the parent platform (instagram-*, facebook-*).
   const active =
     ALL_PLATFORMS.find((p) => p.href === `/${config.slug}`) ??
@@ -15,12 +19,12 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
 
   return (
     <div className="pb-16">
-      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: config.h1, path: `/${config.slug}` }])} />
-      {config.faqs.length > 0 && <JsonLd data={faqJsonLd(config.faqs)} />}
+      <JsonLd data={breadcrumbJsonLd([{ name: m.client.hero.home, path: '/' }, { name: config.h1, path: `/${config.slug}` }], locale)} />
+      {config.faqs.length > 0 && <JsonLd data={faqJsonLd(config.faqs, locale)} />}
 
       <DownloadHero title={config.h1} intro={config.intro} breadcrumb={config.h1} activeId={active?.id} />
 
-      <Section eyebrow="How it works" title={active ? `How to download from ${active.label}` : 'How to download a video'} narrow>
+      <Section eyebrow={pp.howEyebrow} title={fmt(pp.howTitle, { platform: active?.label ?? '' })} narrow>
         <div className="mx-auto max-w-2xl space-y-5">
           {config.about.map((p) => (
             <p key={p} className="text-[16px] leading-[1.75] text-ink-dim">
@@ -30,7 +34,7 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
         </div>
       </Section>
 
-      <Section eyebrow="Content types" title="What you can download">
+      <Section eyebrow={pp.contentEyebrow} title={pp.contentTitle}>
         <CardGrid maxCols={3} count={config.supportedContentTypes.length}>
           {config.supportedContentTypes.map((c) => (
             <div key={c.label} className="card scroll-reveal h-full p-6">
@@ -41,7 +45,7 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
         </CardGrid>
       </Section>
 
-      <Section eyebrow="Formats" title="File formats">
+      <Section eyebrow={pp.formatsEyebrow} title={pp.formatsTitle}>
         <CardGrid maxCols={2} count={config.formats.length}>
           {config.formats.map((f) => (
             <div key={f} className="card scroll-reveal h-full p-6 text-[14px] leading-relaxed text-ink-dim">
@@ -52,21 +56,21 @@ export function PlatformDownloaderPage({ config }: { config: PlatformPageConfig 
       </Section>
 
       {config.faqs.length > 0 && (
-        <Section eyebrow="FAQ" title="Frequently asked questions" narrow>
+        <Section eyebrow={pp.faqEyebrow} title={pp.faqTitle} narrow>
           <Accordion items={config.faqs} />
         </Section>
       )}
 
       {config.related.length > 0 && (
-        <Section eyebrow="More downloaders" title="Other downloaders">
+        <Section eyebrow={pp.otherEyebrow} title={pp.otherTitle}>
           <div className="flex flex-wrap justify-center gap-2">
             {config.related.map((slug) => {
-              const page = platformPages[slug];
+              const page = getPlatformPage(slug, locale);
               if (!page) return null;
               return (
                 <Link
                   key={slug}
-                  href={`/${slug}`}
+                  href={localePath(locale, `/${slug}`)}
                   className="press rounded-full bg-base-surface px-5 py-2.5 text-[14px] text-ink-dim transition-colors hover:bg-base-raised hover:text-ink"
                 >
                   {page.h1}

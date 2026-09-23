@@ -4,17 +4,7 @@ import { useRef, useState } from 'react';
 import type { ExtractionResult } from '@exportvid/shared';
 import { detectPlatform } from '@exportvid/shared';
 import { extractMedia, ExtractionApiError } from './api';
-
-export const DOWNLOADER_ERROR_MESSAGES: Record<string, string> = {
-  UNSUPPORTED_URL: "ExportVid doesn't support that site yet. Check the supported sites list.",
-  INVALID_URL: "That doesn't look like a link. Copy the full address of the post and paste it again.",
-  PRIVATE_OR_PROTECTED_CONTENT: "This post is private or needs a login, so ExportVid can't reach it.",
-  NOT_FOUND: "We couldn't find a video or photo at that link. Check that the post still exists.",
-  EXTRACTION_FAILED: 'The platform didn’t return a file. The post may be removed, or the platform may be blocking the request. Try again in a minute.',
-  RATE_LIMITED: 'Too many requests. Wait a moment and try again.',
-  TIMEOUT: 'The platform took too long to respond. Try again.',
-  INTERNAL_ERROR: 'Something went wrong on our end. Try again.',
-};
+import { useI18n } from '@/components/I18nProvider';
 
 export type DownloaderStatus = 'idle' | 'loading' | 'error' | 'success';
 
@@ -24,6 +14,7 @@ export type DownloaderStatus = 'idle' | 'loading' | 'error' | 'success';
  * its own presentation around { status, result, error, detected }.
  */
 export function useDownloader(initialUrl = '') {
+  const { t } = useI18n();
   const [url, setUrl] = useState(initialUrl);
   const [status, setStatus] = useState<DownloaderStatus>('idle');
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +43,8 @@ export function useDownloader(initialUrl = '') {
     } catch (err) {
       if (controller.signal.aborted) return;
       const code = err instanceof ExtractionApiError ? err.code : 'INTERNAL_ERROR';
-      setError(DOWNLOADER_ERROR_MESSAGES[code] ?? DOWNLOADER_ERROR_MESSAGES.INTERNAL_ERROR);
+      const messages = t.errors as Record<string, string>;
+      setError(messages[code] ?? t.errors.INTERNAL_ERROR);
       setStatus('error');
     }
   }

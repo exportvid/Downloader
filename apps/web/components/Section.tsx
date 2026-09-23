@@ -32,7 +32,7 @@ export function Accordion({ items, openFirst = true }: { items: { q: string; a: 
     <div className="space-y-3">
       {items.map((f, i) => (
         <details key={f.q} open={openFirst && i === 0} className="faq card scroll-reveal group px-5 py-1 transition-colors open:bg-base-raised">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-start [&::-webkit-details-marker]:hidden">
             <span className="text-[15px] font-semibold text-ink">{f.q}</span>
             <svg
               width="16"
@@ -49,7 +49,7 @@ export function Accordion({ items, openFirst = true }: { items: { q: string; a: 
               <path d="M6 9l6 6 6-6" />
             </svg>
           </summary>
-          <p className="faq-body pb-4 pr-8 text-[14px] leading-relaxed text-ink-dim">{f.a}</p>
+          <p className="faq-body pb-4 pe-8 text-[14px] leading-relaxed text-ink-dim">{f.a}</p>
         </details>
       ))}
     </div>

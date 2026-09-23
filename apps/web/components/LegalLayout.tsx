@@ -8,7 +8,7 @@ export function LegalLayout({ title, updated, children }: { title: string; updat
         className="card mt-10 max-w-none p-6 text-[14px] leading-relaxed text-ink-dim sm:p-10
           [&>h2]:mb-3 [&>h2]:mt-9 [&>h2]:text-[17px] [&>h2]:font-semibold [&>h2]:text-ink [&>h2:first-child]:mt-0
           [&>p]:mb-4 [&>ul]:mb-4 [&>ul]:list-disc [&>ul]:space-y-2 [&>ul]:pl-5 [&>ul>li]:marker:text-accent
-          [&_strong]:font-semibold [&_strong]:text-ink [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-[#ffab5c]"
+          [&_code]:rounded [&_code]:bg-hl/8 [&_code]:px-1 [&_code]:text-[13px] [&_strong]:font-semibold [&_strong]:text-ink [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-[#ffab5c]"
       >
         {children}
       </div>

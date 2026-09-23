@@ -1,3 +1,6 @@
+import { PLATFORM_SLUGS, type Locale, type PlatformSlug } from './i18n/config';
+import { getPlatformContent } from './i18n/platformContent';
+
 export interface FaqItem {
   q: string;
   a: string;
@@ -16,7 +19,10 @@ export interface PlatformPageConfig {
   related: string[];
 }
 
-export const platformPages: Record<string, PlatformPageConfig> = {
+/** The parts of a platform page that get translated. Slugs and related links are shared by every language. */
+export type PlatformContent = Omit<PlatformPageConfig, 'slug' | 'related'>;
+
+export const platformPages: Record<PlatformSlug, PlatformPageConfig> = {
   'youtube-video-downloader': {
     slug: 'youtube-video-downloader',
     metaTitle: 'YouTube to MP4 Downloader for Videos and Shorts',
@@ -460,6 +466,14 @@ export const platformPages: Record<string, PlatformPageConfig> = {
   },
 };
 
-export function getPlatformPage(slug: string): PlatformPageConfig | undefined {
-  return platformPages[slug];
+export function isPlatformSlug(slug: string): slug is PlatformSlug {
+  return (PLATFORM_SLUGS as readonly string[]).includes(slug);
+}
+
+/** Returns the page in the requested language. Any missing translation falls back to English. */
+export function getPlatformPage(slug: string, locale: Locale = 'en'): PlatformPageConfig | undefined {
+  if (!isPlatformSlug(slug)) return undefined;
+  const base = platformPages[slug];
+  if (locale === 'en') return base;
+  return { ...base, ...getPlatformContent(locale, slug) };
 }

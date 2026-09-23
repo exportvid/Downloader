@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useI18n } from './I18nProvider';
 
 type Preference = 'system' | 'light' | 'dark';
 
-const OPTIONS: { value: Preference; label: string; icon: React.ReactNode }[] = [
+const OPTIONS: { value: Preference; icon: React.ReactNode }[] = [
   {
     value: 'system',
-    label: 'System',
     icon: (
       <>
         <rect x="3" y="4" width="18" height="12" rx="2" />
@@ -17,7 +17,6 @@ const OPTIONS: { value: Preference; label: string; icon: React.ReactNode }[] = [
   },
   {
     value: 'light',
-    label: 'Light',
     icon: (
       <>
         <circle cx="12" cy="12" r="4" />
@@ -25,7 +24,7 @@ const OPTIONS: { value: Preference; label: string; icon: React.ReactNode }[] = [
       </>
     ),
   },
-  { value: 'dark', label: 'Dark', icon: <path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z" /> },
+  { value: 'dark', icon: <path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z" /> },
 ];
 
 const DARK_QUERY = '(prefers-color-scheme: dark)';
@@ -53,6 +52,7 @@ function Icon({ children }: { children: React.ReactNode }) {
 }
 
 export function ThemeToggle() {
+  const { t } = useI18n();
   const [pref, setPref] = useState<Preference>('system');
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -101,7 +101,7 @@ export function ThemeToggle() {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        aria-label={`Theme: ${current.label}`}
+        aria-label={`${t.theme.label}: ${t.theme[current.value]}`}
         aria-expanded={open}
         aria-haspopup="menu"
         className={`press flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-colors hover:bg-hl/8 hover:text-ink ${
@@ -112,7 +112,7 @@ export function ThemeToggle() {
       </button>
 
       {open && (
-        <div role="menu" className="reveal absolute right-0 top-full z-50 mt-3 w-40 rounded-2xl bg-base-raised p-1.5 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]">
+        <div role="menu" className="reveal absolute end-0 top-full z-50 mt-3 w-40 rounded-2xl bg-base-raised p-1.5 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]">
           {OPTIONS.map((o) => (
             <button
               key={o.value}
@@ -125,8 +125,8 @@ export function ThemeToggle() {
               }`}
             >
               <Icon>{o.icon}</Icon>
-              {o.label}
-              {pref === o.value && <span className="ml-auto h-1.5 w-1.5 rounded-full bg-accent" />}
+              {t.theme[o.value]}
+              {pref === o.value && <span className="ms-auto h-1.5 w-1.5 rounded-full bg-accent" />}
             </button>
           ))}
         </div>

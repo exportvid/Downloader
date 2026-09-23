@@ -78,3 +78,14 @@ npm run r2:lifecycle --workspace=apps/api
 ## Deploy check
 
 `.github/workflows/ci.yml` runs on every push and pull request: install, build the shared package, generate the Prisma client, type check, lint the web app, build web and API, and audit production dependencies (report only). The API has no ESLint config yet, so it is type-checked but not linted.
+
+## Languages
+
+ExportVid ships in 15 languages: English (default, no URL prefix) plus Spanish, Portuguese, French, German, Indonesian, Arabic, Russian, Hindi, Japanese, Bengali, Vietnamese, Turkish, Italian, and Korean. Non-English pages live under `/<code>/...` (for example `/es/youtube-video-downloader`), and each page links to all of its translations with `hreflang`. The legal pages (privacy, terms, copyright) exist in English only.
+
+- **Interface text and home, FAQ, contact, and supported-sites copy:** `apps/web/lib/i18n/messages/<code>.ts`. English (`en.ts`) defines the shape and every other file must match it, so TypeScript flags a missing key.
+- **Platform pages (titles, descriptions, FAQs):** English in `apps/web/lib/platforms.ts`, other languages in `apps/web/lib/i18n/platforms/<code>.ts`.
+- **Adding a language:** add the code to `LOCALES` and `LOCALE_META` in `apps/web/lib/i18n/config.ts`, create the two files above, and register them in `messages/index.ts` and `platformContent.ts`.
+- **Language memory:** picking a language sets a `NEXT_LOCALE` cookie. Returning visitors with that cookie are redirected from an English URL to their language. Visitors without it, including search engines, always get English at the English URL.
+- Translations were written for natural reading in each language but have not been reviewed by native speakers. Have each one checked before launch.
+
