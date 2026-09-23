@@ -12,6 +12,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint src --ext .ts",
     "prisma:generate": "prisma generate",
+    "r2:lifecycle": "tsx src/scripts/applyR2Lifecycle.ts",
     "prisma:migrate": "prisma migrate dev"
   },
   "dependencies": {

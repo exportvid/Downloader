@@ -1,0 +1,51 @@
+name: Deploy check
+
+# Runs on every push and pull request. If this passes, the code builds the same way a deploy would.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build shared package
+        run: npm run build:shared
+
+      - name: Generate Prisma client
+        run: npm run prisma:generate --workspace=apps/api
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint web app
+        run: npm run lint --workspace=apps/web
+
+      - name: Build web and API
+        # Next downloads Google Fonts during the build, and that request occasionally fails. One retry covers it.
+        run: npm run build || npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://exportvid.com
+          NEXT_PUBLIC_API_BASE_URL: https://api.exportvid.com
+
+      # Reports known vulnerabilities without failing the check. At the time of writing the only high finding is
+      # PostCSS inside Next.js, and the fix is a major Next upgrade to plan separately.
+      - name: Audit production dependencies
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high

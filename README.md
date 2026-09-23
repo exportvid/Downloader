@@ -66,3 +66,15 @@ npx tsx apps/api/src/worker.ts # merge worker, in a third terminal (only needed 
 No accounts, profiles, download history, favorites, comments, social features, mobile app, browser extension, editor, AI tools, cloud storage, or bulk downloading.
 
 Every platform has its own landing page (`/[slug]`, driven by `apps/web/lib/platforms.ts`) that reuses the homepage download hero.
+
+## Temporary file cleanup
+
+Merged files are deleted about 15 minutes after they are ready (`TEMP_FILE_TTL_SECONDS`). The worker runs a sweeper on start and every 5 minutes that removes anything older, both in R2 and in the local tmp folder, so a crash or restart cannot leave files behind. As a second backstop, run this once after creating the R2 bucket. It makes R2 expire objects after one day:
+
+```bash
+npm run r2:lifecycle --workspace=apps/api
+```
+
+## Deploy check
+
+`.github/workflows/ci.yml` runs on every push and pull request: install, build the shared package, generate the Prisma client, type check, lint the web app, build web and API, and audit production dependencies (report only). The API has no ESLint config yet, so it is type-checked but not linted.

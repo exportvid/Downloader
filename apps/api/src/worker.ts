@@ -1,11 +1,11 @@
 import { execFile } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { Worker, type Job } from 'bullmq';
 import { config } from './config';
 import { assertSafeUrl } from './lib/urlSafety';
-import { publishTempFile, localTmpDir } from './lib/storage';
+import { publishTempFile, localTmpDir, startTempSweeper } from './lib/storage';
 import { logMergeJobEvent } from './lib/db';
 import { MERGE_QUEUE_NAME, type MergeJobData, type MergeJobResult } from './queue/mergeQueue';
 
@@ -45,6 +45,7 @@ async function runFfmpegMerge(data: MergeJobData): Promise<string> {
   await new Promise<void>((resolve, reject) => {
     execFile(config.FFMPEG_PATH, args, { timeout: 300_000, maxBuffer: 16 * 1024 * 1024 }, (err, _stdout, stderr) => {
       if (err) {
+        unlink(outPath).catch(() => {});
         reject(new Error(`ffmpeg failed: ${stderr?.slice(-2000) || err.message}`));
         return;
       }
@@ -90,6 +91,8 @@ worker.on('failed', (job, err) => {
   // eslint-disable-next-line no-console
   console.error(`[worker] merge job ${job?.id} failed:`, err.message);
 });
+
+startTempSweeper();
 
 // eslint-disable-next-line no-console
 console.log('[worker] media-merge worker started');
