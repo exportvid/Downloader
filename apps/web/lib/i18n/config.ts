@@ -8,27 +8,29 @@ export const LOCALE_COOKIE = 'NEXT_LOCALE';
 export interface LocaleMeta {
   /** Language name written in that language, shown in the selector. */
   name: string;
+  /** English name of the language, shown small under the native name so it is easy to spot in an unfamiliar script. */
+  english: string;
   dir: 'ltr' | 'rtl';
   /** Open Graph locale. */
   og: string;
 }
 
 export const LOCALE_META: Record<Locale, LocaleMeta> = {
-  en: { name: 'English', dir: 'ltr', og: 'en_US' },
-  es: { name: 'Español', dir: 'ltr', og: 'es_ES' },
-  pt: { name: 'Português', dir: 'ltr', og: 'pt_BR' },
-  fr: { name: 'Français', dir: 'ltr', og: 'fr_FR' },
-  de: { name: 'Deutsch', dir: 'ltr', og: 'de_DE' },
-  id: { name: 'Bahasa Indonesia', dir: 'ltr', og: 'id_ID' },
-  ar: { name: 'العربية', dir: 'rtl', og: 'ar_AR' },
-  ru: { name: 'Русский', dir: 'ltr', og: 'ru_RU' },
-  hi: { name: 'हिन्दी', dir: 'ltr', og: 'hi_IN' },
-  ja: { name: '日本語', dir: 'ltr', og: 'ja_JP' },
-  bn: { name: 'বাংলা', dir: 'ltr', og: 'bn_BD' },
-  vi: { name: 'Tiếng Việt', dir: 'ltr', og: 'vi_VN' },
-  tr: { name: 'Türkçe', dir: 'ltr', og: 'tr_TR' },
-  it: { name: 'Italiano', dir: 'ltr', og: 'it_IT' },
-  ko: { name: '한국어', dir: 'ltr', og: 'ko_KR' },
+  en: { name: 'English', english: 'English', dir: 'ltr', og: 'en_US' },
+  es: { name: 'Español', english: 'Spanish', dir: 'ltr', og: 'es_ES' },
+  pt: { name: 'Português', english: 'Portuguese', dir: 'ltr', og: 'pt_BR' },
+  fr: { name: 'Français', english: 'French', dir: 'ltr', og: 'fr_FR' },
+  de: { name: 'Deutsch', english: 'German', dir: 'ltr', og: 'de_DE' },
+  id: { name: 'Bahasa Indonesia', english: 'Indonesian', dir: 'ltr', og: 'id_ID' },
+  ar: { name: 'العربية', english: 'Arabic', dir: 'rtl', og: 'ar_AR' },
+  ru: { name: 'Русский', english: 'Russian', dir: 'ltr', og: 'ru_RU' },
+  hi: { name: 'हिन्दी', english: 'Hindi', dir: 'ltr', og: 'hi_IN' },
+  ja: { name: '日本語', english: 'Japanese', dir: 'ltr', og: 'ja_JP' },
+  bn: { name: 'বাংলা', english: 'Bengali', dir: 'ltr', og: 'bn_BD' },
+  vi: { name: 'Tiếng Việt', english: 'Vietnamese', dir: 'ltr', og: 'vi_VN' },
+  tr: { name: 'Türkçe', english: 'Turkish', dir: 'ltr', og: 'tr_TR' },
+  it: { name: 'Italiano', english: 'Italian', dir: 'ltr', og: 'it_IT' },
+  ko: { name: '한국어', english: 'Korean', dir: 'ltr', og: 'ko_KR' },
 };
 
 /** Scripts whose display type comes from system fonts and needs the non-Latin heading rules in globals.css. */
