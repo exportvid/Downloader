@@ -1,0 +1,86 @@
+# Production stack for one server: API, merge worker, Redis, Postgres, and Caddy for HTTPS.
+# Run from this folder:
+#   docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build
+
+x-app: &app
+  build:
+    context: ..
+    dockerfile: infra/api.Dockerfile
+    args:
+      YTDLP_REFRESH: ${YTDLP_REFRESH:-0}
+  image: exportvid-api
+  env_file: .env.production
+  environment:
+    NODE_ENV: production
+    REDIS_URL: redis://redis:6379
+    DATABASE_URL: postgresql://exportvid:${POSTGRES_PASSWORD}@postgres:5432/exportvid
+  restart: unless-stopped
+  depends_on:
+    redis:
+      condition: service_healthy
+    postgres:
+      condition: service_healthy
+
+services:
+  api:
+    <<: *app
+    expose:
+      - '4000'
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  worker:
+    <<: *app
+    command: ['node', 'dist/worker.js']
+    volumes:
+      - worker-tmp:/app/apps/api/.tmp-media
+
+  redis:
+    image: valkey/valkey:7-alpine
+    restart: unless-stopped
+    command: ['valkey-server', '--save', '', '--appendonly', 'no']
+    healthcheck:
+      test: ['CMD', 'valkey-cli', 'ping']
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: exportvid
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: exportvid
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U exportvid']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # The only service that publishes ports. Redis and Postgres are never reachable from outside the server.
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      API_DOMAIN: ${API_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - api
+
+volumes:
+  pg-data:
+  worker-tmp:
+  caddy-data:
+  caddy-config:

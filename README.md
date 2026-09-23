@@ -89,3 +89,7 @@ ExportVid ships in 15 languages: English (default, no URL prefix) plus Spanish, 
 - **Language memory:** picking a language sets a `NEXT_LOCALE` cookie. Returning visitors with that cookie are redirected from an English URL to their language. Visitors without it, including search engines, always get English at the English URL.
 - Translations were written for natural reading in each language but have not been reviewed by native speakers. Have each one checked before launch.
 
+## Deploying
+
+See `infra/DEPLOY.md`. The website deploys to Vercel (`apps/web/vercel.json`). The API, worker, Redis, and Postgres run on one server with `infra/docker-compose.prod.yml`, with Caddy handling HTTPS. `infra/update.sh` rebuilds with a fresh yt-dlp.
+

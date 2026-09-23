@@ -1,0 +1,8 @@
+# Caddy gets and renews the HTTPS certificate on its own.
+{$API_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy api:4000 {
+		# Stream downloads straight through instead of buffering them.
+		flush_interval -1
+	}
+}
