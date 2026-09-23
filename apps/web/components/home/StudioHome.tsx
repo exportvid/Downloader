@@ -31,6 +31,7 @@ export function StudioHome() {
   return (
     <div className="pb-8">
       <DownloadHero
+        badge="Free video downloader"
         title="Download videos and photos"
         intro="Paste a link from YouTube, Facebook, Instagram, TikTok, and more. Get the video or photo in the best quality available, with no watermark."
       />

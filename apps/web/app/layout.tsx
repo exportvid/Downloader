@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: '%s | ExportVid',
   },
   description:
-    'Download videos and photos from YouTube, Facebook, Instagram, TikTok, and more. Paste a link, pick a quality, and save it. Free, with no watermark.',
+    'Free video downloader for social media. Paste a link from YouTube, Facebook, Instagram, TikTok, and more, then save the video or photo in the best quality.',
   icons: { icon: '/favicon.svg' },
 };
 

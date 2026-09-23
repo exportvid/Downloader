@@ -16,67 +16,14 @@ export interface PlatformPageConfig {
   related: string[];
 }
 
-const ALL_SLUGS = [
-  'youtube-video-downloader',
-  'facebook-video-downloader',
-  'instagram-video-downloader',
-  'tiktok-video-downloader',
-  'x-video-downloader',
-  'reddit-video-downloader',
-  'pinterest-video-downloader',
-  'snapchat-video-downloader',
-  'twitch-clip-downloader',
-  'linkedin-video-downloader',
-  'tumblr-video-downloader',
-  'vimeo-video-downloader',
-];
-
 export const platformPages: Record<string, PlatformPageConfig> = {
-  'video-downloader': {
-    slug: 'video-downloader',
-    metaTitle: 'Free Video Downloader for Social Media',
-    metaDescription:
-      'Download videos from YouTube, Facebook, Instagram, TikTok, X, and more. Paste a link, pick a quality, and save the MP4 to your device for free.',
-    h1: 'Download videos from any supported site',
-    intro: 'Paste a link from YouTube, Facebook, Instagram, TikTok, or another supported site and save the video in the best quality available.',
-    about: [
-      'ExportVid reads the link you paste, finds the video files the platform serves, and lists every quality and format available. Nothing is upscaled or relabeled, so what you see is what you download.',
-      'Each platform delivers video differently. ExportVid handles those differences for you, so the steps are the same everywhere: paste, choose a quality, download.',
-    ],
-    supportedContentTypes: [
-      { label: 'Standard videos', description: 'Regular uploads and feed videos.' },
-      { label: 'Short-form videos', description: 'TikToks, Reels, YouTube Shorts, and Snapchat Spotlight.' },
-      { label: 'Posts, clips, and pins', description: 'Video posts on X, Twitch clips, Pinterest pins, and more.' },
-    ],
-    formats: ['MP4 with video and audio, in every resolution the source offers', 'Original quality. Separate video and audio are joined without re-encoding.'],
-    faqs: [
-      {
-        q: 'How do I download a video from social media?',
-        a: 'Copy the link to the video, paste it into the box at the top of this page, and select Download. Then choose a quality and save the file to your device.',
-      },
-      {
-        q: 'Which sites can I download from?',
-        a: 'YouTube, Facebook, Instagram, TikTok, X, Reddit, Pinterest, Snapchat, Twitch, LinkedIn, Tumblr, and Vimeo.',
-      },
-      {
-        q: 'Is ExportVid free?',
-        a: 'Yes. There are no fees and no sign-up, and nothing to install.',
-      },
-      {
-        q: 'Can I download private videos?',
-        a: 'No. ExportVid works only with videos that anyone can watch without signing in. It never tries to reach private accounts or login-protected posts.',
-      },
-    ],
-    related: ALL_SLUGS,
-  },
-
   'youtube-video-downloader': {
     slug: 'youtube-video-downloader',
-    metaTitle: 'YouTube Downloader: Save Videos and Shorts',
+    metaTitle: 'YouTube to MP4 Downloader for Videos and Shorts',
     metaDescription:
-      'Download YouTube videos and Shorts as MP4. Paste a youtube.com or youtu.be link, choose a quality, and save it to your device for free.',
+      'Download YouTube to MP4 for free. Paste a youtube.com or youtu.be link, choose a quality, and save the video or Short to your device.',
     h1: 'YouTube video downloader',
-    intro: 'Paste a YouTube link and download the video or Short in the best quality available.',
+    intro: 'Paste a YouTube link and download the video or Short as an MP4 in the best quality available.',
     about: [
       'ExportVid accepts full youtube.com/watch links, short youtu.be links, and youtube.com/shorts links.',
       'YouTube usually offers several resolutions for each video. ExportVid lists every one of them, up to the highest quality the upload provides. Higher resolutions store video and audio separately, so ExportVid joins them into one MP4 without re-encoding.',
@@ -92,8 +39,12 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'Copy the video link from YouTube, paste it into the box above, and select Download. Choose a quality from the list and save the file.',
       },
       {
+        q: 'How do I convert YouTube to MP4?',
+        a: 'Paste the video link into the box above and select Download. ExportVid saves the video as an MP4 file, so there is nothing else to convert.',
+      },
+      {
         q: 'Can I download YouTube Shorts?',
-        a: 'Yes. Paste the Shorts link and ExportVid recognizes it automatically.',
+        a: 'Yes. Paste the Shorts link and ExportVid recognizes it automatically. The YouTube Shorts downloader page has more detail.',
       },
       {
         q: 'Do youtu.be links work?',
@@ -104,7 +55,36 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'No. Private and members-only videos need a login, and ExportVid never accesses login-protected content.',
       },
     ],
-    related: ['facebook-video-downloader', 'instagram-video-downloader', 'tiktok-video-downloader', 'video-downloader'],
+    related: ['youtube-shorts-downloader', 'facebook-video-downloader', 'instagram-video-downloader', 'tiktok-video-downloader'],
+  },
+
+  'youtube-shorts-downloader': {
+    slug: 'youtube-shorts-downloader',
+    metaTitle: 'YouTube Shorts Downloader: Save Shorts as MP4',
+    metaDescription: 'Download YouTube Shorts as MP4 for free. Paste a youtube.com/shorts link, choose a quality, and save the video to your device.',
+    h1: 'YouTube Shorts downloader',
+    intro: 'Paste a YouTube Shorts link and download the Short as an MP4.',
+    about: [
+      'ExportVid recognizes youtube.com/shorts links and finds the video file YouTube serves for that Short. A regular youtube.com/watch link works too.',
+      'The list shows every quality YouTube offers for the Short, so you can pick the one that fits your device.',
+    ],
+    supportedContentTypes: [{ label: 'YouTube Shorts', description: 'Short vertical videos from the Shorts feed.' }],
+    formats: ['MP4 with video and audio, in every resolution YouTube offers for the Short'],
+    faqs: [
+      {
+        q: 'How do I download a YouTube Short?',
+        a: 'Open the Short, copy its link, paste it into the box above, and select Download. Then choose a quality and save the file.',
+      },
+      {
+        q: 'Does the download include sound?',
+        a: 'Yes. ExportVid keeps the audio and joins it with the video when YouTube serves them as separate files.',
+      },
+      {
+        q: 'Can I download longer YouTube videos too?',
+        a: 'Yes. The YouTube video downloader works with any regular video link.',
+      },
+    ],
+    related: ['youtube-video-downloader', 'tiktok-video-downloader', 'instagram-reels-downloader'],
   },
 
   'facebook-video-downloader': {
@@ -137,7 +117,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'No. ExportVid only works with content anyone can view and never bypasses privacy settings.',
       },
     ],
-    related: ['facebook-reels-downloader', 'instagram-video-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['facebook-reels-downloader', 'instagram-video-downloader', 'youtube-video-downloader'],
   },
 
   'facebook-reels-downloader': {
@@ -191,6 +171,10 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'No. ExportVid only works with posts anyone can view. It never accesses private accounts.',
       },
       {
+        q: 'How do I download an Instagram Story?',
+        a: 'Open the Story, copy its link, and paste it into the box above. Stories can be downloaded while they are live, from accounts anyone can view.',
+      },
+      {
         q: 'Can I download every photo in a carousel?',
         a: 'Yes. Each photo or video in the carousel appears in the list with its own download button.',
       },
@@ -200,7 +184,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       },
     ],
     formats: ['MP4 for videos, with audio', 'JPEG for photos, carousel images, and profile pictures'],
-    related: ['instagram-reels-downloader', 'facebook-video-downloader', 'tiktok-video-downloader', 'video-downloader'],
+    related: ['instagram-reels-downloader', 'facebook-video-downloader', 'tiktok-video-downloader'],
   },
 
   'instagram-reels-downloader': {
@@ -236,9 +220,9 @@ export const platformPages: Record<string, PlatformPageConfig> = {
     slug: 'tiktok-video-downloader',
     metaTitle: 'TikTok Downloader: Save Videos Without Watermark',
     metaDescription:
-      'Download TikTok videos as MP4, without the watermark when TikTok offers a clean file. Paste a TikTok link and save it to your device for free.',
+      'Download TikTok to MP4 without the watermark when TikTok offers a clean file. Paste a TikTok link and save the video to your device for free.',
     h1: 'TikTok video downloader',
-    intro: 'Paste a TikTok link and download the video in the best quality TikTok offers, without the watermark when a clean file exists.',
+    intro: 'Paste a TikTok link and save the video as an MP4 in the best quality TikTok offers, without the watermark when a clean file exists.',
     about: [
       'ExportVid accepts full links like tiktok.com/@username/video/123 and short vm.tiktok.com or vt.tiktok.com links.',
       'TikTok usually serves one quality per video instead of a range of resolutions, so you will often see a single MP4. That is the real file TikTok provides. ExportVid does not invent extra options.',
@@ -263,7 +247,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'No. Private accounts and login-protected videos are not supported.',
       },
     ],
-    related: ['instagram-reels-downloader', 'facebook-reels-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['instagram-reels-downloader', 'facebook-reels-downloader', 'youtube-video-downloader'],
   },
 
   'x-video-downloader': {
@@ -296,7 +280,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'No. Protected accounts require a login on X, and ExportVid does not access login-protected content.',
       },
     ],
-    related: ['reddit-video-downloader', 'tiktok-video-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['reddit-video-downloader', 'tiktok-video-downloader', 'youtube-video-downloader'],
   },
 
   'reddit-video-downloader': {
@@ -328,7 +312,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
         a: 'No. Only posts in open subreddits are supported.',
       },
     ],
-    related: ['x-video-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['x-video-downloader', 'youtube-video-downloader'],
   },
 
   'pinterest-video-downloader': {
@@ -351,7 +335,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       { q: 'Can I download image pins?', a: 'Not yet. ExportVid supports Pinterest pins that contain a video.' },
       { q: 'Do pin.it links work?', a: 'Yes. Short pin.it links work directly.' },
     ],
-    related: ['tumblr-video-downloader', 'instagram-video-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['tumblr-video-downloader', 'instagram-video-downloader', 'youtube-video-downloader'],
   },
 
   'snapchat-video-downloader': {
@@ -374,7 +358,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       { q: 'Can I download Snapchat Stories?', a: 'Not yet. ExportVid supports Spotlight videos.' },
       { q: 'Can I download private snaps?', a: 'No. ExportVid only works with content that anyone can view.' },
     ],
-    related: ['tiktok-video-downloader', 'instagram-reels-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['tiktok-video-downloader', 'instagram-reels-downloader', 'youtube-video-downloader'],
   },
 
   'twitch-clip-downloader': {
@@ -397,7 +381,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       { q: 'Can I download full streams or VODs?', a: 'No. ExportVid supports clips only.' },
       { q: 'Which Twitch links work?', a: 'Links that start with clips.twitch.tv, and twitch.tv/channel/clip links.' },
     ],
-    related: ['youtube-video-downloader', 'vimeo-video-downloader', 'video-downloader'],
+    related: ['youtube-video-downloader', 'vimeo-video-downloader'],
   },
 
   'linkedin-video-downloader': {
@@ -423,7 +407,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       },
       { q: 'Can I download LinkedIn Learning courses?', a: 'No. Course content requires an account and is not supported.' },
     ],
-    related: ['youtube-video-downloader', 'x-video-downloader', 'facebook-video-downloader', 'video-downloader'],
+    related: ['youtube-video-downloader', 'x-video-downloader', 'facebook-video-downloader'],
   },
 
   'tumblr-video-downloader': {
@@ -446,7 +430,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       { q: 'Do blog subdomains work?', a: 'Yes. Links like blogname.tumblr.com/post/... work.' },
       { q: 'Can I download from a private blog?', a: 'No. Blogs that require signing in are not supported.' },
     ],
-    related: ['pinterest-video-downloader', 'instagram-video-downloader', 'youtube-video-downloader', 'video-downloader'],
+    related: ['pinterest-video-downloader', 'instagram-video-downloader', 'youtube-video-downloader'],
   },
 
   'vimeo-video-downloader': {
@@ -472,7 +456,7 @@ export const platformPages: Record<string, PlatformPageConfig> = {
       },
       { q: 'Do embed links work?', a: 'Yes. player.vimeo.com links work.' },
     ],
-    related: ['youtube-video-downloader', 'twitch-clip-downloader', 'video-downloader'],
+    related: ['youtube-video-downloader', 'twitch-clip-downloader'],
   },
 };
 

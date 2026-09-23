@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from './config';
 
+const OG_IMAGE = { url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: 'ExportVid: download videos and photos from social media' };
+
 export function pageMetadata(opts: { title: string; description: string; path: string; noIndex?: boolean }): Metadata {
   const url = `${SITE_URL}${opts.path}`;
   return {
@@ -14,11 +16,13 @@ export function pageMetadata(opts: { title: string; description: string; path: s
       url,
       siteName: SITE_NAME,
       type: 'website',
+      images: [OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: opts.title,
       description: opts.description,
+      images: [OG_IMAGE.url],
     },
   };
 }

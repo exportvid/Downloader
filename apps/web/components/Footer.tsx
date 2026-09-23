@@ -6,6 +6,7 @@ const PLATFORM_LINKS = ALL_PLATFORMS.map((p) => ({ href: p.href, label: p.label,
 const EXTRA_LINKS = [
   { href: '/instagram-reels-downloader', label: 'Instagram Reels' },
   { href: '/facebook-reels-downloader', label: 'Facebook Reels' },
+  { href: '/youtube-shorts-downloader', label: 'YouTube Shorts' },
 ];
 
 const COMPANY_LINKS = [

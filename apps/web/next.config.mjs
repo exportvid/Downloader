@@ -4,6 +4,14 @@ const nextConfig = {
   eslint: {
     dirs: ['app', 'components', 'lib'],
   },
+  async redirects() {
+    return [
+      // The homepage is the general video downloader; a second page would compete with it for the same searches.
+      { source: '/video-downloader', destination: '/', permanent: true },
+      // One canonical host: send www to the bare domain.
+      { source: '/:path*', has: [{ type: 'host', value: 'www.exportvid.com' }], destination: 'https://exportvid.com/:path*', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
