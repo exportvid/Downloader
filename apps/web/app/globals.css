@@ -264,7 +264,10 @@ html[data-script='system'] h2[class*='--font-studio-display'] {
    The dark block says :not(light) so it never outranks the light defaults above.
 
    Colors come from each platform's published brand palette. Only colors and shapes are borrowed: the icons are
-   ExportVid's own simplified glyphs, not the platforms' logos. */
+   ExportVid's own simplified glyphs, not the platforms' logos.
+
+   Keep these to plain values so platform pages load exactly like the homepage: no url(), @import, @font-face,
+   filters, or new animations here. All twelve themes together add about 2 KB gzipped to the one shared stylesheet. */
 
 /* TikTok: black, with the cyan and red of its logo split. */
 :root:has([data-platform='tiktok']) {

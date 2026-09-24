@@ -11,11 +11,16 @@ import { SITE_URL } from '@/lib/config';
 import { LOCALES, LOCALE_META, SYSTEM_FONT_LOCALES, isLocale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
-const inter = Inter({ subsets: ['latin', 'latin-ext', 'cyrillic', 'vietnamese'], variable: '--font-inter', display: 'swap' });
-const studio = Bebas_Neue({ subsets: ['latin', 'latin-ext'], weight: '400', variable: '--font-studio-display', display: 'swap' });
-const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display', display: 'swap', weight: ['500', '600', '700'] });
+// `subsets` only picks which files are preloaded. Every alphabet is still available: the browser downloads the
+// Cyrillic, Vietnamese, or extended-Latin file on its own when a page contains those letters. Preloading only Latin,
+// which every page uses, keeps the other languages' files off pages that never need them.
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const studio = Bebas_Neue({ subsets: ['latin'], weight: '400', variable: '--font-studio-display', display: 'swap' });
+// Only the ExportVid wordmark uses this, at one weight.
+const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display', display: 'swap', weight: '600' });
 // Bebas Neue has no Cyrillic or Vietnamese, so Russian and Vietnamese headings use Oswald, a similar condensed face.
-const condensed = Oswald({ subsets: ['latin', 'cyrillic', 'vietnamese'], variable: '--font-condensed', display: 'swap' });
+// No other page uses it, so it is never preloaded.
+const condensed = Oswald({ subsets: ['latin', 'cyrillic', 'vietnamese'], variable: '--font-condensed', display: 'swap', preload: false });
 
 export const dynamicParams = false;
 

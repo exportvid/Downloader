@@ -68,10 +68,10 @@ export function DownloadHero({
         </div>
       )}
 
-      {/* Long translated headlines drop a size so they stay within three lines on a phone. The top padding keeps
-          accents (É, Ü) inside the clipped gradient. */}
+      {/* Long translated headlines drop a size so they stay within three lines on a phone. The padding keeps accents
+          (É, Ü) and descenders (у, g in Russian and Vietnamese headings) inside the clipped gradient. */}
       <h1
-        className={`mx-auto max-w-4xl bg-gradient-to-r from-head-from via-head-via to-head-to bg-clip-text pt-[0.12em] font-[family-name:var(--font-studio-display)] leading-[0.92] tracking-wide text-transparent text-balance ${
+        className={`mx-auto max-w-4xl bg-gradient-to-r from-head-from via-head-via to-head-to bg-clip-text pb-[0.12em] pt-[0.12em] font-[family-name:var(--font-studio-display)] leading-[0.92] tracking-wide text-transparent text-balance ${
           title.length > 32 ? 'text-5xl sm:text-7xl' : 'text-6xl sm:text-8xl'
         }`}
       >
