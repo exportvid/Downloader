@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LOCALES, LOCALE_COOKIE, LOCALE_META, isLocalizedPath, localePath, splitLocale, type Locale } from '@/lib/i18n/config';
+import { BD, BR, DE, ES, FR, ID, IN, IT, JP, KR, RU, SA, TR, US, VN } from 'country-flag-icons/react/3x2';
 import { useI18n } from './I18nProvider';
 
 function rememberLanguage(locale: Locale) {
@@ -14,12 +15,15 @@ function rememberLanguage(locale: Locale) {
   }
 }
 
-function Globe({ size = 17 }: { size?: number }) {
+// Each language shows the flag of the country most of its speakers here come from; English uses the US flag.
+const FLAGS: Record<Locale, typeof US> = { en: US, es: ES, pt: BR, fr: FR, de: DE, id: ID, ar: SA, ru: RU, hi: IN, ja: JP, bn: BD, vi: VN, tr: TR, it: IT, ko: KR };
+
+function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
+  const Svg = FLAGS[locale];
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z" />
-    </svg>
+    <span className={`inline-flex shrink-0 overflow-hidden rounded-[3px] ring-1 ring-inset ring-hl/15 ${className}`} aria-hidden>
+      <Svg className="block h-full w-full" />
+    </span>
   );
 }
 
@@ -93,7 +97,7 @@ export function LanguageMenu() {
           open ? 'bg-hl/8 text-ink' : 'text-ink-dim'
         }`}
       >
-        <Globe />
+        <Flag locale={locale} className="h-3.5 w-[21px]" />
         {/* The full name is easier to recognize than a code, so show it when there is room. */}
         <span className="hidden max-w-[7.5rem] truncate xl:inline">{current.name}</span>
         <span className="uppercase xl:hidden">{locale}</span>
@@ -105,8 +109,7 @@ export function LanguageMenu() {
           aria-label={t.language.menuLabel}
           className="dropdown-in absolute end-0 top-full z-50 mt-3 w-[min(21.5rem,calc(100vw-1.5rem))] ltr:origin-top-right rtl:origin-top-left rounded-2xl bg-base-raised p-2 shadow-[0_30px_60px_-20px_rgb(var(--shadow)/var(--shadow-a))]"
         >
-          <div className="flex items-center gap-2 px-3 pb-2 pt-2.5 text-ink-faint">
-            <Globe size={14} />
+          <div className="px-3 pb-2 pt-2.5 text-ink-faint">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em]">{t.language.menuLabel}</p>
           </div>
           <ul className="grid grid-cols-2 gap-1">
@@ -123,11 +126,12 @@ export function LanguageMenu() {
                     role="menuitemradio"
                     aria-checked={active}
                     onClick={() => rememberLanguage(l)}
-                    className={`group/lang flex items-center justify-between gap-2 rounded-xl px-3 py-2 transition-colors ${
+                    className={`group/lang flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors ${
                       active ? 'bg-accent/12' : 'hover:bg-hl/6'
                     }`}
                   >
-                    <span className="min-w-0">
+                    <Flag locale={l} className="h-4 w-6" />
+                    <span className="min-w-0 flex-1">
                       <span className={`block truncate text-[14px] font-semibold leading-tight ${active ? 'text-accent' : 'text-ink'}`}>{meta.name}</span>
                       <span className="mt-0.5 block truncate text-[11px] leading-tight text-ink-faint" lang="en" dir="ltr">
                         {meta.english}
