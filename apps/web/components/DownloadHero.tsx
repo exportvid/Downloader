@@ -25,6 +25,7 @@ export function DownloadHero({
   activeId,
   mark,
   note,
+  promise,
 }: {
   badge?: string;
   title: string;
@@ -35,6 +36,8 @@ export function DownloadHero({
   mark?: ReactNode;
   /** Small print under the platform links. */
   note?: string;
+  /** Promises shown under the intro, split on "·" (e.g. "No watermark · No sign-up"). The first one leads. */
+  promise?: string;
 }) {
   const { locale, t } = useI18n();
   const { url, setUrl, status, error, result, detected, inputRef, turnstileRef, turnstileVisible, handleSubmit, handlePaste } = useDownloader();
@@ -79,7 +82,9 @@ export function DownloadHero({
       </h1>
       <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft text-balance sm:text-base">{intro}</p>
 
-      <div className="relative mx-auto mt-10 max-w-3xl text-start">
+      {promise && <PromiseLine text={promise} />}
+
+      <div className={`relative mx-auto max-w-3xl text-start ${promise ? 'mt-8' : 'mt-10'}`}>
         <div
           className="pointer-events-none absolute -inset-x-10 -inset-y-10 -z-10 opacity-70 blur-3xl"
           style={{ background: 'var(--halo)' }}
@@ -181,6 +186,28 @@ export function DownloadHero({
       </div>
       {note && <p className="mx-auto mt-5 max-w-xl text-[12px] leading-relaxed text-ink-faint text-balance">{note}</p>}
     </section>
+  );
+}
+
+function PromiseLine({ text }: { text: string }) {
+  const [lead, ...rest] = text.split(/\s*[·・]\s*/);
+  return (
+    <p className="mx-auto mt-6 flex w-fit flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-full bg-accent/12 py-2 pe-4 ps-2.5 text-[14px] ring-1 ring-inset ring-accent/25">
+      <span className="flex items-center gap-2 font-semibold text-accent">
+        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-accent-contrast">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M12 3s6 6.2 6 10.5a6 6 0 01-12 0C6 9.2 12 3 12 3zM4 4l16 16" />
+          </svg>
+        </span>
+        {lead}
+      </span>
+      {rest.map((r) => (
+        <span key={r} className="flex items-center gap-3 font-medium text-ink-dim">
+          <span className="h-1 w-1 rounded-full bg-ink-faint" aria-hidden />
+          {r}
+        </span>
+      ))}
+    </p>
   );
 }
 

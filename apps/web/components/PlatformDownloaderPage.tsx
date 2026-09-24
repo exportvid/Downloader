@@ -36,6 +36,7 @@ export function PlatformDownloaderPage({ config, locale }: { config: PlatformPag
           )
         }
         note={fmt(pp.independent, { platform: platformName })}
+        promise={m.site.home.heroBadge}
       />
 
       <Section eyebrow={pp.howEyebrow} title={fmt(pp.howTitle, { platform: platformName })} narrow>
