@@ -217,7 +217,7 @@ export const id: Messages = {
       metaDescription: 'Semua situs tempat Anda bisa download video dengan ExportVid, beserta format tautan yang berfungsi untuk masing-masing.',
       eyebrow: 'Situs yang didukung',
       title: 'Situs tempat Anda bisa download video',
-      intro: 'Semua platform yang berfungsi dengan ExportVid, dan tautan yang cocok untuk masing-masing.',
+      intro: 'Tempel tautan dari situs mana pun di bawah. Setiap kartu menampilkan format tautan yang diterima ExportVid.',
       missing: 'Ada situs yang Anda butuhkan tapi belum ada?',
       tellUs: 'Beri tahu kami',
       types: {

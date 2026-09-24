@@ -217,7 +217,7 @@ export const vi: Messages = {
       metaDescription: 'Tất cả các trang bạn có thể tải video bằng ExportVid, cùng các dạng liên kết hoạt động với từng trang.',
       eyebrow: 'Trang web được hỗ trợ',
       title: 'Các trang bạn có thể tải video',
-      intro: 'Mọi nền tảng ExportVid hoạt động được, cùng các liên kết dùng được với từng nền tảng.',
+      intro: 'Dán liên kết từ bất kỳ trang nào bên dưới. Mỗi thẻ ghi rõ các dạng liên kết mà ExportVid chấp nhận.',
       missing: 'Thiếu một trang web bạn cần?',
       tellUs: 'Hãy cho chúng tôi biết',
       types: {

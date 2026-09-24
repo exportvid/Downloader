@@ -217,7 +217,7 @@ export const tr: Messages = {
       metaDescription: 'ExportVid ile video indirebileceğiniz tüm siteler ve her biri için çalışan bağlantı biçimleri.',
       eyebrow: 'Desteklenen siteler',
       title: 'Video indirebileceğiniz siteler',
-      intro: 'ExportVid’in çalıştığı tüm platformlar ve her biri için geçerli bağlantılar.',
+      intro: 'Aşağıdaki sitelerden herhangi birinin bağlantısını yapıştırın. Her kartta ExportVid’in kabul ettiği bağlantı biçimleri yer alır.',
       missing: 'İhtiyaç duyduğunuz bir site mi eksik?',
       tellUs: 'Hangisi olduğunu bize söyleyin',
       types: {

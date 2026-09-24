@@ -217,7 +217,7 @@ export const fr: Messages = {
       metaDescription: 'Tous les sites depuis lesquels vous pouvez télécharger des vidéos avec ExportVid, et les formats de lien acceptés pour chacun.',
       eyebrow: 'Sites pris en charge',
       title: 'Sites depuis lesquels télécharger des vidéos',
-      intro: 'Toutes les plateformes compatibles avec ExportVid, et les liens acceptés pour chacune.',
+      intro: 'Collez un lien provenant de l’un des sites ci-dessous. Chaque fiche indique les formats de lien acceptés par ExportVid.',
       missing: 'Il manque un site dont vous avez besoin ?',
       tellUs: 'Dites-nous lequel',
       types: {

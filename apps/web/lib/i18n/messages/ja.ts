@@ -217,7 +217,7 @@ export const ja: Messages = {
       metaDescription: 'ExportVid で動画をダウンロードできるすべてのサイトと、それぞれで使えるリンクの形式。',
       eyebrow: '対応サイト',
       title: '動画をダウンロードできるサイト',
-      intro: 'ExportVid が対応するすべてのプラットフォームと、それぞれで使えるリンクです。',
+      intro: '下のサイトのリンクなら、どれでも貼り付けられます。各カードに、ExportVid で使えるリンクの形式を載せています。',
       missing: '必要なサイトが見当たりませんか？',
       tellUs: 'ご要望をお寄せください',
       types: {

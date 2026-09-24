@@ -222,7 +222,7 @@ export const en = {
       metaDescription: 'Every site you can download videos from with ExportVid, and the link formats that work for each one.',
       eyebrow: 'Supported sites',
       title: 'Sites you can download videos from',
-      intro: 'Every platform ExportVid works with, and the links that work for each one.',
+      intro: 'Paste a link from any site below. Each card shows the link formats ExportVid accepts.',
       missing: 'Missing a site you need?',
       tellUs: 'Tell us which one',
       /** Labels for the small content-type tags, keyed by the English name used in the platform catalog. */

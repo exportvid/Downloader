@@ -217,7 +217,7 @@ export const it: Messages = {
       metaDescription: 'Tutti i siti da cui puoi scaricare video con ExportVid e i formati di link che funzionano per ciascuno.',
       eyebrow: 'Siti supportati',
       title: 'Siti da cui puoi scaricare video',
-      intro: 'Tutte le piattaforme con cui funziona ExportVid e i link accettati per ciascuna.',
+      intro: 'Incolla un link da uno qualsiasi dei siti qui sotto. Ogni scheda mostra i formati di link accettati da ExportVid.',
       missing: 'Manca un sito che ti serve?',
       tellUs: 'Dicci quale',
       types: {

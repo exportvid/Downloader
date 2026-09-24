@@ -217,7 +217,7 @@ export const ko: Messages = {
       metaDescription: 'ExportVid로 동영상을 다운로드할 수 있는 모든 사이트와 사이트별로 작동하는 링크 형식.',
       eyebrow: '지원 사이트',
       title: '동영상을 다운로드할 수 있는 사이트',
-      intro: 'ExportVid가 지원하는 모든 플랫폼과, 각각에서 사용할 수 있는 링크예요.',
+      intro: '아래 사이트의 링크라면 어떤 것이든 붙여넣으세요. 각 카드에서 ExportVid가 지원하는 링크 형식을 확인할 수 있어요.',
       missing: '필요한 사이트가 없나요?',
       tellUs: '어떤 사이트인지 알려주세요',
       types: {
