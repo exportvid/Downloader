@@ -161,6 +161,7 @@ export const hi: Messages = {
       faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
       otherEyebrow: 'और डाउनलोडर',
       otherTitle: 'दूसरे डाउनलोडर',
+      independent: 'ExportVid एक स्वतंत्र टूल है और इसका {platform} से कोई संबंध नहीं है।',
     },
     faqPage: {
       metaTitle: 'FAQ: ExportVid कैसे काम करता है',

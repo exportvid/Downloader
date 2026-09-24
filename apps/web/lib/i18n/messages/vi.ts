@@ -161,6 +161,7 @@ export const vi: Messages = {
       faqTitle: 'Câu hỏi thường gặp',
       otherEyebrow: 'Công cụ tải khác',
       otherTitle: 'Các công cụ tải khác',
+      independent: 'ExportVid là công cụ độc lập, không liên kết với {platform} và không được nền tảng này bảo trợ.',
     },
     faqPage: {
       metaTitle: 'Câu hỏi thường gặp: ExportVid hoạt động thế nào',

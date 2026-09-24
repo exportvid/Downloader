@@ -161,6 +161,7 @@ export const bn: Messages = {
       faqTitle: 'সাধারণ প্রশ্ন',
       otherEyebrow: 'আরও ডাউনলোডার',
       otherTitle: 'অন্যান্য ডাউনলোডার',
+      independent: 'ExportVid একটি স্বাধীন টুল এবং {platform}-এর সঙ্গে এর কোনো সম্পর্ক নেই।',
     },
     faqPage: {
       metaTitle: 'সাধারণ প্রশ্ন: ExportVid কীভাবে কাজ করে',

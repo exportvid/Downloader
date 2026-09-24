@@ -160,6 +160,7 @@ export const ar: Messages = {
       faqTitle: 'الأسئلة الشائعة',
       otherEyebrow: 'أدوات تحميل أخرى',
       otherTitle: 'أدوات تحميل أخرى',
+      independent: 'ExportVid أداة مستقلة، وليست تابعة لـ {platform} ولا معتمدة منها.',
     },
     faqPage: {
       metaTitle: 'الأسئلة الشائعة: كيف يعمل ExportVid',

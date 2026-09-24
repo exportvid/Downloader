@@ -161,6 +161,7 @@ export const tr: Messages = {
       faqTitle: 'Sık sorulan sorular',
       otherEyebrow: 'Diğer indiriciler',
       otherTitle: 'Diğer indiriciler',
+      independent: 'ExportVid bağımsız bir araçtır ve {platform} ile herhangi bir bağlantısı yoktur.',
     },
     faqPage: {
       metaTitle: 'SSS: ExportVid Nasıl Çalışır',

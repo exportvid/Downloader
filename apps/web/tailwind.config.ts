@@ -23,15 +23,20 @@ const config: Config = {
         head: {
           from: 'rgb(var(--head-from) / <alpha-value>)',
           via: 'rgb(var(--head-via) / <alpha-value>)',
+          to: 'rgb(var(--head-to) / <alpha-value>)',
         },
+        /** Text and icons drawn on top of bg-brand-gradient. */
+        'on-brand': 'rgb(var(--on-brand) / <alpha-value>)',
         danger: 'rgb(var(--danger) / <alpha-value>)',
+        /** ExportVid's own orange. Platform pages never change it, so the logo always looks like ExportVid. */
+        ev: 'rgb(var(--ev) / <alpha-value>)',
         accent: {
           DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
           from: '#ffab5c',
           via: '#ff5a3c',
           to: '#c81f2e',
           dim: '#c8402c',
-          contrast: '#1a0906',
+          contrast: 'rgb(var(--accent-contrast) / <alpha-value>)',
         },
       },
       fontFamily: {
@@ -41,14 +46,17 @@ const config: Config = {
       },
       borderRadius: {
         xl2: '1.25rem',
+        /** Button and input corners. Platform pages change these to match the platform's own buttons. */
+        brand: 'var(--btn-radius)',
+        'brand-sm': 'var(--btn-radius-sm)',
       },
       boxShadow: {
-        glow: '0 0 0 1px rgba(255,90,60,0.18), 0 10px 34px -10px rgba(255,90,60,0.35)',
+        glow: 'var(--btn-shadow)',
         card: '0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 40px -24px rgba(0,0,0,0.55)',
       },
       backgroundImage: {
         'grid-fade': 'radial-gradient(ellipse 70% 55% at 50% -8%, rgba(255,138,61,0.16), transparent)',
-        'brand-gradient': 'linear-gradient(135deg, #ffab5c 0%, #ff5a3c 55%, #c81f2e 100%)',
+        'brand-gradient': 'var(--brand-gradient)',
       },
       transitionTimingFunction: {
         out: 'cubic-bezier(0.23, 1, 0.32, 1)',

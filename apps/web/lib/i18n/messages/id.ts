@@ -161,6 +161,7 @@ export const id: Messages = {
       faqTitle: 'Pertanyaan yang sering diajukan',
       otherEyebrow: 'Downloader lainnya',
       otherTitle: 'Downloader lain',
+      independent: 'ExportVid adalah alat independen dan tidak berafiliasi dengan atau didukung oleh {platform}.',
     },
     faqPage: {
       metaTitle: 'FAQ: Cara Kerja ExportVid',

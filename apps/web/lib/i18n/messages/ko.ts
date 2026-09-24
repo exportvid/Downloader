@@ -161,6 +161,7 @@ export const ko: Messages = {
       faqTitle: '자주 묻는 질문',
       otherEyebrow: '다른 다운로더',
       otherTitle: '다른 다운로더',
+      independent: 'ExportVid는 독립적인 도구로, {platform} 측과 제휴 관계가 없으며 승인을 받지 않았습니다.',
     },
     faqPage: {
       metaTitle: '자주 묻는 질문: ExportVid 이용 안내',

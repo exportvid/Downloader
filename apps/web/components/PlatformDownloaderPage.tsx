@@ -4,7 +4,7 @@ import { getPlatformPage } from '@/lib/platforms';
 import { fmt, localePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { DownloadHero } from './DownloadHero';
-import { ALL_PLATFORMS } from './PlatformMark';
+import { ALL_PLATFORMS, PlatformMark } from './PlatformMark';
 import { Accordion, Section } from './Section';
 import { JsonLd } from './JsonLd';
 import { breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
@@ -17,14 +17,31 @@ export function PlatformDownloaderPage({ config, locale }: { config: PlatformPag
     ALL_PLATFORMS.find((p) => p.href === `/${config.slug}`) ??
     ALL_PLATFORMS.find((p) => p.href.startsWith(`/${config.slug.split('-')[0]}-`));
 
+  const platformName = active?.label ?? '';
+
   return (
-    <div className="pb-16">
+    // data-platform switches the whole page to that platform's colors (see "Platform themes" in globals.css).
+    <div data-platform={active?.id} className="relative isolate pb-16">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px]" style={{ background: 'var(--backdrop)' }} aria-hidden />
       <JsonLd data={breadcrumbJsonLd([{ name: m.client.hero.home, path: '/' }, { name: config.h1, path: `/${config.slug}` }], locale)} />
       {config.faqs.length > 0 && <JsonLd data={faqJsonLd(config.faqs, locale)} />}
 
-      <DownloadHero title={config.h1} intro={config.intro} breadcrumb={config.h1} activeId={active?.id} />
+      <DownloadHero
+        title={config.h1}
+        intro={config.intro}
+        breadcrumb={config.h1}
+        activeId={active?.id}
+        mark={
+          active && (
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient text-on-brand shadow-glow" aria-hidden>
+              <PlatformMark id={active.id} className="h-7 w-7" />
+            </span>
+          )
+        }
+        note={fmt(pp.independent, { platform: platformName })}
+      />
 
-      <Section eyebrow={pp.howEyebrow} title={fmt(pp.howTitle, { platform: active?.label ?? '' })} narrow>
+      <Section eyebrow={pp.howEyebrow} title={fmt(pp.howTitle, { platform: platformName })} narrow>
         <div className="mx-auto max-w-2xl space-y-5">
           {config.about.map((p) => (
             <p key={p} className="text-[16px] leading-[1.75] text-ink-dim">
@@ -38,6 +55,7 @@ export function PlatformDownloaderPage({ config, locale }: { config: PlatformPag
         <CardGrid maxCols={3} count={config.supportedContentTypes.length}>
           {config.supportedContentTypes.map((c) => (
             <div key={c.label} className="card scroll-reveal h-full p-6">
+              <span className="mb-4 block h-1 w-8 rounded-full bg-brand-gradient" aria-hidden />
               <p className="text-[16px] font-semibold text-ink">{c.label}</p>
               <p className="mt-2 text-[14px] leading-relaxed text-ink-dim">{c.description}</p>
             </div>
@@ -48,8 +66,11 @@ export function PlatformDownloaderPage({ config, locale }: { config: PlatformPag
       <Section eyebrow={pp.formatsEyebrow} title={pp.formatsTitle}>
         <CardGrid maxCols={2} count={config.formats.length}>
           {config.formats.map((f) => (
-            <div key={f} className="card scroll-reveal h-full p-6 text-[14px] leading-relaxed text-ink-dim">
-              {f}
+            <div key={f} className="card scroll-reveal flex h-full gap-3 p-6 text-[14px] leading-relaxed text-ink-dim">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-accent" aria-hidden>
+                <path d="M5 12.5l4.5 4.5L19 7.5" />
+              </svg>
+              <span>{f}</span>
             </div>
           ))}
         </CardGrid>
@@ -71,7 +92,7 @@ export function PlatformDownloaderPage({ config, locale }: { config: PlatformPag
                 <Link
                   key={slug}
                   href={localePath(locale, `/${slug}`)}
-                  className="press rounded-full bg-base-surface px-5 py-2.5 text-[14px] text-ink-dim transition-colors hover:bg-base-raised hover:text-ink"
+                  className="press rounded-full bg-base-surface px-5 py-2.5 text-[14px] text-ink-dim transition-colors hover:bg-base-raised hover:text-accent"
                 >
                   {page.h1}
                 </Link>

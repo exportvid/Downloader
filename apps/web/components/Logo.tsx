@@ -14,7 +14,7 @@ export function Logo({ href = '/', label = 'ExportVid home' }: { href?: string; 
     <Link href={href} className="group flex items-center gap-2.5" aria-label={label}>
       <LogoMark />
       <span className="font-display text-[16px] font-semibold tracking-tight text-ink">
-        Export<span className="text-accent">Vid</span>
+        Export<span className="text-ev">Vid</span>
       </span>
     </Link>
   );

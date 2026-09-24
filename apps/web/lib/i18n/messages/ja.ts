@@ -161,6 +161,7 @@ export const ja: Messages = {
       faqTitle: 'よくある質問',
       otherEyebrow: 'その他のダウンローダー',
       otherTitle: '他のダウンローダー',
+      independent: 'ExportVid は独立したツールであり、{platform} とは提携しておらず、承認も受けていません。',
     },
     faqPage: {
       metaTitle: 'よくある質問：ExportVid の仕組み',

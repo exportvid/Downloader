@@ -45,7 +45,7 @@ export default async function SupportedSitesPage({ params }: Props) {
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {ALL_PLATFORMS.map((p) => (
           <Link key={p.id} href={localePath(locale, p.href)} className="card lift group flex items-center gap-4 p-5 transition-colors hover:bg-base-raised">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-glow">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-on-brand shadow-glow">
               <PlatformMark id={p.id} className="h-5 w-5" />
             </span>
             <span className="min-w-0 flex-1">

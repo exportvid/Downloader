@@ -161,6 +161,7 @@ export const de: Messages = {
       faqTitle: 'Häufig gestellte Fragen',
       otherEyebrow: 'Weitere Downloader',
       otherTitle: 'Andere Downloader',
+      independent: 'ExportVid ist ein unabhängiges Tool und steht in keiner Verbindung zu {platform}.',
     },
     faqPage: {
       metaTitle: 'FAQ: So funktioniert ExportVid',

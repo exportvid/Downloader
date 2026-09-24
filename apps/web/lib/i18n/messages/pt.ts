@@ -161,6 +161,7 @@ export const pt: Messages = {
       faqTitle: 'Perguntas frequentes',
       otherEyebrow: 'Mais downloaders',
       otherTitle: 'Outros downloaders',
+      independent: 'O ExportVid é uma ferramenta independente, sem vínculo com {platform} e sem aprovação da plataforma.',
     },
     faqPage: {
       metaTitle: 'Perguntas frequentes: como o ExportVid funciona',

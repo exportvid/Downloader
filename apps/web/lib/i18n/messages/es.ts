@@ -161,6 +161,7 @@ export const es: Messages = {
       faqTitle: 'Preguntas frecuentes',
       otherEyebrow: 'Más descargadores',
       otherTitle: 'Otros descargadores',
+      independent: 'ExportVid es una herramienta independiente y no está afiliada a {platform} ni cuenta con su respaldo.',
     },
     faqPage: {
       metaTitle: 'Preguntas frecuentes: cómo funciona ExportVid',

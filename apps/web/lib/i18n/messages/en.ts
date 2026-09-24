@@ -166,6 +166,7 @@ export const en = {
       faqTitle: 'Frequently asked questions',
       otherEyebrow: 'More downloaders',
       otherTitle: 'Other downloaders',
+      independent: 'ExportVid is an independent tool and is not affiliated with or endorsed by {platform}.',
     },
     faqPage: {
       metaTitle: 'FAQ: How ExportVid Works',

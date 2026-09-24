@@ -161,6 +161,7 @@ export const ru: Messages = {
       faqTitle: 'Часто задаваемые вопросы',
       otherEyebrow: 'Другие загрузчики',
       otherTitle: 'Другие загрузчики',
+      independent: 'ExportVid — независимый сервис, не связанный с {platform} и не одобренный этой платформой.',
     },
     faqPage: {
       metaTitle: 'Вопросы и ответы: как работает ExportVid',
