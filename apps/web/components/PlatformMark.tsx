@@ -28,6 +28,23 @@ export const ALL_PLATFORMS: PlatformEntry[] = [
 
 export const NAV_PLATFORMS = ALL_PLATFORMS.slice(0, 5);
 
+/** The link domains ExportVid accepts for each platform. */
+export const PLATFORM_DOMAINS: Record<PlatformId, string> = {
+  tiktok: 'tiktok.com, vm.tiktok.com',
+  instagram: 'instagram.com',
+  facebook: 'facebook.com, fb.watch',
+  twitter: 'x.com, twitter.com',
+  reddit: 'reddit.com, v.redd.it',
+  youtube: 'youtube.com, youtu.be',
+  pinterest: 'pinterest.com, pin.it',
+  snapchat: 'snapchat.com/spotlight',
+  twitch: 'clips.twitch.tv, twitch.tv',
+  linkedin: 'linkedin.com/posts',
+  tumblr: 'tumblr.com and *.tumblr.com',
+  vimeo: 'vimeo.com, player.vimeo.com',
+};
+
+
 /** Simplified, hand-drawn brand glyphs (currentColor) — not exact trademarked logos. */
 export function PlatformMark({ id, className }: { id: PlatformId; className?: string }) {
   switch (id) {
@@ -62,7 +79,7 @@ export function PlatformMark({ id, className }: { id: PlatformId; className?: st
       return (
         <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
           <rect x="3" y="6" width="18" height="12" rx="4" />
-          <path d="M10.5 9.5v5l4.5-2.5z" fill="#0a0a0f" />
+          <path d="M10.5 9.5v5l4.5-2.5z" fill="var(--mark-cut, #0a0a0f)" />
         </svg>
       );
     case 'reddit':
@@ -135,3 +152,48 @@ export const PLATFORM_COLORS: Record<PlatformId, { bg: string; dark?: boolean }>
   tumblr: { bg: '#35465c' },
   vimeo: { bg: '#1ab7ea' },
 };
+
+/** Each platform's own brand colors. `bg` fills the icon tile, `ink` colors the glyph, and `glow` (an "r g b" triplet)
+ * tints the light a card casts around the tile. X and Tumblr glow neutral because their near-black would not show. */
+export const PLATFORM_BRAND: Record<PlatformId, { bg: string; ink: string; glow: string }> = {
+  youtube: { bg: '#ff0033', ink: '#fff', glow: '255 0 51' },
+  facebook: { bg: '#0866ff', ink: '#fff', glow: '8 102 255' },
+  instagram: {
+    bg: 'radial-gradient(circle at 28% 108%, #ffd600 0%, #ff7a00 22%, #ff0069 48%, #d300c5 72%, #7638fa 100%)',
+    ink: '#fff',
+    glow: '255 0 105',
+  },
+  tiktok: { bg: '#000', ink: '#fff', glow: '37 244 238' },
+  twitter: { bg: '#000', ink: '#fff', glow: '150 150 160' },
+  reddit: { bg: '#ff4500', ink: '#fff', glow: '255 69 0' },
+  pinterest: { bg: '#e60023', ink: '#fff', glow: '230 0 35' },
+  snapchat: { bg: '#fffc00', ink: '#000', glow: '255 252 0' },
+  twitch: { bg: '#9146ff', ink: '#fff', glow: '145 70 255' },
+  linkedin: { bg: '#0a66c2', ink: '#fff', glow: '10 102 194' },
+  tumblr: { bg: '#001935', ink: '#fff', glow: '120 140 170' },
+  vimeo: { bg: '#1ab7ea', ink: '#fff', glow: '26 183 234' },
+};
+
+/** A platform's icon drawn the way the platform draws its own app icon: brand fill, brand glyph color.
+ * Size it with `className` (e.g. "h-12 w-12 rounded-2xl") and the glyph with `markClassName`. */
+export function PlatformTile({ id, className = '', markClassName = 'h-1/2 w-1/2' }: { id: PlatformId; className?: string; markClassName?: string }) {
+  const b = PLATFORM_BRAND[id];
+  return (
+    <span
+      className={`relative flex shrink-0 items-center justify-center shadow-[inset_0_1px_0_rgb(255_255_255/0.22),inset_0_0_0_1px_rgb(255_255_255/0.08)] ${className}`}
+      style={{ background: b.bg, color: b.ink, ['--mark-cut' as string]: b.bg }}
+      aria-hidden
+    >
+      {id === 'tiktok' ? (
+        // TikTok's note carries a cyan and a red shadow on either side.
+        <span className={`relative ${markClassName}`}>
+          <PlatformMark id="tiktok" className="absolute inset-0 h-full w-full -translate-x-[6%] -translate-y-[4%] text-[#25f4ee]" />
+          <PlatformMark id="tiktok" className="absolute inset-0 h-full w-full translate-x-[6%] translate-y-[4%] text-[#fe2c55]" />
+          <PlatformMark id="tiktok" className="relative h-full w-full" />
+        </span>
+      ) : (
+        <PlatformMark id={id} className={markClassName} />
+      )}
+    </span>
+  );
+}

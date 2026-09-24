@@ -186,6 +186,56 @@
   }
 }
 
+/* Platform cards: each card is lit by its platform's color, spilling from the icon corner.
+   Set --glow ("r g b") on the card. The light brightens and the edge picks up the color on hover. */
+.platform-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgb(var(--hl) / 0.06);
+  transition:
+    transform 260ms var(--ease-out),
+    box-shadow 260ms var(--ease-out);
+}
+.platform-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(90% 75% at 0% 0%, rgb(var(--glow) / 0.24), transparent 70%);
+  opacity: 0.8;
+  transition: opacity 260ms var(--ease-out);
+}
+[dir='rtl'] .platform-card::before {
+  background: radial-gradient(90% 75% at 100% 0%, rgb(var(--glow) / 0.24), transparent 70%);
+}
+.platform-card .platform-tile {
+  box-shadow: 0 10px 24px -10px rgb(var(--glow) / 0.75);
+  transition: transform 260ms var(--ease-out);
+}
+.platform-card:focus-visible {
+  outline: 2px solid rgb(var(--glow));
+  outline-offset: 2px;
+}
+@media (hover: hover) {
+  .platform-card:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 0 0 1px rgb(var(--glow) / 0.4);
+  }
+  .platform-card:hover::before {
+    opacity: 1;
+  }
+  .platform-card:hover .platform-tile {
+    transform: scale(1.06) rotate(-3deg);
+  }
+}
+:root[data-theme='light'] .platform-card {
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--hl) / 0.06),
+    0 1px 2px rgba(40, 25, 15, 0.05),
+    0 12px 28px -16px rgba(40, 25, 15, 0.14);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {
     animation: none !important;

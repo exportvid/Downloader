@@ -6,7 +6,7 @@ import { isLocale, localePath } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { PageHeader } from '@/components/PageHeader';
 import { JsonLd } from '@/components/JsonLd';
-import { ALL_PLATFORMS, PlatformMark, type PlatformId } from '@/components/PlatformMark';
+import { ALL_PLATFORMS, PLATFORM_BRAND, PLATFORM_DOMAINS, PlatformTile } from '@/components/PlatformMark';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -17,20 +17,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({ title: m.site.supported.metaTitle, description: m.site.supported.metaDescription, path: '/supported-sites', locale, ogAlt: m.site.meta.ogAlt });
 }
 
-const DOMAINS: Record<PlatformId, string> = {
-  tiktok: 'tiktok.com, vm.tiktok.com',
-  instagram: 'instagram.com',
-  facebook: 'facebook.com, fb.watch',
-  twitter: 'x.com, twitter.com',
-  reddit: 'reddit.com, v.redd.it',
-  youtube: 'youtube.com, youtu.be',
-  pinterest: 'pinterest.com, pin.it',
-  snapchat: 'snapchat.com/spotlight',
-  twitch: 'clips.twitch.tv, twitch.tv',
-  linkedin: 'linkedin.com/posts',
-  tumblr: 'tumblr.com and *.tumblr.com',
-  vimeo: 'vimeo.com, player.vimeo.com',
-};
 
 export default async function SupportedSitesPage({ params }: Props) {
   const { locale } = await params;
@@ -44,19 +30,22 @@ export default async function SupportedSitesPage({ params }: Props) {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {ALL_PLATFORMS.map((p) => (
-          <Link key={p.id} href={localePath(locale, p.href)} className="card lift group flex items-center gap-4 p-5 transition-colors hover:bg-base-raised">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-on-brand shadow-glow">
-              <PlatformMark id={p.id} className="h-5 w-5" />
-            </span>
+          <Link
+            key={p.id}
+            href={localePath(locale, p.href)}
+            className="platform-card card scroll-reveal group flex items-center gap-4 p-5"
+            style={{ ['--glow' as string]: PLATFORM_BRAND[p.id].glow }}
+          >
+            <PlatformTile id={p.id} className="platform-tile h-12 w-12 rounded-[14px]" markClassName="h-6 w-6" />
             <span className="min-w-0 flex-1">
               <span className="block text-[15px] font-semibold text-ink">{p.label}</span>
               <span dir="ltr" className="block truncate text-xs text-ink-faint text-start">
-                {DOMAINS[p.id]}
+                {PLATFORM_DOMAINS[p.id]}
               </span>
             </span>
             <span className="hidden flex-wrap justify-end gap-1 sm:flex">
               {p.types.map((type) => (
-                <span key={type} className="rounded-full bg-base px-2 py-0.5 text-[10px] text-ink-faint">
+                <span key={type} className="rounded-full bg-hl/6 px-2 py-0.5 text-[10px] font-medium text-ink-dim">
                   {t.types[type] ?? type}
                 </span>
               ))}

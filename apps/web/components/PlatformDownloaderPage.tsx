@@ -4,7 +4,7 @@ import { getPlatformPage } from '@/lib/platforms';
 import { fmt, localePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { DownloadHero } from './DownloadHero';
-import { ALL_PLATFORMS, PlatformMark } from './PlatformMark';
+import { ALL_PLATFORMS, PLATFORM_BRAND, PLATFORM_DOMAINS, PlatformMark, PlatformTile, type PlatformEntry } from './PlatformMark';
 import { Accordion, Section } from './Section';
 import { JsonLd } from './JsonLd';
 import { breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
@@ -12,10 +12,7 @@ import { breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
 export function PlatformDownloaderPage({ config, locale }: { config: PlatformPageConfig; locale: Locale }) {
   const m = getMessages(locale);
   const pp = m.site.platformPage;
-  // Reels pages have no card of their own, so fall back to the parent platform (instagram-*, facebook-*).
-  const active =
-    ALL_PLATFORMS.find((p) => p.href === `/${config.slug}`) ??
-    ALL_PLATFORMS.find((p) => p.href.startsWith(`/${config.slug.split('-')[0]}-`));
+  const active = platformForSlug(config.slug);
 
   const platformName = active?.label ?? '';
 
@@ -84,25 +81,54 @@ export function PlatformDownloaderPage({ config, locale }: { config: PlatformPag
 
       {config.related.length > 0 && (
         <Section eyebrow={pp.otherEyebrow} title={pp.otherTitle}>
-          <div className="flex flex-wrap justify-center gap-2">
+          {/* Four links sit two by two; three sit in one row. */}
+          <ul className={`mx-auto grid gap-2.5 sm:grid-cols-2 ${config.related.length === 4 ? 'max-w-3xl' : 'lg:grid-cols-3'}`}>
             {config.related.map((slug) => {
               const page = getPlatformPage(slug, locale);
-              if (!page) return null;
+              const platform = platformForSlug(slug);
+              if (!page || !platform) return null;
               return (
-                <Link
-                  key={slug}
-                  href={localePath(locale, `/${slug}`)}
-                  className="press rounded-full bg-base-surface px-5 py-2.5 text-[14px] text-ink-dim transition-colors hover:bg-base-raised hover:text-accent"
-                >
-                  {page.h1}
-                </Link>
+                <li key={slug}>
+                  <Link
+                    href={localePath(locale, `/${slug}`)}
+                    className="platform-card card group flex h-full items-center gap-3 rounded-xl p-3 pe-3.5"
+                    style={{ ['--glow' as string]: PLATFORM_BRAND[platform.id].glow }}
+                  >
+                    <PlatformTile id={platform.id} className="platform-tile h-9 w-9 rounded-[10px]" markClassName="h-[18px] w-[18px]" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-[14px] font-semibold leading-tight text-ink">{page.h1}</span>
+                      <span dir="ltr" className="mt-0.5 block truncate text-start text-[11.5px] text-ink-faint">
+                        {PLATFORM_DOMAINS[platform.id]}
+                      </span>
+                    </span>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="shrink-0 text-ink-faint transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:text-ink rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
+                      aria-hidden
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </Section>
       )}
     </div>
   );
+}
+
+/** The platform a page belongs to. Reels pages have no entry of their own, so they fall back to the parent platform (instagram-*, facebook-*). */
+function platformForSlug(slug: string): PlatformEntry | undefined {
+  return ALL_PLATFORMS.find((p) => p.href === `/${slug}`) ?? ALL_PLATFORMS.find((p) => p.href.startsWith(`/${slug.split('-')[0]}-`));
 }
 
 /**
