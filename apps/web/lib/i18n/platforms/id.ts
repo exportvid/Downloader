@@ -122,11 +122,11 @@ export const id: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Download Instagram: Reels, Video, dan Foto',
+    metaTitle: 'Download Video Instagram: Reels, Video, Stories',
     metaDescription:
-      'Download Reels, video, foto, carousel, dan Stories Instagram secara gratis. Tempel tautan Instagram dan ExportVid mendeteksi jenis kontennya.',
-    h1: 'Download Video dan Foto Instagram',
-    intro: 'Tempel tautan Instagram untuk Reel, postingan, foto, carousel, atau Story. ExportVid mendeteksi jenisnya dan menampilkan apa yang bisa Anda download.',
+      'Download Reels, video, dan Stories Instagram sebagai MP4 secara gratis. Foto dan carousel juga bisa. Tempel tautan Instagram dan ExportVid menemukan filenya.',
+    h1: 'Download Video Instagram',
+    intro: 'Tempel tautan Reel, postingan video, atau Story Instagram dan download sebagai MP4. Postingan foto dan carousel juga bisa.',
     about: [
       'Instagram memakai tautan yang mirip untuk jenis konten yang berbeda. ExportVid membedakannya: Reels (/reel/), postingan feed (/p/), Stories, dan profil.',
       'Untuk carousel, setiap foto dan video ditampilkan tersendiri, jadi Anda bisa download hanya yang Anda inginkan.',
@@ -134,15 +134,15 @@ export const id: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Video vertikal pendek yang diposting sebagai Reels.' },
       { label: 'Postingan video', description: 'Video yang dibagikan sebagai postingan feed biasa.' },
-      { label: 'Foto', description: 'Postingan feed dengan satu gambar.' },
-      { label: 'Carousel', description: 'Postingan dengan beberapa foto atau video, ditampilkan satu per satu.' },
       { label: 'Stories', description: 'Stories yang masih aktif.' },
+      { label: 'Carousel', description: 'Postingan dengan beberapa foto atau video, ditampilkan satu per satu.' },
+      { label: 'Foto', description: 'Postingan feed dengan satu gambar.' },
       { label: 'Foto profil', description: 'Foto profil sebuah akun.' },
     ],
     faqs: [
       {
-        q: 'Bagaimana cara download video atau foto Instagram?',
-        a: 'Salin tautan postingan dari Instagram, tempel di kotak di atas, lalu pilih Download. Setelah itu pilih file yang Anda inginkan.',
+        q: 'Bagaimana cara download video Instagram?',
+        a: 'Salin tautan Reel atau postingan dari Instagram, tempel di kotak di atas, lalu pilih Download. Setelah itu pilih file yang Anda inginkan.',
       },
       {
         q: 'Bisakah saya download dari akun Instagram privat?',
@@ -153,8 +153,8 @@ export const id: Record<PlatformSlug, PlatformContent> = {
         a: 'Buka Story, salin tautannya, lalu tempel di kotak di atas. Story bisa di-download selama masih aktif dan berasal dari akun yang bisa dilihat siapa saja.',
       },
       {
-        q: 'Bisakah saya download semua foto dalam carousel?',
-        a: 'Bisa. Setiap foto atau video dalam carousel muncul di daftar dengan tombol download-nya sendiri.',
+        q: 'Bisakah saya download semua video dan foto dalam carousel?',
+        a: 'Bisa. Setiap video atau foto dalam carousel muncul di daftar dengan tombol download sendiri.',
       },
       {
         q: 'Bisakah saya download Sorotan Instagram?',

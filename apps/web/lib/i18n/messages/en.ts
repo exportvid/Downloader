@@ -23,8 +23,8 @@ export const en = {
     hero: {
       home: 'Home',
       breadcrumbAria: 'Breadcrumb',
-      placeholder: 'Paste a video or photo link',
-      inputAria: 'Video or photo link',
+      placeholder: 'Paste a video link',
+      inputAria: 'Video link',
       paste: 'Paste',
       download: 'Download',
       checking: 'Checking',
@@ -45,9 +45,10 @@ export const en = {
       UNSUPPORTED_URL: "ExportVid doesn't support that site yet. Check the supported sites list.",
       INVALID_URL: "That doesn't look like a link. Copy the full address of the post and paste it again.",
       PRIVATE_OR_PROTECTED_CONTENT: "This post is private or needs a login, so ExportVid can't reach it.",
-      NOT_FOUND: "We couldn't find a video or photo at that link. Check that the post still exists.",
+      NOT_FOUND: "We couldn't find a video at that link. Check that the post still exists.",
       EXTRACTION_FAILED: 'The platform didn’t return a file. The post may be removed, or the platform may be blocking the request. Try again in a minute.',
       RATE_LIMITED: 'Too many requests. Wait a moment and try again.',
+      VERIFICATION_FAILED: "We couldn't verify your browser. Refresh the page and try again.",
       TIMEOUT: 'The platform took too long to respond. Try again.',
       INTERNAL_ERROR: 'Something went wrong on our end. Try again.',
     },
@@ -80,21 +81,21 @@ export const en = {
   site: {
     meta: {
       siteDescription:
-        'Free video downloader for social media. Paste a link from YouTube, Facebook, Instagram, TikTok, and more, then save the video or photo in the best quality.',
-      homeTitle: 'Download Videos and Photos from Social Media',
-      ogAlt: 'ExportVid: download videos and photos from social media',
+        'Free video downloader for social media. Paste a link from TikTok, Instagram, YouTube, Facebook, X, and more, and save the video as an MP4 in the best quality available.',
+      homeTitle: 'Free Video Downloader for Social Media',
+      ogAlt: 'ExportVid: a fast, free video downloader for social media',
     },
     home: {
-      heroBadge: 'Free video downloader',
-      heroTitle: 'Download videos and photos',
+      heroBadge: 'No watermark · No sign-up',
+      heroTitle: 'Fast & Free Video Downloader',
       heroIntro:
-        'Paste a link from YouTube, Facebook, Instagram, TikTok, and more. Get the video or photo in the best quality available, with no watermark.',
+        'Paste a video link from TikTok, Instagram, YouTube, and more. Save it as an MP4 in the best quality available, free and without a watermark.',
       howEyebrow: 'How it works',
-      howTitle: 'How to download in three steps',
+      howTitle: 'Download a video in three steps',
       steps: [
-        { title: 'Paste a link', body: 'Copy the link to a video or photo and paste it in the box above.' },
-        { title: 'Choose a quality', body: 'ExportVid checks the link and lists every quality and format available.' },
-        { title: 'Download', body: 'Save the file to your phone or computer.' },
+        { title: 'Paste a link', body: 'Copy the link to a video and paste it in the box above.' },
+        { title: 'Choose a quality', body: 'ExportVid checks the link and lists every quality the video comes in.' },
+        { title: 'Download', body: 'Save the MP4 to your phone or computer.' },
       ],
       whyEyebrow: 'Why ExportVid',
       whyTitle: 'Why use ExportVid',
@@ -128,15 +129,19 @@ export const en = {
           a: 'No. You get the quality the platform provides, and the list shows every option. When video and audio come as separate files, ExportVid joins them without re-encoding.',
         },
         { q: 'Can I download from private accounts?', a: 'No. ExportVid only works with posts anyone can view. It never tries to open private or login-protected content.' },
+        {
+          q: 'Can I download photos too?',
+          a: 'Yes, where the platform allows it. Paste the link to an Instagram photo post or carousel, and the photos appear in the list next to any videos.',
+        },
       ],
       faqMore: 'You can find more answers in the {link}.',
       faqMoreLink: 'full FAQ',
       ctaTitle: 'Got a link?',
-      ctaBody: 'Paste it above and download your video or photo.',
-      ctaButton: 'Paste a link',
+      ctaBody: 'Paste it above and save the video to your device.',
+      ctaButton: 'Paste a video link',
     },
     footer: {
-      tagline: 'A free video and photo downloader for social media.',
+      tagline: 'A fast, free video downloader for social media.',
       downloaders: 'Downloaders',
       company: 'Company',
       legal: 'Legal',
@@ -165,15 +170,15 @@ export const en = {
     faqPage: {
       metaTitle: 'FAQ: How ExportVid Works',
       metaDescription:
-        'Answers about downloading videos and photos with ExportVid: supported sites, watermarks, quality, private content, and what to do when a link does not work.',
+        'Answers about downloading social media videos with ExportVid: supported sites, watermarks, video quality, private content, and what to do when a link does not work.',
       eyebrow: 'FAQ',
       title: 'Frequently asked questions',
       intro: 'Quick answers about how ExportVid works.',
       items: [
         { q: 'Is ExportVid free?', a: 'Yes. ExportVid is free to use, with no fees, no subscription, and no sign-up.' },
         {
-          q: 'How do I download a video or photo from social media?',
-          a: 'Copy the link to the post, paste it into the box on the homepage, and select Download. ExportVid lists the available files. Choose one and save it to your device.',
+          q: 'How do I download a video from social media?',
+          a: 'Copy the link to the video, paste it into the box on the homepage, and select Download. ExportVid lists every quality available. Choose one and save the MP4 to your device.',
         },
         { q: 'Which sites can I download from?', a: '{list}. The Supported sites page lists the link formats that work for each one.' },
         {
@@ -194,6 +199,10 @@ export const en = {
         },
         { q: 'Do I need to install anything?', a: 'No. ExportVid runs in your browser on a phone or computer. There is no app or extension to install.' },
         {
+          q: 'Can I download photos too?',
+          a: 'Yes, where the platform allows it. Paste the link to an Instagram photo post or carousel, and the photos appear in the list next to any videos.',
+        },
+        {
           q: 'Why doesn’t my link work?',
           a: 'Check that you copied the full link, that the post is visible without signing in, and that the site is on the Supported sites list. If the post is fine, the platform may be blocking the request. Try again in a minute.',
         },
@@ -209,9 +218,9 @@ export const en = {
     },
     supported: {
       metaTitle: 'Supported Sites',
-      metaDescription: 'Every site you can download videos and photos from with ExportVid, and the link formats that work for each one.',
+      metaDescription: 'Every site you can download videos from with ExportVid, and the link formats that work for each one.',
       eyebrow: 'Supported sites',
-      title: 'Sites you can download from',
+      title: 'Sites you can download videos from',
       intro: 'Every platform ExportVid works with, and the links that work for each one.',
       missing: 'Missing a site you need?',
       tellUs: 'Tell us which one',

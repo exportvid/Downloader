@@ -2,11 +2,12 @@ import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import type { ApiErrorBody } from '@exportvid/shared';
 import { mergeQueue } from '../queue/mergeQueue';
+import { ROUTE_LIMITS } from '../lib/limits';
 
 const paramsSchema = z.object({ jobId: z.string().min(1) });
 
 export function registerJobsRoute(app: FastifyInstance) {
-  app.get('/api/v1/jobs/:jobId', async (req, reply) => {
+  app.get('/api/v1/jobs/:jobId', { config: { rateLimit: ROUTE_LIMITS.jobs } }, async (req, reply) => {
     const parsed = paramsSchema.safeParse(req.params);
     if (!parsed.success) {
       const body: ApiErrorBody = { error: { code: 'INVALID_URL', message: 'jobId is required' } };

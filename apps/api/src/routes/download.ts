@@ -5,6 +5,7 @@ import { config } from '../config';
 import { resolveAsset, contentTypeFor } from '../lib/assetLookup';
 import { safeStreamFetch } from '../lib/urlSafety';
 import { createByteLimiter } from '../lib/limitedStream';
+import { ROUTE_LIMITS, acquireDownloadSlot, sendRateLimited } from '../lib/limits';
 
 const querySchema = z.object({
   requestId: z.string().uuid(),
@@ -24,7 +25,7 @@ function notFound(reply: FastifyReply, message: string) {
  * we never buffer a large file in JS and never block this request on ffmpeg.
  */
 export function registerDownloadRoute(app: FastifyInstance) {
-  app.get('/api/v1/download', async (req, reply) => {
+  app.get('/api/v1/download', { config: { rateLimit: ROUTE_LIMITS.download } }, async (req, reply) => {
     const parsed = querySchema.safeParse(req.query);
     if (!parsed.success) {
       const body: ApiErrorBody = { error: { code: 'INVALID_URL', message: 'requestId and assetId are required' } };
@@ -41,6 +42,14 @@ export function registerDownloadRoute(app: FastifyInstance) {
       const body: ApiErrorBody = { error: { code: 'INVALID_URL', message: 'Use /api/v1/download/prepare for this asset.' } };
       return reply.status(409).send(body);
     }
+
+    // Every stream costs server bandwidth for as long as it runs, so cap how many one visitor keeps open.
+    const release = await acquireDownloadSlot(req.ip);
+    if (!release) {
+      return sendRateLimited(reply, 30, 'Too many downloads at once. Wait for one to finish and try again.');
+    }
+    // 'close' fires when the response finishes or the visitor cancels, on every path below.
+    reply.raw.on('close', release);
 
     let upstream;
     try {

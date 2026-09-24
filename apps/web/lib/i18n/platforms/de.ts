@@ -122,11 +122,11 @@ export const de: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Instagram Downloader: Reels, Videos und Fotos',
+    metaTitle: 'Instagram Video-Downloader: Reels, Videos, Stories',
     metaDescription:
-      'Lade Instagram-Reels, Videos, Fotos, Karussells und Stories kostenlos herunter. Füge einen Instagram-Link ein, und ExportVid erkennt den Inhaltstyp.',
-    h1: 'Instagram Videos und Fotos herunterladen',
-    intro: 'Füge einen Instagram-Link zu einem Reel, Beitrag, Foto, Karussell oder einer Story ein. ExportVid erkennt den Typ und zeigt, was du herunterladen kannst.',
+      'Lade Instagram Reels, Videos und Stories kostenlos als MP4 herunter. Fotos und Karussells funktionieren auch. Füge einen Instagram-Link ein und ExportVid findet die Dateien.',
+    h1: 'Instagram Videos herunterladen',
+    intro: 'Füge den Link zu einem Instagram Reel, Videobeitrag oder einer Story ein und lade ihn als MP4 herunter. Fotobeiträge und Karussells funktionieren auch.',
     about: [
       'Instagram verwendet ähnlich aussehende Links für verschiedene Inhalte. ExportVid unterscheidet sie: Reels (/reel/), Feed-Beiträge (/p/), Stories und Profile.',
       'Bei Karussells wird jedes Foto und jedes Video einzeln aufgeführt, sodass du nur herunterlädst, was du willst.',
@@ -134,15 +134,15 @@ export const de: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Kurze Hochformat-Videos, die als Reels veröffentlicht wurden.' },
       { label: 'Videobeiträge', description: 'Videos, die als normale Feed-Beiträge geteilt wurden.' },
-      { label: 'Fotos', description: 'Feed-Beiträge mit einem einzelnen Bild.' },
-      { label: 'Karussells', description: 'Beiträge mit mehreren Fotos oder Videos, einzeln aufgelistet.' },
       { label: 'Stories', description: 'Stories, die gerade online sind.' },
+      { label: 'Karussells', description: 'Beiträge mit mehreren Fotos oder Videos, einzeln aufgelistet.' },
+      { label: 'Fotos', description: 'Feed-Beiträge mit einem einzelnen Bild.' },
       { label: 'Profilbilder', description: 'Das Profilbild eines Kontos.' },
     ],
     faqs: [
       {
-        q: 'Wie lade ich ein Instagram-Video oder -Foto herunter?',
-        a: 'Kopiere den Beitragslink auf Instagram, füge ihn oben in das Feld ein und wähle Herunterladen. Wähle dann die gewünschte Datei aus.',
+        q: 'Wie lade ich ein Instagram-Video herunter?',
+        a: 'Kopiere den Link zum Reel oder Beitrag auf Instagram, füge ihn oben in das Feld ein und wähle Herunterladen. Wähle dann die gewünschte Datei aus.',
       },
       {
         q: 'Kann ich von einem privaten Instagram-Konto herunterladen?',
@@ -153,8 +153,8 @@ export const de: Record<PlatformSlug, PlatformContent> = {
         a: 'Öffne die Story, kopiere den Link und füge ihn oben in das Feld ein. Stories lassen sich herunterladen, solange sie online sind und von Konten stammen, die jeder sehen kann.',
       },
       {
-        q: 'Kann ich alle Fotos eines Karussells herunterladen?',
-        a: 'Ja. Jedes Foto und Video des Karussells erscheint in der Liste mit einer eigenen Download-Schaltfläche.',
+        q: 'Kann ich alle Videos und Fotos aus einem Karussell herunterladen?',
+        a: 'Ja. Jedes Video und jedes Foto im Karussell erscheint mit eigenem Download-Button in der Liste.',
       },
       {
         q: 'Kann ich Instagram-Highlights herunterladen?',

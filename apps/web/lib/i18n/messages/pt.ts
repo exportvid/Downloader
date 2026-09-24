@@ -18,8 +18,8 @@ export const pt: Messages = {
     hero: {
       home: 'Início',
       breadcrumbAria: 'Trilha de navegação',
-      placeholder: 'Cole o link de um vídeo ou de uma foto',
-      inputAria: 'Link de um vídeo ou de uma foto',
+      placeholder: 'Cole um link de vídeo',
+      inputAria: 'Link do vídeo',
       paste: 'Colar',
       download: 'Baixar',
       checking: 'Verificando',
@@ -40,10 +40,11 @@ export const pt: Messages = {
       UNSUPPORTED_URL: 'O ExportVid ainda não é compatível com esse site. Veja a lista de sites compatíveis.',
       INVALID_URL: 'Isso não parece um link. Copie o endereço completo da publicação e cole novamente.',
       PRIVATE_OR_PROTECTED_CONTENT: 'Esta publicação é privada ou exige login, então o ExportVid não consegue acessá-la.',
-      NOT_FOUND: 'Não encontramos nenhum vídeo ou foto nesse link. Confira se a publicação ainda existe.',
+      NOT_FOUND: 'Não encontramos nenhum vídeo nesse link. Confira se a publicação ainda existe.',
       EXTRACTION_FAILED:
         'A plataforma não retornou nenhum arquivo. A publicação pode ter sido removida ou a plataforma pode estar bloqueando a solicitação. Tente novamente em um minuto.',
       RATE_LIMITED: 'Muitas solicitações. Aguarde um instante e tente novamente.',
+      VERIFICATION_FAILED: 'Não conseguimos verificar seu navegador. Recarregue a página e tente novamente.',
       TIMEOUT: 'A plataforma demorou demais para responder. Tente novamente.',
       INTERNAL_ERROR: 'Algo deu errado do nosso lado. Tente novamente.',
     },
@@ -75,21 +76,21 @@ export const pt: Messages = {
   site: {
     meta: {
       siteDescription:
-        'Baixador de vídeos grátis para redes sociais. Cole um link do YouTube, Facebook, Instagram, TikTok e mais, e salve o vídeo ou a foto na melhor qualidade.',
-      homeTitle: 'Baixar vídeos e fotos das redes sociais',
-      ogAlt: 'ExportVid: baixe vídeos e fotos das redes sociais',
+        'Baixador de vídeos grátis para redes sociais. Cole um link do TikTok, Instagram, YouTube, Facebook, X e mais, e salve o vídeo em MP4 na melhor qualidade disponível.',
+      homeTitle: 'Baixador de vídeos grátis para redes sociais',
+      ogAlt: 'ExportVid: um baixador de vídeos rápido e grátis para redes sociais',
     },
     home: {
-      heroBadge: 'Baixador de vídeos grátis',
-      heroTitle: 'Baixe vídeos e fotos',
+      heroBadge: 'Sem marca d’água · Sem cadastro',
+      heroTitle: 'Baixador de vídeos rápido e grátis',
       heroIntro:
-        'Cole um link do YouTube, Facebook, Instagram, TikTok e mais. Receba o vídeo ou a foto na melhor qualidade disponível, sem marca d’água.',
+        'Cole o link de um vídeo do TikTok, Instagram, YouTube e mais. Salve em MP4 na melhor qualidade disponível, de graça e sem marca d’água.',
       howEyebrow: 'Como funciona',
-      howTitle: 'Como baixar em três passos',
+      howTitle: 'Baixe um vídeo em três passos',
       steps: [
-        { title: 'Cole um link', body: 'Copie o link de um vídeo ou de uma foto e cole na caixa acima.' },
-        { title: 'Escolha a qualidade', body: 'O ExportVid verifica o link e mostra todas as qualidades e formatos disponíveis.' },
-        { title: 'Baixe', body: 'Salve o arquivo no seu celular ou computador.' },
+        { title: 'Cole um link', body: 'Copie o link de um vídeo e cole na caixa acima.' },
+        { title: 'Escolha a qualidade', body: 'O ExportVid confere o link e lista todas as qualidades disponíveis do vídeo.' },
+        { title: 'Baixe', body: 'Salve o MP4 no celular ou no computador.' },
       ],
       whyEyebrow: 'Por que o ExportVid',
       whyTitle: 'Por que usar o ExportVid',
@@ -123,15 +124,19 @@ export const pt: Messages = {
           a: 'Não. Você recebe a qualidade que a plataforma oferece, e a lista mostra todas as opções. Quando vídeo e áudio vêm em arquivos separados, o ExportVid os une sem recodificar.',
         },
         { q: 'Posso baixar de contas privadas?', a: 'Não. O ExportVid só funciona com publicações que qualquer pessoa pode ver. Ele nunca tenta abrir conteúdo privado ou protegido por login.' },
+        {
+          q: 'Também posso baixar fotos?',
+          a: 'Sim, quando a plataforma permite. Cole o link de uma publicação com fotos ou de um carrossel do Instagram, e as fotos aparecem na lista junto com os vídeos.',
+        },
       ],
       faqMore: 'Veja mais respostas nas {link}.',
       faqMoreLink: 'perguntas frequentes completas',
       ctaTitle: 'Tem um link?',
-      ctaBody: 'Cole acima e baixe seu vídeo ou sua foto.',
-      ctaButton: 'Colar um link',
+      ctaBody: 'Cole acima e salve o vídeo no seu dispositivo.',
+      ctaButton: 'Colar um link de vídeo',
     },
     footer: {
-      tagline: 'Um baixador gratuito de vídeos e fotos para redes sociais.',
+      tagline: 'Um baixador de vídeos rápido e grátis para redes sociais.',
       downloaders: 'Downloaders',
       company: 'Empresa',
       legal: 'Legal',
@@ -160,15 +165,15 @@ export const pt: Messages = {
     faqPage: {
       metaTitle: 'Perguntas frequentes: como o ExportVid funciona',
       metaDescription:
-        'Respostas sobre como baixar vídeos e fotos com o ExportVid: sites compatíveis, marcas d’água, qualidade, conteúdo privado e o que fazer quando um link não funciona.',
+        'Respostas sobre como baixar vídeos das redes sociais com o ExportVid: sites compatíveis, marcas d’água, qualidade do vídeo, conteúdo privado e o que fazer quando um link não funciona.',
       eyebrow: 'Ajuda',
       title: 'Perguntas frequentes',
       intro: 'Respostas rápidas sobre como o ExportVid funciona.',
       items: [
         { q: 'O ExportVid é grátis?', a: 'Sim. O ExportVid é grátis, sem taxas, sem assinatura e sem cadastro.' },
         {
-          q: 'Como baixo um vídeo ou uma foto de uma rede social?',
-          a: 'Copie o link da publicação, cole na caixa da página inicial e toque em Baixar. O ExportVid mostra os arquivos disponíveis. Escolha um e salve no seu dispositivo.',
+          q: 'Como baixo um vídeo de uma rede social?',
+          a: 'Copie o link do vídeo, cole na caixa da página inicial e toque em Baixar. O ExportVid lista todas as qualidades disponíveis. Escolha uma e salve o MP4 no seu dispositivo.',
         },
         { q: 'De quais sites posso baixar?', a: '{list}. A página de sites compatíveis mostra os formatos de link que funcionam em cada um.' },
         {
@@ -189,6 +194,10 @@ export const pt: Messages = {
         },
         { q: 'Preciso instalar alguma coisa?', a: 'Não. O ExportVid roda no navegador, no celular ou no computador. Não há app nem extensão para instalar.' },
         {
+          q: 'Também posso baixar fotos?',
+          a: 'Sim, quando a plataforma permite. Cole o link de uma publicação com fotos ou de um carrossel do Instagram, e as fotos aparecem na lista junto com os vídeos.',
+        },
+        {
           q: 'Por que meu link não funciona?',
           a: 'Confira se você copiou o link inteiro, se a publicação pode ser vista sem login e se o site está na página de sites compatíveis. Se a publicação estiver certa, a plataforma pode estar bloqueando a solicitação. Tente novamente em um minuto.',
         },
@@ -204,9 +213,9 @@ export const pt: Messages = {
     },
     supported: {
       metaTitle: 'Sites compatíveis',
-      metaDescription: 'Todos os sites dos quais você pode baixar vídeos e fotos com o ExportVid e os formatos de link que funcionam em cada um.',
+      metaDescription: 'Todos os sites de onde você pode baixar vídeos com o ExportVid e os formatos de link que funcionam em cada um.',
       eyebrow: 'Sites compatíveis',
-      title: 'Sites dos quais você pode baixar',
+      title: 'Sites de onde você pode baixar vídeos',
       intro: 'Todas as plataformas com as quais o ExportVid funciona e os links aceitos em cada uma.',
       missing: 'Falta algum site de que você precisa?',
       tellUs: 'Conte qual',

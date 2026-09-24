@@ -19,7 +19,7 @@ export function generateStaticParams() {
 
 export default function PrivacyPage() {
   return (
-    <LegalLayout title="Privacy Policy" updated="September 23, 2026">
+    <LegalLayout title="Privacy Policy" updated="September 24, 2026">
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Privacy Policy', path: '/privacy' }])} />
 
       <LegalSummary>
@@ -51,6 +51,16 @@ export default function PrivacyPage() {
         <li>
           <strong>Technical request data.</strong> This includes your IP address, the time of the request, and details of the
           request itself. We use it to apply rate limits, block abuse, and diagnose errors.
+        </li>
+        <li>
+          <strong>Bot check.</strong> Before we process a link, Cloudflare Turnstile checks that the request comes from a
+          person using a browser and not an automated script. To do this, Cloudflare reads technical signals from your
+          browser, such as its settings and how the page was loaded, and sometimes asks you to tick a box. Cloudflare
+          handles this data under its{' '}
+          <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener noreferrer">
+            Turnstile privacy addendum
+          </a>
+          , and we receive only a pass or fail result.
         </li>
         <li>
           <strong>Service metrics.</strong> For each attempt we record which platform was requested, whether it succeeded or
@@ -100,7 +110,7 @@ export default function PrivacyPage() {
       <ul>
         <li>Cached extraction results: about 5 minutes.</li>
         <li>Temporary merged files: about 15 minutes after they are ready.</li>
-        <li>Rate-limit counters: about one minute.</li>
+        <li>Rate-limit counters: between one minute and one hour, depending on the limit.</li>
         <li>Server logs: only as long as needed for security, abuse prevention, and debugging, then deleted on a rolling basis.</li>
         <li>Service metrics: kept to track reliability over time. They do not identify you.</li>
       </ul>

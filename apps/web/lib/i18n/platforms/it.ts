@@ -122,11 +122,11 @@ export const it: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Scarica da Instagram: Reels, video e foto',
+    metaTitle: 'Scarica video da Instagram: Reel, video e storie',
     metaDescription:
-      'Scarica gratis Reels, video, foto, caroselli e storie di Instagram. Incolla un link di Instagram e ExportVid riconosce il tipo di contenuto.',
-    h1: 'Scarica video e foto da Instagram',
-    intro: 'Incolla un link di Instagram a un Reel, un post, una foto, un carosello o una storia. ExportVid riconosce il tipo e mostra cosa puoi scaricare.',
+      'Scarica gratis Reel, video e storie di Instagram in MP4. Funzionano anche foto e caroselli. Incolla un link di Instagram ed ExportVid trova i file.',
+    h1: 'Scarica video da Instagram',
+    intro: 'Incolla il link di un Reel, di un post video o di una storia di Instagram e scaricalo in MP4. Funzionano anche post con foto e caroselli.',
     about: [
       'Instagram usa link simili per tipi di contenuto diversi. ExportVid li distingue: Reels (/reel/), post del feed (/p/), storie e profili.',
       'Per i caroselli, ogni foto e ogni video è elencato a parte, così scarichi solo quello che vuoi.',
@@ -134,15 +134,15 @@ export const it: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Brevi video verticali pubblicati come Reels.' },
       { label: 'Post con video', description: 'Video condivisi come normali post del feed.' },
-      { label: 'Foto', description: 'Post del feed con una sola immagine.' },
-      { label: 'Caroselli', description: 'Post con più foto o video, elencati uno per uno.' },
       { label: 'Storie', description: 'Storie ancora attive.' },
+      { label: 'Caroselli', description: 'Post con più foto o video, elencati uno per uno.' },
+      { label: 'Foto', description: 'Post del feed con una sola immagine.' },
       { label: 'Foto profilo', description: 'La foto profilo di un account.' },
     ],
     faqs: [
       {
-        q: 'Come scarico un video o una foto di Instagram?',
-        a: 'Copia il link del post da Instagram, incollalo nel riquadro qui sopra e premi Scarica. Poi scegli il file che vuoi.',
+        q: 'Come scarico un video da Instagram?',
+        a: 'Copia il link del Reel o del post da Instagram, incollalo nel riquadro qui sopra e seleziona Scarica. Poi scegli il file che vuoi.',
       },
       {
         q: 'Posso scaricare da un account Instagram privato?',
@@ -153,8 +153,8 @@ export const it: Record<PlatformSlug, PlatformContent> = {
         a: 'Apri la storia, copia il link e incollalo nel riquadro qui sopra. Le storie si possono scaricare finché sono attive e provengono da account che chiunque può vedere.',
       },
       {
-        q: 'Posso scaricare tutte le foto di un carosello?',
-        a: 'Sì. Ogni foto o video del carosello compare nell’elenco con il suo pulsante di download.',
+        q: 'Posso scaricare tutti i video e le foto di un carosello?',
+        a: 'Sì. Ogni video o foto del carosello compare nell’elenco con il proprio pulsante di download.',
       },
       {
         q: 'Posso scaricare le storie in evidenza di Instagram?',

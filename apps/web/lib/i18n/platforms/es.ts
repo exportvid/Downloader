@@ -122,11 +122,11 @@ export const es: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Descargar de Instagram: Reels, videos y fotos',
+    metaTitle: 'Descargar videos de Instagram: Reels, videos e historias',
     metaDescription:
-      'Descarga Reels, videos, fotos, carruseles e historias de Instagram gratis. Pega un enlace de Instagram y ExportVid detecta el tipo de contenido.',
-    h1: 'Descargar videos y fotos de Instagram',
-    intro: 'Pega un enlace de Instagram de un Reel, una publicación, una foto, un carrusel o una historia. ExportVid detecta el tipo y muestra lo que puedes descargar.',
+      'Descarga Reels, videos e historias de Instagram en MP4 gratis. También funciona con fotos y carruseles. Pega un enlace de Instagram y ExportVid encuentra los archivos.',
+    h1: 'Descargar videos de Instagram',
+    intro: 'Pega el enlace de un Reel, una publicación con video o una historia de Instagram y descárgalo en MP4. También funciona con fotos y carruseles.',
     about: [
       'Instagram usa enlaces parecidos para tipos de contenido distintos. ExportVid los distingue: Reels (/reel/), publicaciones del feed (/p/), historias y perfiles.',
       'En los carruseles, cada foto y cada video aparece por separado, para que descargues solo el que quieras.',
@@ -134,15 +134,15 @@ export const es: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Videos verticales cortos publicados como Reels.' },
       { label: 'Publicaciones con video', description: 'Videos compartidos como publicaciones normales del feed.' },
-      { label: 'Fotos', description: 'Publicaciones del feed con una sola imagen.' },
-      { label: 'Carruseles', description: 'Publicaciones con varias fotos o videos, listados uno por uno.' },
       { label: 'Historias', description: 'Historias que siguen activas.' },
+      { label: 'Carruseles', description: 'Publicaciones con varias fotos o videos, listados uno por uno.' },
+      { label: 'Fotos', description: 'Publicaciones del feed con una sola imagen.' },
       { label: 'Fotos de perfil', description: 'La foto de perfil de una cuenta.' },
     ],
     faqs: [
       {
-        q: '¿Cómo descargo un video o una foto de Instagram?',
-        a: 'Copia el enlace de la publicación en Instagram, pégalo en el cuadro de arriba y pulsa Descargar. Después elige el archivo que quieras.',
+        q: '¿Cómo descargo un video de Instagram?',
+        a: 'Copia el enlace del Reel o de la publicación en Instagram, pégalo en el cuadro de arriba y pulsa Descargar. Después elige el archivo que quieras.',
       },
       {
         q: '¿Puedo descargar de una cuenta privada de Instagram?',
@@ -153,8 +153,8 @@ export const es: Record<PlatformSlug, PlatformContent> = {
         a: 'Abre la historia, copia su enlace y pégalo en el cuadro de arriba. Las historias se pueden descargar mientras siguen activas y si son de cuentas que cualquiera puede ver.',
       },
       {
-        q: '¿Puedo descargar todas las fotos de un carrusel?',
-        a: 'Sí. Cada foto o video del carrusel aparece en la lista con su propio botón de descarga.',
+        q: '¿Puedo descargar todos los videos y fotos de un carrusel?',
+        a: 'Sí. Cada video o foto del carrusel aparece en la lista con su propio botón de descarga.',
       },
       {
         q: '¿Puedo descargar historias destacadas de Instagram?',

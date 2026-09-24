@@ -18,8 +18,8 @@ export const id: Messages = {
     hero: {
       home: 'Beranda',
       breadcrumbAria: 'Navigasi',
-      placeholder: 'Tempel tautan video atau foto',
-      inputAria: 'Tautan video atau foto',
+      placeholder: 'Tempel tautan video',
+      inputAria: 'Tautan video',
       paste: 'Tempel',
       download: 'Download',
       checking: 'Memeriksa',
@@ -40,10 +40,11 @@ export const id: Messages = {
       UNSUPPORTED_URL: 'ExportVid belum mendukung situs itu. Lihat daftar situs yang didukung.',
       INVALID_URL: 'Itu tidak terlihat seperti tautan. Salin alamat lengkap postingan lalu tempel lagi.',
       PRIVATE_OR_PROTECTED_CONTENT: 'Postingan ini privat atau perlu login, jadi ExportVid tidak bisa mengaksesnya.',
-      NOT_FOUND: 'Kami tidak menemukan video atau foto di tautan itu. Pastikan postingannya masih ada.',
+      NOT_FOUND: 'Kami tidak menemukan video di tautan itu. Pastikan postingannya masih ada.',
       EXTRACTION_FAILED:
         'Platform tidak mengembalikan file. Postingan mungkin sudah dihapus, atau platform sedang memblokir permintaan. Coba lagi dalam satu menit.',
       RATE_LIMITED: 'Terlalu banyak permintaan. Tunggu sebentar lalu coba lagi.',
+      VERIFICATION_FAILED: 'Kami tidak dapat memverifikasi browser Anda. Muat ulang halaman lalu coba lagi.',
       TIMEOUT: 'Platform terlalu lama merespons. Coba lagi.',
       INTERNAL_ERROR: 'Terjadi masalah di sisi kami. Coba lagi.',
     },
@@ -75,21 +76,21 @@ export const id: Messages = {
   site: {
     meta: {
       siteDescription:
-        'Downloader video gratis untuk media sosial. Tempel tautan dari YouTube, Facebook, Instagram, TikTok, dan lainnya, lalu simpan video atau fotonya dalam kualitas terbaik.',
-      homeTitle: 'Download Video dan Foto dari Media Sosial',
-      ogAlt: 'ExportVid: download video dan foto dari media sosial',
+        'Downloader video gratis untuk media sosial. Tempel tautan dari TikTok, Instagram, YouTube, Facebook, X, dan lainnya, lalu simpan videonya sebagai MP4 dalam kualitas terbaik yang tersedia.',
+      homeTitle: 'Downloader Video Gratis untuk Media Sosial',
+      ogAlt: 'ExportVid: downloader video yang cepat dan gratis untuk media sosial',
     },
     home: {
-      heroBadge: 'Downloader video gratis',
-      heroTitle: 'Download video dan foto',
+      heroBadge: 'Tanpa watermark · Tanpa daftar',
+      heroTitle: 'Downloader Video Cepat & Gratis',
       heroIntro:
-        'Tempel tautan dari YouTube, Facebook, Instagram, TikTok, dan lainnya. Dapatkan video atau foto dalam kualitas terbaik yang tersedia, tanpa watermark.',
+        'Tempel tautan video dari TikTok, Instagram, YouTube, dan lainnya. Simpan sebagai MP4 dalam kualitas terbaik yang tersedia, gratis dan tanpa watermark.',
       howEyebrow: 'Cara kerja',
-      howTitle: 'Cara download dalam tiga langkah',
+      howTitle: 'Download video dalam tiga langkah',
       steps: [
-        { title: 'Tempel tautan', body: 'Salin tautan video atau foto, lalu tempel di kotak di atas.' },
-        { title: 'Pilih kualitas', body: 'ExportVid memeriksa tautan dan menampilkan semua kualitas dan format yang tersedia.' },
-        { title: 'Download', body: 'Simpan file ke ponsel atau komputer Anda.' },
+        { title: 'Tempel tautan', body: 'Salin tautan video dan tempel di kotak di atas.' },
+        { title: 'Pilih kualitas', body: 'ExportVid memeriksa tautan dan menampilkan semua kualitas video yang tersedia.' },
+        { title: 'Download', body: 'Simpan MP4 ke ponsel atau komputer Anda.' },
       ],
       whyEyebrow: 'Kenapa ExportVid',
       whyTitle: 'Kenapa memakai ExportVid',
@@ -123,15 +124,19 @@ export const id: Messages = {
           a: 'Tidak. Anda mendapatkan kualitas yang disediakan platform, dan daftarnya menampilkan semua pilihan. Jika video dan audio berupa file terpisah, ExportVid menggabungkannya tanpa encode ulang.',
         },
         { q: 'Bisakah saya download dari akun privat?', a: 'Tidak. ExportVid hanya bekerja dengan postingan yang bisa dilihat siapa saja. ExportVid tidak pernah mencoba membuka konten privat atau yang dilindungi login.' },
+        {
+          q: 'Apakah saya juga bisa download foto?',
+          a: 'Ya, jika platformnya mengizinkan. Tempel tautan postingan foto atau carousel Instagram, dan fotonya muncul di daftar bersama video.',
+        },
       ],
       faqMore: 'Jawaban lainnya ada di {link}.',
       faqMoreLink: 'FAQ lengkap',
       ctaTitle: 'Punya tautan?',
-      ctaBody: 'Tempel di atas dan download video atau foto Anda.',
-      ctaButton: 'Tempel tautan',
+      ctaBody: 'Tempel di atas dan simpan videonya ke perangkat Anda.',
+      ctaButton: 'Tempel tautan video',
     },
     footer: {
-      tagline: 'Downloader video dan foto gratis untuk media sosial.',
+      tagline: 'Downloader video yang cepat dan gratis untuk media sosial.',
       downloaders: 'Downloader',
       company: 'Perusahaan',
       legal: 'Hukum',
@@ -160,15 +165,15 @@ export const id: Messages = {
     faqPage: {
       metaTitle: 'FAQ: Cara Kerja ExportVid',
       metaDescription:
-        'Jawaban seputar download video dan foto dengan ExportVid: situs yang didukung, watermark, kualitas, konten privat, dan apa yang harus dilakukan jika tautan tidak berfungsi.',
+        'Jawaban seputar download video media sosial dengan ExportVid: situs yang didukung, watermark, kualitas video, konten privat, dan apa yang harus dilakukan jika tautan tidak berfungsi.',
       eyebrow: 'Bantuan',
       title: 'Pertanyaan yang sering diajukan',
       intro: 'Jawaban singkat tentang cara kerja ExportVid.',
       items: [
         { q: 'Apakah ExportVid gratis?', a: 'Ya. ExportVid gratis digunakan, tanpa biaya, tanpa langganan, dan tanpa pendaftaran.' },
         {
-          q: 'Bagaimana cara download video atau foto dari media sosial?',
-          a: 'Salin tautan postingan, tempel di kotak pada beranda, lalu pilih Download. ExportVid menampilkan file yang tersedia. Pilih satu dan simpan ke perangkat Anda.',
+          q: 'Bagaimana cara download video dari media sosial?',
+          a: 'Salin tautan video, tempel di kotak pada halaman utama, lalu pilih Download. ExportVid menampilkan semua kualitas yang tersedia. Pilih salah satu dan simpan MP4 ke perangkat Anda.',
         },
         { q: 'Dari situs mana saja saya bisa download?', a: '{list}. Halaman situs yang didukung menunjukkan format tautan yang berfungsi untuk masing-masing.' },
         {
@@ -189,6 +194,10 @@ export const id: Messages = {
         },
         { q: 'Apakah saya perlu menginstal sesuatu?', a: 'Tidak. ExportVid berjalan di browser Anda, di ponsel atau komputer. Tidak ada aplikasi atau ekstensi yang perlu diinstal.' },
         {
+          q: 'Apakah saya juga bisa download foto?',
+          a: 'Ya, jika platformnya mengizinkan. Tempel tautan postingan foto atau carousel Instagram, dan fotonya muncul di daftar bersama video.',
+        },
+        {
           q: 'Kenapa tautan saya tidak berfungsi?',
           a: 'Pastikan Anda menyalin tautan secara lengkap, postingan dapat dilihat tanpa login, dan situsnya ada di halaman situs yang didukung. Jika postingannya normal, platform mungkin sedang memblokir permintaan. Coba lagi dalam satu menit.',
         },
@@ -204,9 +213,9 @@ export const id: Messages = {
     },
     supported: {
       metaTitle: 'Situs yang Didukung',
-      metaDescription: 'Semua situs tempat Anda bisa download video dan foto dengan ExportVid, beserta format tautan yang berfungsi untuk masing-masing.',
+      metaDescription: 'Semua situs tempat Anda bisa download video dengan ExportVid, beserta format tautan yang berfungsi untuk masing-masing.',
       eyebrow: 'Situs yang didukung',
-      title: 'Situs tempat Anda bisa download',
+      title: 'Situs tempat Anda bisa download video',
       intro: 'Semua platform yang berfungsi dengan ExportVid, dan tautan yang cocok untuk masing-masing.',
       missing: 'Ada situs yang Anda butuhkan tapi belum ada?',
       tellUs: 'Beri tahu kami',

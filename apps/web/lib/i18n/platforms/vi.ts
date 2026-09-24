@@ -122,11 +122,11 @@ export const vi: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Tải từ Instagram: Reels, Video và Ảnh',
+    metaTitle: 'Tải Video Instagram: Reels, Video, Stories',
     metaDescription:
-      'Tải Reels, video, ảnh, bài đăng nhiều ảnh và Stories Instagram miễn phí. Dán liên kết Instagram và ExportVid sẽ nhận diện loại nội dung.',
-    h1: 'Tải video và ảnh Instagram',
-    intro: 'Dán liên kết Instagram của Reel, bài đăng, ảnh, bài đăng nhiều ảnh hoặc Story. ExportVid nhận diện loại nội dung và hiển thị những gì bạn có thể tải.',
+      'Tải Reels, video và Stories Instagram dưới dạng MP4 miễn phí. Ảnh và bài đăng nhiều ảnh cũng dùng được. Dán liên kết Instagram và ExportVid sẽ tìm các tệp.',
+    h1: 'Tải video Instagram',
+    intro: 'Dán liên kết Reel, bài đăng video hoặc Stories trên Instagram và tải về dưới dạng MP4. Bài đăng ảnh và bài đăng nhiều ảnh cũng dùng được.',
     about: [
       'Instagram dùng các liên kết trông giống nhau cho những loại nội dung khác nhau. ExportVid phân biệt được: Reels (/reel/), bài đăng trên bảng tin (/p/), Stories và trang cá nhân.',
       'Với bài đăng nhiều ảnh, từng ảnh và từng video được liệt kê riêng, để bạn chỉ tải thứ mình muốn.',
@@ -134,15 +134,15 @@ export const vi: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Video dọc ngắn đăng dưới dạng Reels.' },
       { label: 'Bài đăng video', description: 'Video được chia sẻ như bài đăng thông thường trên bảng tin.' },
-      { label: 'Ảnh', description: 'Bài đăng trên bảng tin chỉ có một ảnh.' },
-      { label: 'Bài đăng nhiều ảnh', description: 'Bài đăng có nhiều ảnh hoặc video, được liệt kê từng mục.' },
       { label: 'Stories', description: 'Stories vẫn còn hiển thị.' },
+      { label: 'Bài đăng nhiều ảnh', description: 'Bài đăng có nhiều ảnh hoặc video, được liệt kê từng mục.' },
+      { label: 'Ảnh', description: 'Bài đăng trên bảng tin chỉ có một ảnh.' },
       { label: 'Ảnh đại diện', description: 'Ảnh đại diện của một tài khoản.' },
     ],
     faqs: [
       {
-        q: 'Làm sao để tải video hoặc ảnh Instagram?',
-        a: 'Sao chép liên kết bài đăng trên Instagram, dán vào ô phía trên rồi chọn Tải xuống. Sau đó chọn tệp bạn muốn.',
+        q: 'Làm sao để tải video Instagram?',
+        a: 'Sao chép liên kết Reel hoặc bài đăng trên Instagram, dán vào ô ở trên và chọn Tải xuống. Sau đó chọn tệp bạn muốn.',
       },
       {
         q: 'Tôi có thể tải từ tài khoản Instagram riêng tư không?',
@@ -153,8 +153,8 @@ export const vi: Record<PlatformSlug, PlatformContent> = {
         a: 'Mở Story, sao chép liên kết rồi dán vào ô phía trên. Có thể tải Story khi nó còn hiển thị và thuộc tài khoản mà ai cũng xem được.',
       },
       {
-        q: 'Tôi có thể tải tất cả ảnh trong một bài đăng nhiều ảnh không?',
-        a: 'Được. Mỗi ảnh hoặc video trong bài đăng xuất hiện trong danh sách với nút tải riêng.',
+        q: 'Tôi có tải được mọi video và ảnh trong bài đăng nhiều ảnh không?',
+        a: 'Có. Mỗi video hoặc ảnh trong bài đăng nhiều ảnh hiện trong danh sách với nút tải riêng.',
       },
       {
         q: 'Tôi có thể tải tin nổi bật trên Instagram không?',

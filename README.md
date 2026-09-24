@@ -1,6 +1,6 @@
 # ExportVid
 
-A fast, minimal downloader for public social media content across 12 platforms: TikTok, Instagram, Facebook, X, Reddit, YouTube, Pinterest, Snapchat, Twitch, LinkedIn, Tumblr, and Vimeo. Paste a link, get the real available formats, download instantly. No accounts, no logins, no app.
+A fast, simple, free video downloader for social media, covering 12 platforms: TikTok, Instagram, Facebook, X, Reddit, YouTube, Pinterest, Snapchat, Twitch, LinkedIn, Tumblr, and Vimeo. Paste a video link, see the real available qualities, and download the MP4. Photos from Instagram posts and carousels work too, as a secondary feature. No accounts, no logins, no app.
 
 ## Architecture
 
@@ -13,7 +13,7 @@ packages/shared  Types + platform detection shared by both apps
 The frontend never talks to yt-dlp or ffmpeg directly — it only calls the API's normalized JSON contract (`ExtractionResult` / `MediaAsset` in [packages/shared/src/types.ts](packages/shared/src/types.ts)). All extraction, SSRF protection, and media processing live in `apps/api`, matching the spec's requirement to keep the frontend ignorant of platform-specific logic and to keep heavy ffmpeg work off Vercel/edge.
 
 **Request flow:**
-1. `POST /api/v1/extract` — validates the URL, resolves DNS and blocks private/metadata IP ranges (SSRF defense), shells out to `yt-dlp -J` (metadata only, no download), normalizes the result, caches it in Redis for a short TTL (also de-duplicates concurrent identical requests).
+1. `POST /api/v1/extract` — checks the visitor's Cloudflare Turnstile token (when `TURNSTILE_SECRET_KEY` is set), validates the URL, resolves DNS and blocks private/metadata IP ranges (SSRF defense), shells out to `yt-dlp -J` (metadata only, no download), normalizes the result, caches it in Redis for a short TTL (also de-duplicates concurrent identical requests).
 2. `GET /api/v1/download/prepare` — for assets the source serves as one muxed file, returns a ready-to-stream URL instantly. For assets split into separate video/audio streams (common on Reddit, sometimes elsewhere), it enqueues a BullMQ job and returns a `jobId`.
 3. `GET /api/v1/download` — streams the file straight through from the source to the browser (SSRF-checked, size-capped, no buffering).
 4. The merge worker (`apps/api/src/worker.ts`) runs `ffmpeg -c copy` (stream copy, no re-encode) to mux video+audio, uploads the result to R2 (or a local tmp dir in dev) with a short TTL, and the client polls `GET /api/v1/jobs/:jobId` until it's ready.

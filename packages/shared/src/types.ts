@@ -88,6 +88,7 @@ export interface ApiErrorBody {
       | 'NOT_FOUND'
       | 'EXTRACTION_FAILED'
       | 'RATE_LIMITED'
+      | 'VERIFICATION_FAILED'
       | 'TIMEOUT'
       | 'INTERNAL_ERROR';
     message: string;

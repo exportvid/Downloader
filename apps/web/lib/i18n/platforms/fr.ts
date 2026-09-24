@@ -122,11 +122,11 @@ export const fr: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Télécharger depuis Instagram : Reels, vidéos et photos',
+    metaTitle: 'Télécharger des vidéos Instagram : Reels, vidéos, Stories',
     metaDescription:
-      'Téléchargez gratuitement des Reels, vidéos, photos, carrousels et Stories Instagram. Collez un lien Instagram et ExportVid détecte le type de contenu.',
-    h1: 'Télécharger des vidéos et des photos Instagram',
-    intro: 'Collez un lien Instagram vers un Reel, une publication, une photo, un carrousel ou une Story. ExportVid détecte le type et affiche ce que vous pouvez télécharger.',
+      'Téléchargez gratuitement les Reels, vidéos et Stories Instagram en MP4. Les photos et carrousels fonctionnent aussi. Collez un lien Instagram et ExportVid trouve les fichiers.',
+    h1: 'Télécharger des vidéos Instagram',
+    intro: 'Collez le lien d’un Reel, d’une publication vidéo ou d’une Story Instagram et téléchargez-le en MP4. Les photos et carrousels fonctionnent aussi.',
     about: [
       'Instagram utilise des liens semblables pour des types de contenu différents. ExportVid les distingue : Reels (/reel/), publications du fil (/p/), Stories et profils.',
       'Pour les carrousels, chaque photo et chaque vidéo est listée séparément, pour que vous ne téléchargiez que celle qui vous intéresse.',
@@ -134,15 +134,15 @@ export const fr: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Courtes vidéos verticales publiées en Reels.' },
       { label: 'Publications vidéo', description: 'Vidéos partagées comme publications classiques du fil.' },
-      { label: 'Photos', description: 'Publications du fil avec une seule image.' },
-      { label: 'Carrousels', description: 'Publications avec plusieurs photos ou vidéos, listées une par une.' },
       { label: 'Stories', description: 'Stories encore en ligne.' },
+      { label: 'Carrousels', description: 'Publications avec plusieurs photos ou vidéos, listées une par une.' },
+      { label: 'Photos', description: 'Publications du fil avec une seule image.' },
       { label: 'Photos de profil', description: 'La photo de profil d’un compte.' },
     ],
     faqs: [
       {
-        q: 'Comment télécharger une vidéo ou une photo Instagram ?',
-        a: 'Copiez le lien de la publication sur Instagram, collez-le dans la zone ci-dessus et appuyez sur Télécharger. Choisissez ensuite le fichier voulu.',
+        q: 'Comment télécharger une vidéo Instagram ?',
+        a: 'Copiez le lien du Reel ou de la publication sur Instagram, collez-le dans le champ ci-dessus et sélectionnez Télécharger. Choisissez ensuite le fichier voulu.',
       },
       {
         q: 'Puis-je télécharger depuis un compte Instagram privé ?',
@@ -153,8 +153,8 @@ export const fr: Record<PlatformSlug, PlatformContent> = {
         a: 'Ouvrez la Story, copiez son lien et collez-le dans la zone ci-dessus. Les Stories peuvent être téléchargées tant qu’elles sont en ligne, si elles viennent de comptes que tout le monde peut voir.',
       },
       {
-        q: 'Puis-je télécharger toutes les photos d’un carrousel ?',
-        a: 'Oui. Chaque photo ou vidéo du carrousel apparaît dans la liste avec son propre bouton de téléchargement.',
+        q: 'Puis-je télécharger toutes les vidéos et photos d’un carrousel ?',
+        a: 'Oui. Chaque vidéo ou photo du carrousel apparaît dans la liste avec son propre bouton de téléchargement.',
       },
       {
         q: 'Puis-je télécharger les Stories à la une d’Instagram ?',

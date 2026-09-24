@@ -3,6 +3,7 @@ import { z } from 'zod';
 import type { ApiErrorBody } from '@exportvid/shared';
 import { resolveAsset } from '../lib/assetLookup';
 import { mergeQueue } from '../queue/mergeQueue';
+import { LIMITS, ROUTE_LIMITS, activeDownloads, consumeQuota, sendRateLimited } from '../lib/limits';
 
 const querySchema = z.object({
   requestId: z.string().uuid(),
@@ -17,7 +18,7 @@ const querySchema = z.object({
  * way, never a JS-buffered fetch of the whole file.
  */
 export function registerPrepareDownloadRoute(app: FastifyInstance) {
-  app.get('/api/v1/download/prepare', async (req, reply) => {
+  app.get('/api/v1/download/prepare', { config: { rateLimit: ROUTE_LIMITS.prepare } }, async (req, reply) => {
     const parsed = querySchema.safeParse(req.query);
     if (!parsed.success) {
       const body: ApiErrorBody = { error: { code: 'INVALID_URL', message: 'requestId and assetId are required' } };
@@ -33,8 +34,22 @@ export function registerPrepareDownloadRoute(app: FastifyInstance) {
     const { internal, filename } = resolved;
 
     if (internal.kind === 'direct') {
+      // The download route enforces this too, but the browser navigates there directly and would show raw JSON.
+      // Checking here lets the website show a proper message instead.
+      if ((await activeDownloads(req.ip)) >= LIMITS.concurrentDownloads) {
+        return sendRateLimited(reply, 30, 'Too many downloads at once. Wait for one to finish and try again.');
+      }
       const url = `/api/v1/download?${new URLSearchParams({ requestId, assetId }).toString()}`;
       return reply.status(200).send({ kind: 'direct', url });
+    }
+
+    const waiting = await mergeQueue.getWaitingCount();
+    if (waiting >= LIMITS.maxQueuedMerges) {
+      return sendRateLimited(reply, 60, 'ExportVid is busy right now. Try again in a minute, or pick a lower quality.');
+    }
+    const merges = await consumeQuota('merge-10min', req.ip, LIMITS.mergesPer10Min, 10 * 60);
+    if (!merges.allowed) {
+      return sendRateLimited(reply, merges.retryAfterSeconds, "You've started a lot of downloads. Please wait a few minutes.");
     }
 
     const job = await mergeQueue.add('merge', {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
-import { prepareDownload, pollJob } from '@/lib/api';
+import { prepareDownload, pollJob, ExtractionApiError } from '@/lib/api';
 import { useI18n } from './I18nProvider';
 
 type Status = 'idle' | 'preparing' | 'processing' | 'error';
@@ -45,8 +45,8 @@ export function DownloadButton({ requestId, assetId, label }: { requestId: strin
       }
       setError(t.button.errorSlow);
       setStatus('error');
-    } catch {
-      setError(t.button.errorGeneric);
+    } catch (err) {
+      setError(err instanceof ExtractionApiError && err.code === 'RATE_LIMITED' ? t.errors.RATE_LIMITED : t.button.errorGeneric);
       setStatus('error');
     }
   }, [requestId, assetId, t]);

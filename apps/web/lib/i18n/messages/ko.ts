@@ -18,8 +18,8 @@ export const ko: Messages = {
     hero: {
       home: '홈',
       breadcrumbAria: '현재 위치',
-      placeholder: '동영상 또는 사진 링크를 붙여넣으세요',
-      inputAria: '동영상 또는 사진 링크',
+      placeholder: '동영상 링크를 붙여넣으세요',
+      inputAria: '동영상 링크',
       paste: '붙여넣기',
       download: '다운로드',
       checking: '확인 중',
@@ -40,10 +40,11 @@ export const ko: Messages = {
       UNSUPPORTED_URL: 'ExportVid는 아직 해당 사이트를 지원하지 않아요. 지원하는 사이트 목록을 확인해 보세요.',
       INVALID_URL: '링크가 아닌 것 같아요. 게시물의 전체 주소를 복사해서 다시 붙여넣어 주세요.',
       PRIVATE_OR_PROTECTED_CONTENT: '비공개 게시물이거나 로그인이 필요해서 ExportVid가 접근할 수 없어요.',
-      NOT_FOUND: '이 링크에서 동영상이나 사진을 찾지 못했어요. 게시물이 아직 있는지 확인해 주세요.',
+      NOT_FOUND: '이 링크에서 동영상을 찾지 못했어요. 게시물이 아직 있는지 확인해 주세요.',
       EXTRACTION_FAILED:
         '플랫폼에서 파일을 받지 못했어요. 게시물이 삭제됐거나 플랫폼이 요청을 차단하고 있을 수 있어요. 잠시 후 다시 시도해 주세요.',
       RATE_LIMITED: '요청이 너무 많아요. 잠시 기다린 뒤 다시 시도해 주세요.',
+      VERIFICATION_FAILED: '브라우저를 확인하지 못했어요. 페이지를 새로고침한 뒤 다시 시도해 주세요.',
       TIMEOUT: '플랫폼의 응답이 너무 늦어요. 다시 시도해 주세요.',
       INTERNAL_ERROR: '저희 쪽에서 문제가 생겼어요. 다시 시도해 주세요.',
     },
@@ -75,21 +76,21 @@ export const ko: Messages = {
   site: {
     meta: {
       siteDescription:
-        'SNS 동영상을 무료로 다운로드하세요. YouTube, Facebook, Instagram, TikTok 등의 링크를 붙여넣으면 동영상이나 사진을 최고 화질로 저장할 수 있어요.',
-      homeTitle: 'SNS 동영상·사진 다운로드',
-      ogAlt: 'ExportVid: SNS 동영상과 사진 다운로드',
+        'SNS 동영상을 무료로 다운로드하세요. TikTok, Instagram, YouTube, Facebook, X 등의 링크를 붙여넣으면 동영상을 최고 화질의 MP4로 저장할 수 있어요.',
+      homeTitle: '무료 SNS 동영상 다운로더',
+      ogAlt: 'ExportVid: 빠르고 무료인 SNS 동영상 다운로더',
     },
     home: {
-      heroBadge: '무료 동영상 다운로더',
-      heroTitle: '동영상과 사진 다운로드',
+      heroBadge: '워터마크 없음 · 가입 필요 없음',
+      heroTitle: '빠르고 무료인 동영상 다운로더',
       heroIntro:
-        'YouTube, Facebook, Instagram, TikTok 등의 링크를 붙여넣으세요. 동영상이나 사진을 가능한 최고 화질로, 워터마크 없이 받을 수 있어요.',
+        'TikTok, Instagram, YouTube 등의 동영상 링크를 붙여넣으세요. 워터마크 없이 무료로, 최고 화질의 MP4로 저장할 수 있어요.',
       howEyebrow: '이용 방법',
-      howTitle: '세 단계로 다운로드하기',
+      howTitle: '세 단계로 동영상 다운로드하기',
       steps: [
-        { title: '링크 붙여넣기', body: '동영상이나 사진의 링크를 복사해서 위 입력창에 붙여넣으세요.' },
-        { title: '화질 선택', body: 'ExportVid가 링크를 확인하고 사용 가능한 모든 화질과 형식을 보여줘요.' },
-        { title: '다운로드', body: '파일을 휴대폰이나 컴퓨터에 저장하세요.' },
+        { title: '링크 붙여넣기', body: '동영상 링크를 복사해 위 입력란에 붙여넣으세요.' },
+        { title: '화질 선택', body: 'ExportVid가 링크를 확인하고 동영상의 모든 화질을 보여 줘요.' },
+        { title: '다운로드', body: 'MP4 파일을 휴대폰이나 컴퓨터에 저장하세요.' },
       ],
       whyEyebrow: 'ExportVid를 쓰는 이유',
       whyTitle: 'ExportVid를 선택하는 이유',
@@ -123,15 +124,19 @@ export const ko: Messages = {
           a: '아니요. 플랫폼이 제공하는 화질 그대로 받을 수 있고, 목록에는 모든 옵션이 표시돼요. 영상과 소리가 별도 파일로 오면 ExportVid가 다시 인코딩하지 않고 합쳐요.',
         },
         { q: '비공개 계정에서도 다운로드할 수 있나요?', a: '아니요. ExportVid는 누구나 볼 수 있는 게시물에서만 작동해요. 비공개 콘텐츠나 로그인으로 보호된 콘텐츠는 열려고 시도하지 않아요.' },
+        {
+          q: '사진도 다운로드할 수 있나요?',
+          a: '네, 플랫폼이 허용하는 경우에는 가능해요. 인스타그램 사진 게시물이나 캐러셀 링크를 붙여넣으면 사진이 동영상과 함께 목록에 표시돼요.',
+        },
       ],
       faqMore: '더 많은 답변은 {link}에서 확인하세요.',
       faqMoreLink: '전체 FAQ',
       ctaTitle: '링크가 있으신가요?',
-      ctaBody: '위에 붙여넣고 동영상이나 사진을 다운로드하세요.',
-      ctaButton: '링크 붙여넣기',
+      ctaBody: '위에 붙여넣고 동영상을 기기에 저장하세요.',
+      ctaButton: '동영상 링크 붙여넣기',
     },
     footer: {
-      tagline: 'SNS 동영상과 사진을 무료로 다운로드하세요.',
+      tagline: '빠르고 무료인 SNS 동영상 다운로더.',
       downloaders: '다운로더',
       company: '회사',
       legal: '법적 고지',
@@ -160,15 +165,15 @@ export const ko: Messages = {
     faqPage: {
       metaTitle: '자주 묻는 질문: ExportVid 이용 안내',
       metaDescription:
-        'ExportVid로 동영상과 사진을 다운로드하는 방법에 대한 답변: 지원 사이트, 워터마크, 화질, 비공개 콘텐츠, 링크가 작동하지 않을 때의 해결 방법.',
+        'ExportVid로 SNS 동영상을 다운로드하는 방법에 대한 답변: 지원 사이트, 워터마크, 동영상 화질, 비공개 콘텐츠, 링크가 작동하지 않을 때 할 일.',
       eyebrow: '도움말',
       title: '자주 묻는 질문',
       intro: 'ExportVid가 어떻게 작동하는지 간단히 알려드려요.',
       items: [
         { q: 'ExportVid는 무료인가요?', a: '네, 무료예요. 이용료도, 구독도, 가입도 필요 없어요.' },
         {
-          q: 'SNS 동영상이나 사진은 어떻게 다운로드하나요?',
-          a: '게시물 링크를 복사해서 홈페이지 입력창에 붙여넣고 다운로드를 누르세요. ExportVid가 사용 가능한 파일을 보여줘요. 하나를 골라 기기에 저장하면 돼요.',
+          q: 'SNS 동영상은 어떻게 다운로드하나요?',
+          a: '동영상 링크를 복사해 홈페이지의 입력란에 붙여넣고 다운로드를 선택하세요. ExportVid가 사용 가능한 모든 화질을 보여 줘요. 하나를 골라 MP4 파일을 기기에 저장하세요.',
         },
         { q: '어떤 사이트에서 다운로드할 수 있나요?', a: '{list}. 사이트별로 사용할 수 있는 링크 형식은 지원 사이트 페이지에서 확인할 수 있어요.' },
         {
@@ -189,6 +194,10 @@ export const ko: Messages = {
         },
         { q: '뭔가 설치해야 하나요?', a: '아니요. ExportVid는 휴대폰이나 컴퓨터의 브라우저에서 바로 작동해요. 설치할 앱이나 확장 프로그램이 없어요.' },
         {
+          q: '사진도 다운로드할 수 있나요?',
+          a: '네, 플랫폼이 허용하는 경우에는 가능해요. 인스타그램 사진 게시물이나 캐러셀 링크를 붙여넣으면 사진이 동영상과 함께 목록에 표시돼요.',
+        },
+        {
           q: '링크가 작동하지 않는 이유가 뭔가요?',
           a: '링크를 전체 복사했는지, 로그인 없이도 게시물이 보이는지, 그리고 해당 사이트가 지원 사이트 목록에 있는지 확인해 보세요. 게시물에 문제가 없다면 플랫폼이 요청을 차단하고 있을 수 있어요. 잠시 후 다시 시도해 주세요.',
         },
@@ -204,9 +213,9 @@ export const ko: Messages = {
     },
     supported: {
       metaTitle: '지원 사이트',
-      metaDescription: 'ExportVid로 동영상과 사진을 다운로드할 수 있는 모든 사이트와, 사이트별로 사용할 수 있는 링크 형식이에요.',
+      metaDescription: 'ExportVid로 동영상을 다운로드할 수 있는 모든 사이트와 사이트별로 작동하는 링크 형식.',
       eyebrow: '지원 사이트',
-      title: '다운로드할 수 있는 사이트',
+      title: '동영상을 다운로드할 수 있는 사이트',
       intro: 'ExportVid가 지원하는 모든 플랫폼과, 각각에서 사용할 수 있는 링크예요.',
       missing: '필요한 사이트가 없나요?',
       tellUs: '어떤 사이트인지 알려주세요',

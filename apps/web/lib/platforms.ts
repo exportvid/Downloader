@@ -150,11 +150,11 @@ export const platformPages: Record<PlatformSlug, PlatformPageConfig> = {
 
   'instagram-video-downloader': {
     slug: 'instagram-video-downloader',
-    metaTitle: 'Instagram Downloader: Reels, Videos, Photos',
+    metaTitle: 'Instagram Video Downloader: Reels, Videos, Stories',
     metaDescription:
-      'Download Instagram Reels, videos, photos, carousels, and Stories. Paste an Instagram link and ExportVid detects the content type for you. Free.',
-    h1: 'Instagram video and photo downloader',
-    intro: 'Paste an Instagram link for a Reel, post, photo, carousel, or Story. ExportVid detects the type and lists what you can download.',
+      'Download Instagram Reels, videos, and Stories as MP4 for free. Photos and carousels work too. Paste an Instagram link and ExportVid finds the files.',
+    h1: 'Instagram video downloader',
+    intro: 'Paste an Instagram link to a Reel, video post, or Story and download it as an MP4. Photo posts and carousels work too.',
     about: [
       'Instagram uses similar-looking links for different kinds of posts. ExportVid tells them apart: Reels (/reel/), feed posts (/p/), Stories, and profiles.',
       'For carousel posts, every photo and video is listed on its own, so you can download only the one you want.',
@@ -162,15 +162,15 @@ export const platformPages: Record<PlatformSlug, PlatformPageConfig> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Short vertical videos posted as Reels.' },
       { label: 'Video posts', description: 'Videos shared as regular feed posts.' },
-      { label: 'Photos', description: 'Single-image feed posts.' },
-      { label: 'Carousels', description: 'Posts with several photos or videos, listed one by one.' },
       { label: 'Stories', description: 'Stories that are currently live.' },
+      { label: 'Carousels', description: 'Posts with several photos or videos, listed one by one.' },
+      { label: 'Photos', description: 'Single-image feed posts.' },
       { label: 'Profile pictures', description: 'The profile photo of an account.' },
     ],
     faqs: [
       {
-        q: 'How do I download an Instagram video or photo?',
-        a: 'Copy the post link from Instagram, paste it into the box above, and select Download. Then choose the file you want.',
+        q: 'How do I download an Instagram video?',
+        a: 'Copy the Reel or post link from Instagram, paste it into the box above, and select Download. Then choose the file you want.',
       },
       {
         q: 'Can I download from a private Instagram account?',
@@ -181,15 +181,15 @@ export const platformPages: Record<PlatformSlug, PlatformPageConfig> = {
         a: 'Open the Story, copy its link, and paste it into the box above. Stories can be downloaded while they are live, from accounts anyone can view.',
       },
       {
-        q: 'Can I download every photo in a carousel?',
-        a: 'Yes. Each photo or video in the carousel appears in the list with its own download button.',
+        q: 'Can I download every video and photo in a carousel?',
+        a: 'Yes. Each video or photo in the carousel appears in the list with its own download button.',
       },
       {
         q: 'Can I download Instagram Highlights?',
         a: 'Yes, when Instagram shows them on a profile that anyone can view. Highlight items are handled the same way as Stories.',
       },
     ],
-    formats: ['MP4 for videos, with audio', 'JPEG for photos, carousel images, and profile pictures'],
+    formats: ['MP4 for Reels, videos, and Stories, with audio', 'JPEG for photos, carousel images, and profile pictures'],
     related: ['instagram-reels-downloader', 'facebook-video-downloader', 'tiktok-video-downloader'],
   },
 

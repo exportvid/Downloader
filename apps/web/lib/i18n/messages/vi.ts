@@ -18,8 +18,8 @@ export const vi: Messages = {
     hero: {
       home: 'Trang chủ',
       breadcrumbAria: 'Đường dẫn trang',
-      placeholder: 'Dán liên kết video hoặc ảnh',
-      inputAria: 'Liên kết video hoặc ảnh',
+      placeholder: 'Dán liên kết video',
+      inputAria: 'Liên kết video',
       paste: 'Dán',
       download: 'Tải xuống',
       checking: 'Đang kiểm tra',
@@ -40,10 +40,11 @@ export const vi: Messages = {
       UNSUPPORTED_URL: 'ExportVid chưa hỗ trợ trang web đó. Hãy xem danh sách các trang web được hỗ trợ.',
       INVALID_URL: 'Đây không giống một liên kết. Hãy sao chép đầy đủ địa chỉ của bài đăng rồi dán lại.',
       PRIVATE_OR_PROTECTED_CONTENT: 'Bài đăng này ở chế độ riêng tư hoặc yêu cầu đăng nhập, nên ExportVid không thể truy cập.',
-      NOT_FOUND: 'Chúng tôi không tìm thấy video hay ảnh nào ở liên kết này. Hãy kiểm tra xem bài đăng còn tồn tại không.',
+      NOT_FOUND: 'Chúng tôi không tìm thấy video nào ở liên kết đó. Hãy kiểm tra xem bài đăng còn tồn tại không.',
       EXTRACTION_FAILED:
         'Nền tảng không trả về tệp nào. Bài đăng có thể đã bị xóa, hoặc nền tảng đang chặn yêu cầu. Hãy thử lại sau một phút.',
       RATE_LIMITED: 'Quá nhiều yêu cầu. Hãy đợi một lát rồi thử lại.',
+      VERIFICATION_FAILED: 'Chúng tôi không thể xác minh trình duyệt của bạn. Hãy tải lại trang rồi thử lại.',
       TIMEOUT: 'Nền tảng phản hồi quá lâu. Hãy thử lại.',
       INTERNAL_ERROR: 'Có sự cố ở phía chúng tôi. Hãy thử lại.',
     },
@@ -75,21 +76,21 @@ export const vi: Messages = {
   site: {
     meta: {
       siteDescription:
-        'Công cụ tải video miễn phí cho mạng xã hội. Dán liên kết từ YouTube, Facebook, Instagram, TikTok và nhiều nền tảng khác, rồi lưu video hoặc ảnh với chất lượng tốt nhất.',
-      homeTitle: 'Tải Video và Ảnh từ Mạng Xã Hội',
-      ogAlt: 'ExportVid: tải video và ảnh từ mạng xã hội',
+        'Công cụ tải video miễn phí cho mạng xã hội. Dán liên kết từ TikTok, Instagram, YouTube, Facebook, X và nhiều nền tảng khác, rồi lưu video dưới dạng MP4 với chất lượng tốt nhất hiện có.',
+      homeTitle: 'Công Cụ Tải Video Miễn Phí cho Mạng Xã Hội',
+      ogAlt: 'ExportVid: công cụ tải video nhanh và miễn phí cho mạng xã hội',
     },
     home: {
-      heroBadge: 'Công cụ tải video miễn phí',
-      heroTitle: 'Tải video và ảnh',
+      heroBadge: 'Không hình mờ · Không cần đăng ký',
+      heroTitle: 'Công cụ tải video nhanh & miễn phí',
       heroIntro:
-        'Dán liên kết từ YouTube, Facebook, Instagram, TikTok và nhiều nền tảng khác. Nhận video hoặc ảnh với chất lượng tốt nhất hiện có, không có watermark.',
+        'Dán liên kết video từ TikTok, Instagram, YouTube và nhiều nền tảng khác. Lưu dưới dạng MP4 với chất lượng tốt nhất hiện có, miễn phí và không có hình mờ.',
       howEyebrow: 'Cách hoạt động',
-      howTitle: 'Cách tải xuống trong ba bước',
+      howTitle: 'Tải video trong ba bước',
       steps: [
-        { title: 'Dán liên kết', body: 'Sao chép liên kết của video hoặc ảnh rồi dán vào ô phía trên.' },
-        { title: 'Chọn chất lượng', body: 'ExportVid kiểm tra liên kết và liệt kê mọi chất lượng và định dạng có sẵn.' },
-        { title: 'Tải xuống', body: 'Lưu tệp về điện thoại hoặc máy tính của bạn.' },
+        { title: 'Dán liên kết', body: 'Sao chép liên kết của video và dán vào ô ở trên.' },
+        { title: 'Chọn chất lượng', body: 'ExportVid kiểm tra liên kết và liệt kê mọi chất lượng hiện có của video.' },
+        { title: 'Tải xuống', body: 'Lưu tệp MP4 vào điện thoại hoặc máy tính.' },
       ],
       whyEyebrow: 'Vì sao chọn ExportVid',
       whyTitle: 'Vì sao nên dùng ExportVid',
@@ -123,15 +124,19 @@ export const vi: Messages = {
           a: 'Không. Bạn nhận được chất lượng do nền tảng cung cấp, và danh sách hiển thị mọi lựa chọn. Khi video và âm thanh là hai tệp riêng, ExportVid ghép chúng lại mà không mã hóa lại.',
         },
         { q: 'Tôi có thể tải từ tài khoản riêng tư không?', a: 'Không. ExportVid chỉ hoạt động với các bài đăng mà ai cũng xem được. Nó không bao giờ cố mở nội dung riêng tư hoặc nội dung được bảo vệ bằng đăng nhập.' },
+        {
+          q: 'Tôi có tải được ảnh không?',
+          a: 'Có, khi nền tảng cho phép. Dán liên kết bài đăng ảnh hoặc bài đăng nhiều ảnh trên Instagram, ảnh sẽ hiện trong danh sách cạnh các video.',
+        },
       ],
       faqMore: 'Bạn có thể xem thêm câu trả lời trong {link}.',
       faqMoreLink: 'phần câu hỏi thường gặp đầy đủ',
       ctaTitle: 'Bạn có liên kết chưa?',
-      ctaBody: 'Dán vào phía trên và tải video hoặc ảnh của bạn.',
-      ctaButton: 'Dán liên kết',
+      ctaBody: 'Dán vào ô ở trên và lưu video về thiết bị của bạn.',
+      ctaButton: 'Dán liên kết video',
     },
     footer: {
-      tagline: 'Công cụ tải video và ảnh miễn phí cho mạng xã hội.',
+      tagline: 'Công cụ tải video nhanh và miễn phí cho mạng xã hội.',
       downloaders: 'Công cụ tải',
       company: 'Công ty',
       legal: 'Pháp lý',
@@ -160,15 +165,15 @@ export const vi: Messages = {
     faqPage: {
       metaTitle: 'Câu hỏi thường gặp: ExportVid hoạt động thế nào',
       metaDescription:
-        'Giải đáp về việc tải video và ảnh bằng ExportVid: trang web được hỗ trợ, watermark, chất lượng, nội dung riêng tư và cách xử lý khi liên kết không hoạt động.',
+        'Giải đáp về việc tải video mạng xã hội với ExportVid: các trang được hỗ trợ, hình mờ, chất lượng video, nội dung riêng tư và cách xử lý khi liên kết không hoạt động.',
       eyebrow: 'Trợ giúp',
       title: 'Câu hỏi thường gặp',
       intro: 'Câu trả lời nhanh về cách ExportVid hoạt động.',
       items: [
         { q: 'ExportVid có miễn phí không?', a: 'Có. ExportVid miễn phí, không tốn phí, không đăng ký gói và không cần tạo tài khoản.' },
         {
-          q: 'Làm sao để tải video hoặc ảnh từ mạng xã hội?',
-          a: 'Sao chép liên kết bài đăng, dán vào ô trên trang chủ rồi chọn Tải xuống. ExportVid sẽ liệt kê các tệp có sẵn. Chọn một tệp và lưu về thiết bị của bạn.',
+          q: 'Làm sao để tải video từ mạng xã hội?',
+          a: 'Sao chép liên kết của video, dán vào ô trên trang chủ và chọn Tải xuống. ExportVid liệt kê mọi chất lượng hiện có. Chọn một và lưu tệp MP4 về thiết bị của bạn.',
         },
         { q: 'Tôi có thể tải từ những trang web nào?', a: '{list}. Trang các trang web được hỗ trợ cho biết định dạng liên kết nào dùng được với từng nền tảng.' },
         {
@@ -189,6 +194,10 @@ export const vi: Messages = {
         },
         { q: 'Tôi có cần cài đặt gì không?', a: 'Không. ExportVid chạy ngay trong trình duyệt trên điện thoại hoặc máy tính. Không có ứng dụng hay tiện ích mở rộng nào cần cài.' },
         {
+          q: 'Tôi có tải được ảnh không?',
+          a: 'Có, khi nền tảng cho phép. Dán liên kết bài đăng ảnh hoặc bài đăng nhiều ảnh trên Instagram, ảnh sẽ hiện trong danh sách cạnh các video.',
+        },
+        {
           q: 'Vì sao liên kết của tôi không hoạt động?',
           a: 'Hãy kiểm tra xem bạn đã sao chép đủ liên kết chưa, bài đăng có xem được khi chưa đăng nhập không, và trang web có nằm trong danh sách được hỗ trợ không. Nếu bài đăng không có vấn đề, nền tảng có thể đang chặn yêu cầu. Hãy thử lại sau một phút.',
         },
@@ -204,9 +213,9 @@ export const vi: Messages = {
     },
     supported: {
       metaTitle: 'Trang Web Được Hỗ Trợ',
-      metaDescription: 'Tất cả trang web bạn có thể tải video và ảnh bằng ExportVid, cùng các định dạng liên kết dùng được với từng trang.',
+      metaDescription: 'Tất cả các trang bạn có thể tải video bằng ExportVid, cùng các dạng liên kết hoạt động với từng trang.',
       eyebrow: 'Trang web được hỗ trợ',
-      title: 'Các trang web bạn có thể tải từ',
+      title: 'Các trang bạn có thể tải video',
       intro: 'Mọi nền tảng ExportVid hoạt động được, cùng các liên kết dùng được với từng nền tảng.',
       missing: 'Thiếu một trang web bạn cần?',
       tellUs: 'Hãy cho chúng tôi biết',

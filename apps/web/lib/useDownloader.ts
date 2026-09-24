@@ -5,6 +5,7 @@ import type { ExtractionResult } from '@exportvid/shared';
 import { detectPlatform } from '@exportvid/shared';
 import { extractMedia, ExtractionApiError } from './api';
 import { useI18n } from '@/components/I18nProvider';
+import { useTurnstile } from './useTurnstile';
 
 export type DownloaderStatus = 'idle' | 'loading' | 'error' | 'success';
 
@@ -21,6 +22,7 @@ export function useDownloader(initialUrl = '') {
   const [result, setResult] = useState<ExtractionResult | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const turnstile = useTurnstile();
 
   const detected = url.trim() ? detectPlatform(url.trim()) : null;
 
@@ -36,8 +38,19 @@ export function useDownloader(initialUrl = '') {
     setError(null);
     setResult(null);
 
+    let turnstileToken: string | undefined;
     try {
-      const data = await extractMedia(trimmed, controller.signal);
+      turnstileToken = await turnstile.getToken();
+    } catch {
+      if (controller.signal.aborted) return;
+      setError(t.errors.VERIFICATION_FAILED);
+      setStatus('error');
+      return;
+    }
+    if (controller.signal.aborted) return;
+
+    try {
+      const data = await extractMedia(trimmed, turnstileToken, controller.signal);
       setResult(data);
       setStatus('success');
     } catch (err) {
@@ -51,6 +64,11 @@ export function useDownloader(initialUrl = '') {
 
   function handleSubmit(e?: React.FormEvent) {
     e?.preventDefault();
+    // An empty submit points the visitor at the field instead of doing nothing.
+    if (!url.trim()) {
+      inputRef.current?.focus();
+      return;
+    }
     void runExtraction(url);
   }
 
@@ -72,5 +90,21 @@ export function useDownloader(initialUrl = '') {
     setResult(null);
   }
 
-  return { url, setUrl, status, error, result, detected, inputRef, handleSubmit, handlePaste, reset, runExtraction };
+  return {
+    url,
+    setUrl,
+    status,
+    error,
+    result,
+    detected,
+    inputRef,
+    /** Attach to an empty div near the form. Cloudflare draws a checkbox there only when it needs a click. */
+    turnstileRef: turnstile.containerRef,
+    /** True while that checkbox is on screen, so the layout can make room for it. */
+    turnstileVisible: turnstile.challengeVisible,
+    handleSubmit,
+    handlePaste,
+    reset,
+    runExtraction,
+  };
 }

@@ -122,11 +122,11 @@ export const pt: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Baixar do Instagram: Reels, vídeos e fotos',
+    metaTitle: 'Baixar vídeos do Instagram: Reels, vídeos e Stories',
     metaDescription:
-      'Baixe Reels, vídeos, fotos, carrosséis e Stories do Instagram de graça. Cole um link do Instagram e o ExportVid detecta o tipo de conteúdo.',
-    h1: 'Baixar vídeos e fotos do Instagram',
-    intro: 'Cole um link do Instagram de um Reel, publicação, foto, carrossel ou Story. O ExportVid detecta o tipo e mostra o que você pode baixar.',
+      'Baixe Reels, vídeos e Stories do Instagram em MP4 de graça. Fotos e carrosséis também funcionam. Cole um link do Instagram e o ExportVid encontra os arquivos.',
+    h1: 'Baixar vídeos do Instagram',
+    intro: 'Cole o link de um Reel, de uma publicação com vídeo ou de um Story do Instagram e baixe em MP4. Fotos e carrosséis também funcionam.',
     about: [
       'O Instagram usa links parecidos para tipos diferentes de conteúdo. O ExportVid os distingue: Reels (/reel/), publicações do feed (/p/), Stories e perfis.',
       'Nos carrosséis, cada foto e cada vídeo aparece separadamente, para você baixar só o que quiser.',
@@ -134,15 +134,15 @@ export const pt: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Vídeos verticais curtos publicados como Reels.' },
       { label: 'Publicações com vídeo', description: 'Vídeos compartilhados como publicações normais do feed.' },
-      { label: 'Fotos', description: 'Publicações do feed com uma única imagem.' },
-      { label: 'Carrosséis', description: 'Publicações com várias fotos ou vídeos, listados um a um.' },
       { label: 'Stories', description: 'Stories que ainda estão no ar.' },
+      { label: 'Carrosséis', description: 'Publicações com várias fotos ou vídeos, listados um a um.' },
+      { label: 'Fotos', description: 'Publicações do feed com uma única imagem.' },
       { label: 'Fotos de perfil', description: 'A foto de perfil de uma conta.' },
     ],
     faqs: [
       {
-        q: 'Como baixo um vídeo ou uma foto do Instagram?',
-        a: 'Copie o link da publicação no Instagram, cole na caixa acima e toque em Baixar. Depois escolha o arquivo que quiser.',
+        q: 'Como baixo um vídeo do Instagram?',
+        a: 'Copie o link do Reel ou da publicação no Instagram, cole na caixa acima e toque em Baixar. Depois escolha o arquivo que quiser.',
       },
       {
         q: 'Posso baixar de uma conta privada do Instagram?',
@@ -153,8 +153,8 @@ export const pt: Record<PlatformSlug, PlatformContent> = {
         a: 'Abra o Story, copie o link e cole na caixa acima. Os Stories podem ser baixados enquanto estão no ar, de contas que qualquer pessoa pode ver.',
       },
       {
-        q: 'Posso baixar todas as fotos de um carrossel?',
-        a: 'Sim. Cada foto ou vídeo do carrossel aparece na lista com seu próprio botão de download.',
+        q: 'Posso baixar todos os vídeos e fotos de um carrossel?',
+        a: 'Sim. Cada vídeo ou foto do carrossel aparece na lista com o próprio botão de download.',
       },
       {
         q: 'Posso baixar os Destaques do Instagram?',

@@ -18,8 +18,8 @@ export const es: Messages = {
     hero: {
       home: 'Inicio',
       breadcrumbAria: 'Ruta de navegación',
-      placeholder: 'Pega el enlace de un video o una foto',
-      inputAria: 'Enlace de un video o una foto',
+      placeholder: 'Pega un enlace de video',
+      inputAria: 'Enlace del video',
       paste: 'Pegar',
       download: 'Descargar',
       checking: 'Comprobando',
@@ -40,10 +40,11 @@ export const es: Messages = {
       UNSUPPORTED_URL: 'ExportVid aún no es compatible con ese sitio. Consulta la lista de sitios compatibles.',
       INVALID_URL: 'Eso no parece un enlace. Copia la dirección completa de la publicación y vuelve a pegarla.',
       PRIVATE_OR_PROTECTED_CONTENT: 'Esta publicación es privada o requiere iniciar sesión, así que ExportVid no puede acceder a ella.',
-      NOT_FOUND: 'No encontramos ningún video ni foto en ese enlace. Comprueba que la publicación siga existiendo.',
+      NOT_FOUND: 'No encontramos ningún video en ese enlace. Comprueba que la publicación siga existiendo.',
       EXTRACTION_FAILED:
         'La plataforma no devolvió ningún archivo. Puede que la publicación se haya eliminado o que la plataforma esté bloqueando la solicitud. Inténtalo de nuevo en un minuto.',
       RATE_LIMITED: 'Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.',
+      VERIFICATION_FAILED: 'No pudimos verificar tu navegador. Recarga la página e inténtalo de nuevo.',
       TIMEOUT: 'La plataforma tardó demasiado en responder. Inténtalo de nuevo.',
       INTERNAL_ERROR: 'Algo falló por nuestra parte. Inténtalo de nuevo.',
     },
@@ -75,21 +76,21 @@ export const es: Messages = {
   site: {
     meta: {
       siteDescription:
-        'Descargador de videos gratis para redes sociales. Pega un enlace de YouTube, Facebook, Instagram, TikTok y más, y guarda el video o la foto en la mejor calidad.',
-      homeTitle: 'Descargar videos y fotos de redes sociales',
-      ogAlt: 'ExportVid: descarga videos y fotos de redes sociales',
+        'Descargador de videos gratis para redes sociales. Pega un enlace de TikTok, Instagram, YouTube, Facebook, X y más, y guarda el video en MP4 con la mejor calidad disponible.',
+      homeTitle: 'Descargador de videos gratis para redes sociales',
+      ogAlt: 'ExportVid: un descargador de videos rápido y gratis para redes sociales',
     },
     home: {
-      heroBadge: 'Descargador de videos gratis',
-      heroTitle: 'Descarga videos y fotos',
+      heroBadge: 'Sin marca de agua · Sin registro',
+      heroTitle: 'Descargador de videos rápido y gratis',
       heroIntro:
-        'Pega un enlace de YouTube, Facebook, Instagram, TikTok y más. Obtén el video o la foto en la mejor calidad disponible, sin marca de agua.',
+        'Pega el enlace de un video de TikTok, Instagram, YouTube y más. Guárdalo en MP4 con la mejor calidad disponible, gratis y sin marca de agua.',
       howEyebrow: 'Cómo funciona',
-      howTitle: 'Cómo descargar en tres pasos',
+      howTitle: 'Descarga un video en tres pasos',
       steps: [
-        { title: 'Pega un enlace', body: 'Copia el enlace de un video o una foto y pégalo en el cuadro de arriba.' },
-        { title: 'Elige la calidad', body: 'ExportVid revisa el enlace y muestra todas las calidades y formatos disponibles.' },
-        { title: 'Descarga', body: 'Guarda el archivo en tu teléfono o computadora.' },
+        { title: 'Pega un enlace', body: 'Copia el enlace de un video y pégalo en el cuadro de arriba.' },
+        { title: 'Elige la calidad', body: 'ExportVid revisa el enlace y muestra todas las calidades disponibles del video.' },
+        { title: 'Descarga', body: 'Guarda el MP4 en tu teléfono o computadora.' },
       ],
       whyEyebrow: 'Por qué ExportVid',
       whyTitle: 'Por qué usar ExportVid',
@@ -123,15 +124,19 @@ export const es: Messages = {
           a: 'No. Obtienes la calidad que ofrece la plataforma, y la lista muestra todas las opciones. Cuando el video y el audio llegan como archivos separados, ExportVid los une sin recodificar.',
         },
         { q: '¿Puedo descargar de cuentas privadas?', a: 'No. ExportVid solo funciona con publicaciones que cualquiera puede ver. Nunca intenta abrir contenido privado ni protegido con inicio de sesión.' },
+        {
+          q: '¿También puedo descargar fotos?',
+          a: 'Sí, cuando la plataforma lo permite. Pega el enlace de una publicación con fotos o de un carrusel de Instagram y las fotos aparecerán en la lista junto a los videos.',
+        },
       ],
       faqMore: 'Encuentra más respuestas en las {link}.',
       faqMoreLink: 'preguntas frecuentes completas',
       ctaTitle: '¿Tienes un enlace?',
-      ctaBody: 'Pégalo arriba y descarga tu video o tu foto.',
-      ctaButton: 'Pegar un enlace',
+      ctaBody: 'Pégalo arriba y guarda el video en tu dispositivo.',
+      ctaButton: 'Pegar un enlace de video',
     },
     footer: {
-      tagline: 'Un descargador gratuito de videos y fotos para redes sociales.',
+      tagline: 'Un descargador de videos rápido y gratis para redes sociales.',
       downloaders: 'Descargadores',
       company: 'Empresa',
       legal: 'Legal',
@@ -160,15 +165,15 @@ export const es: Messages = {
     faqPage: {
       metaTitle: 'Preguntas frecuentes: cómo funciona ExportVid',
       metaDescription:
-        'Respuestas sobre cómo descargar videos y fotos con ExportVid: sitios compatibles, marcas de agua, calidad, contenido privado y qué hacer si un enlace no funciona.',
+        'Respuestas sobre cómo descargar videos de redes sociales con ExportVid: sitios compatibles, marcas de agua, calidad de video, contenido privado y qué hacer si un enlace no funciona.',
       eyebrow: 'Ayuda',
       title: 'Preguntas frecuentes',
       intro: 'Respuestas rápidas sobre cómo funciona ExportVid.',
       items: [
         { q: '¿ExportVid es gratis?', a: 'Sí. ExportVid es gratis, sin cuotas, sin suscripción y sin registro.' },
         {
-          q: '¿Cómo descargo un video o una foto de una red social?',
-          a: 'Copia el enlace de la publicación, pégalo en el cuadro de la página de inicio y pulsa Descargar. ExportVid muestra los archivos disponibles. Elige uno y guárdalo en tu dispositivo.',
+          q: '¿Cómo descargo un video de una red social?',
+          a: 'Copia el enlace del video, pégalo en el cuadro de la página de inicio y pulsa Descargar. ExportVid muestra todas las calidades disponibles. Elige una y guarda el MP4 en tu dispositivo.',
         },
         { q: '¿Desde qué sitios puedo descargar?', a: '{list}. La página de sitios compatibles indica qué formatos de enlace funcionan en cada uno.' },
         {
@@ -189,6 +194,10 @@ export const es: Messages = {
         },
         { q: '¿Tengo que instalar algo?', a: 'No. ExportVid funciona en tu navegador, en el teléfono o en la computadora. No hay ninguna app ni extensión que instalar.' },
         {
+          q: '¿También puedo descargar fotos?',
+          a: 'Sí, cuando la plataforma lo permite. Pega el enlace de una publicación con fotos o de un carrusel de Instagram y las fotos aparecerán en la lista junto a los videos.',
+        },
+        {
           q: '¿Por qué no funciona mi enlace?',
           a: 'Comprueba que copiaste el enlace completo, que la publicación se puede ver sin iniciar sesión y que el sitio figura en la página de sitios compatibles. Si la publicación está bien, puede que la plataforma esté bloqueando la solicitud. Inténtalo de nuevo en un minuto.',
         },
@@ -204,9 +213,9 @@ export const es: Messages = {
     },
     supported: {
       metaTitle: 'Sitios compatibles',
-      metaDescription: 'Todos los sitios desde los que puedes descargar videos y fotos con ExportVid, y los formatos de enlace que funcionan en cada uno.',
+      metaDescription: 'Todos los sitios desde los que puedes descargar videos con ExportVid y los formatos de enlace que funcionan en cada uno.',
       eyebrow: 'Sitios compatibles',
-      title: 'Sitios desde los que puedes descargar',
+      title: 'Sitios desde los que puedes descargar videos',
       intro: 'Todas las plataformas con las que funciona ExportVid y los enlaces que sirven en cada una.',
       missing: '¿Falta un sitio que necesitas?',
       tellUs: 'Dinos cuál',

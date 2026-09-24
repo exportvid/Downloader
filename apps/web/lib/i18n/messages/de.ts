@@ -18,8 +18,8 @@ export const de: Messages = {
     hero: {
       home: 'Startseite',
       breadcrumbAria: 'Brotkrumennavigation',
-      placeholder: 'Link zu einem Video oder Foto einfügen',
-      inputAria: 'Link zu einem Video oder Foto',
+      placeholder: 'Videolink einfügen',
+      inputAria: 'Video-Link',
       paste: 'Einfügen',
       download: 'Herunterladen',
       checking: 'Prüfe',
@@ -40,10 +40,11 @@ export const de: Messages = {
       UNSUPPORTED_URL: 'ExportVid unterstützt diese Seite noch nicht. Sieh dir die Liste der unterstützten Seiten an.',
       INVALID_URL: 'Das sieht nicht nach einem Link aus. Kopiere die vollständige Adresse des Beitrags und füge sie erneut ein.',
       PRIVATE_OR_PROTECTED_CONTENT: 'Dieser Beitrag ist privat oder erfordert eine Anmeldung, daher kann ExportVid nicht darauf zugreifen.',
-      NOT_FOUND: 'Unter diesem Link haben wir kein Video und kein Foto gefunden. Prüfe, ob der Beitrag noch existiert.',
+      NOT_FOUND: 'Unter diesem Link haben wir kein Video gefunden. Prüfe, ob der Beitrag noch existiert.',
       EXTRACTION_FAILED:
         'Die Plattform hat keine Datei geliefert. Der Beitrag wurde möglicherweise gelöscht, oder die Plattform blockiert die Anfrage. Versuche es in einer Minute noch einmal.',
       RATE_LIMITED: 'Zu viele Anfragen. Warte einen Moment und versuche es dann noch einmal.',
+      VERIFICATION_FAILED: 'Wir konnten deinen Browser nicht überprüfen. Lade die Seite neu und versuche es noch einmal.',
       TIMEOUT: 'Die Plattform hat zu lange gebraucht, um zu antworten. Versuche es noch einmal.',
       INTERNAL_ERROR: 'Auf unserer Seite ist ein Fehler aufgetreten. Versuche es noch einmal.',
     },
@@ -75,21 +76,21 @@ export const de: Messages = {
   site: {
     meta: {
       siteDescription:
-        'Kostenloser Video-Downloader für soziale Netzwerke. Füge einen Link von YouTube, Facebook, Instagram, TikTok und mehr ein und speichere das Video oder Foto in bester Qualität.',
-      homeTitle: 'Videos und Fotos aus sozialen Netzwerken herunterladen',
-      ogAlt: 'ExportVid: Videos und Fotos aus sozialen Netzwerken herunterladen',
+        'Kostenloser Video-Downloader für soziale Netzwerke. Füge einen Link von TikTok, Instagram, YouTube, Facebook, X und mehr ein und speichere das Video als MP4 in der besten verfügbaren Qualität.',
+      homeTitle: 'Kostenloser Video-Downloader für soziale Netzwerke',
+      ogAlt: 'ExportVid: ein schneller, kostenloser Video-Downloader für soziale Netzwerke',
     },
     home: {
-      heroBadge: 'Kostenloser Video-Downloader',
-      heroTitle: 'Videos und Fotos herunterladen',
+      heroBadge: 'Ohne Wasserzeichen · Ohne Anmeldung',
+      heroTitle: 'Schneller & kostenloser Video-Downloader',
       heroIntro:
-        'Füge einen Link von YouTube, Facebook, Instagram, TikTok und mehr ein. Erhalte das Video oder Foto in der besten verfügbaren Qualität, ohne Wasserzeichen.',
+        'Füge einen Videolink von TikTok, Instagram, YouTube und mehr ein. Speichere das Video als MP4 in der besten verfügbaren Qualität, kostenlos und ohne Wasserzeichen.',
       howEyebrow: 'So funktioniert’s',
-      howTitle: 'So lädst du in drei Schritten herunter',
+      howTitle: 'Ein Video in drei Schritten herunterladen',
       steps: [
-        { title: 'Link einfügen', body: 'Kopiere den Link zu einem Video oder Foto und füge ihn oben in das Feld ein.' },
-        { title: 'Qualität wählen', body: 'ExportVid prüft den Link und listet alle verfügbaren Qualitäten und Formate auf.' },
-        { title: 'Herunterladen', body: 'Speichere die Datei auf deinem Smartphone oder Computer.' },
+        { title: 'Link einfügen', body: 'Kopiere den Link zu einem Video und füge ihn oben in das Feld ein.' },
+        { title: 'Qualität wählen', body: 'ExportVid prüft den Link und listet jede Qualität auf, in der es das Video gibt.' },
+        { title: 'Herunterladen', body: 'Speichere die MP4-Datei auf deinem Handy oder Computer.' },
       ],
       whyEyebrow: 'Warum ExportVid',
       whyTitle: 'Warum ExportVid nutzen',
@@ -123,15 +124,19 @@ export const de: Messages = {
           a: 'Nein. Du erhältst die Qualität, die die Plattform liefert, und die Liste zeigt alle Optionen. Kommen Video und Audio als getrennte Dateien, fügt ExportVid sie ohne Neucodierung zusammen.',
         },
         { q: 'Kann ich von privaten Konten herunterladen?', a: 'Nein. ExportVid funktioniert nur mit Beiträgen, die jeder sehen kann. Es versucht nie, private oder durch Anmeldung geschützte Inhalte zu öffnen.' },
+        {
+          q: 'Kann ich auch Fotos herunterladen?',
+          a: 'Ja, wenn die Plattform es zulässt. Füge den Link zu einem Instagram-Fotobeitrag oder Karussell ein, dann erscheinen die Fotos in der Liste neben den Videos.',
+        },
       ],
       faqMore: 'Weitere Antworten findest du in den {link}.',
       faqMoreLink: 'vollständigen FAQ',
       ctaTitle: 'Du hast einen Link?',
-      ctaBody: 'Füge ihn oben ein und lade dein Video oder Foto herunter.',
-      ctaButton: 'Link einfügen',
+      ctaBody: 'Füge ihn oben ein und speichere das Video auf deinem Gerät.',
+      ctaButton: 'Videolink einfügen',
     },
     footer: {
-      tagline: 'Ein kostenloser Video- und Foto-Downloader für soziale Netzwerke.',
+      tagline: 'Ein schneller, kostenloser Video-Downloader für soziale Netzwerke.',
       downloaders: 'Downloader',
       company: 'Unternehmen',
       legal: 'Rechtliches',
@@ -160,15 +165,15 @@ export const de: Messages = {
     faqPage: {
       metaTitle: 'FAQ: So funktioniert ExportVid',
       metaDescription:
-        'Antworten zum Herunterladen von Videos und Fotos mit ExportVid: unterstützte Seiten, Wasserzeichen, Qualität, private Inhalte und was zu tun ist, wenn ein Link nicht funktioniert.',
+        'Antworten zum Herunterladen von Videos aus sozialen Netzwerken mit ExportVid: unterstützte Seiten, Wasserzeichen, Videoqualität, private Inhalte und was du tun kannst, wenn ein Link nicht funktioniert.',
       eyebrow: 'Hilfe',
       title: 'Häufig gestellte Fragen',
       intro: 'Kurze Antworten dazu, wie ExportVid funktioniert.',
       items: [
         { q: 'Ist ExportVid kostenlos?', a: 'Ja. ExportVid ist kostenlos, ohne Gebühren, ohne Abo und ohne Registrierung.' },
         {
-          q: 'Wie lade ich ein Video oder Foto aus einem sozialen Netzwerk herunter?',
-          a: 'Kopiere den Link zum Beitrag, füge ihn auf der Startseite in das Feld ein und wähle Herunterladen. ExportVid listet die verfügbaren Dateien auf. Wähle eine aus und speichere sie auf deinem Gerät.',
+          q: 'Wie lade ich ein Video aus sozialen Netzwerken herunter?',
+          a: 'Kopiere den Link zum Video, füge ihn auf der Startseite in das Feld ein und wähle Herunterladen. ExportVid listet jede verfügbare Qualität auf. Wähle eine aus und speichere die MP4-Datei auf deinem Gerät.',
         },
         { q: 'Von welchen Seiten kann ich herunterladen?', a: '{list}. Die Seite „Unterstützte Seiten“ zeigt, welche Linkformate bei welcher Plattform funktionieren.' },
         {
@@ -189,6 +194,10 @@ export const de: Messages = {
         },
         { q: 'Muss ich etwas installieren?', a: 'Nein. ExportVid läuft in deinem Browser, auf dem Smartphone oder am Computer. Es gibt keine App und keine Erweiterung zu installieren.' },
         {
+          q: 'Kann ich auch Fotos herunterladen?',
+          a: 'Ja, wenn die Plattform es zulässt. Füge den Link zu einem Instagram-Fotobeitrag oder Karussell ein, dann erscheinen die Fotos in der Liste neben den Videos.',
+        },
+        {
           q: 'Warum funktioniert mein Link nicht?',
           a: 'Prüfe, ob du den vollständigen Link kopiert hast, ob der Beitrag ohne Anmeldung sichtbar ist und ob die Seite in der Liste der unterstützten Seiten steht. Ist der Beitrag in Ordnung, blockiert die Plattform möglicherweise die Anfrage. Versuche es in einer Minute noch einmal.',
         },
@@ -204,9 +213,9 @@ export const de: Messages = {
     },
     supported: {
       metaTitle: 'Unterstützte Seiten',
-      metaDescription: 'Alle Seiten, von denen du mit ExportVid Videos und Fotos herunterladen kannst, und die Linkformate, die bei jeder funktionieren.',
+      metaDescription: 'Alle Seiten, von denen du mit ExportVid Videos herunterladen kannst, und die Linkformate, die jeweils funktionieren.',
       eyebrow: 'Unterstützte Seiten',
-      title: 'Seiten, von denen du herunterladen kannst',
+      title: 'Seiten, von denen du Videos herunterladen kannst',
       intro: 'Alle Plattformen, mit denen ExportVid funktioniert, und die Links, die bei jeder passen.',
       missing: 'Fehlt eine Seite, die du brauchst?',
       tellUs: 'Sag uns, welche',

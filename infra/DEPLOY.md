@@ -12,6 +12,7 @@ Browser ──> exportvid.com      Vercel   (Next.js website)
 
 - **Domain** with DNS you can edit (Cloudflare DNS is fine).
 - **Cloudflare R2 bucket** named `exportvid-tmp`, plus an API token with read and write access to it. Note the account ID.
+- **Cloudflare Turnstile widget** (free). In the Cloudflare dashboard, open Turnstile, add a widget for `exportvid.com`, and choose **Invisible** mode. Note the site key and the secret key.
 - **Residential proxy** account. TikTok, Instagram, Tumblr, and some Vimeo links block cloud servers, so those pages fail without one. You need the proxy URL in the form `http://user:pass@host:port`.
 - **A server**: Ubuntu 24.04, 2 vCPU, 4 GB RAM (for example a Hetzner CX22). In the provider's firewall, allow only ports 22, 80, and 443.
 
@@ -49,6 +50,7 @@ Check it works: `https://api.exportvid.com/health` should return `{"ok":true,...
 3. Add these environment variables:
    - `NEXT_PUBLIC_SITE_URL` = `https://exportvid.com`
    - `NEXT_PUBLIC_API_BASE_URL` = `https://api.exportvid.com`
+   - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` = the Turnstile site key
 4. Add the domains `exportvid.com` and `www.exportvid.com`. The site already redirects `www` to the bare domain.
 
 ## 4. After launch
@@ -66,6 +68,8 @@ Check it works: `https://api.exportvid.com/health` should return `{"ok":true,...
 ## Things to know
 
 - Only Caddy is reachable from outside. Redis and Postgres stay on the internal Docker network.
-- The API trusts the forwarding header from Caddy so rate limits see each visitor's real IP. Do not publish the API's port 4000 directly.
+- The API trusts exactly one proxy hop (Caddy) so rate limits see each visitor's real IP. Do not publish the API's port 4000 directly. If you later put Cloudflare's proxy (orange cloud) in front of Caddy, add Cloudflare's IP ranges to Caddy's `trusted_proxies`, or every visitor will share Cloudflare's IPs.
+- **Bot check:** every extraction needs a Turnstile token, checked with Cloudflare before yt-dlp runs. If you set only one of the two keys, extraction breaks: a site key without the secret does nothing, and a secret without the site key rejects every request. The API refuses Cloudflare's test keys in production.
+- **Rate limits** (per visitor IP, set in `apps/api/src/lib/limits.ts`): 10 extractions a minute and 60 an hour, 4 downloads streaming at once, 6 merge jobs per 10 minutes, and no new merge jobs for anyone while 25 are waiting. `/health` is not limited.
 - Postgres holds only service metrics (platform, success or failure, timing). If you lose it, nothing user-facing breaks, so there are no backups set up.
 - If the server runs out of bandwidth or CPU, the next step is a second server behind a load balancer.

@@ -31,7 +31,7 @@ export function DownloadHero({
   activeId?: PlatformId;
 }) {
   const { locale, t } = useI18n();
-  const { url, setUrl, status, error, result, detected, inputRef, handleSubmit, handlePaste } = useDownloader();
+  const { url, setUrl, status, error, result, detected, inputRef, turnstileRef, turnstileVisible, handleSubmit, handlePaste } = useDownloader();
   const [tick, setTick] = useState(0);
   const loading = status === 'loading';
 
@@ -60,7 +60,13 @@ export function DownloadHero({
         </div>
       )}
 
-      <h1 className="mx-auto max-w-4xl bg-gradient-to-r from-head-from via-head-via to-accent bg-clip-text font-[family-name:var(--font-studio-display)] text-6xl leading-[0.92] tracking-wide text-transparent text-balance sm:text-8xl">
+      {/* Long translated headlines drop a size so they stay within three lines on a phone. The top padding keeps
+          accents (É, Ü) inside the clipped gradient. */}
+      <h1
+        className={`mx-auto max-w-4xl bg-gradient-to-r from-head-from via-head-via to-accent bg-clip-text pt-[0.12em] font-[family-name:var(--font-studio-display)] leading-[0.92] tracking-wide text-transparent text-balance ${
+          title.length > 32 ? 'text-5xl sm:text-7xl' : 'text-6xl sm:text-8xl'
+        }`}
+      >
         {title}
       </h1>
       <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft text-balance sm:text-base">{intro}</p>
@@ -121,8 +127,8 @@ export function DownloadHero({
 
                 <button
                   type="submit"
-                  disabled={loading || !url.trim()}
-                  className="press group/dl flex h-16 shrink-0 items-center justify-center gap-2.5 rounded-2xl bg-brand-gradient px-8 text-[16px] font-bold text-white shadow-glow transition-[filter,opacity] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-45 sm:min-w-[9.5rem]"
+                  disabled={loading}
+                  className="press group/dl flex h-16 shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-brand-gradient px-8 text-[16px] font-bold text-white shadow-glow transition-[filter,opacity] hover:brightness-110 disabled:cursor-wait disabled:opacity-70 sm:min-w-[9.5rem]"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover/dl:translate-y-0.5">
                     <path d="M12 4v10m0 0l-3.5-3.5M12 14l3.5-3.5M5.5 19h13" />
@@ -131,6 +137,9 @@ export function DownloadHero({
                 </button>
               </div>
             </form>
+
+            {/* Empty unless Cloudflare wants the visitor to click the verification checkbox. */}
+            <div ref={turnstileRef} className={turnstileVisible ? 'mt-3 flex justify-center' : undefined} />
 
             {status !== 'idle' && (
               <div className="reveal px-1 pb-1 pt-4" aria-live="polite">

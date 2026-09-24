@@ -122,11 +122,11 @@ export const ja: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Instagram をダウンロード｜リール・動画・写真を保存',
+    metaTitle: 'Instagram 動画ダウンローダー：リール・動画・ストーリーズ',
     metaDescription:
-      'Instagram のリール、動画、写真、カルーセル、ストーリーズを無料で保存。Instagram のリンクを貼り付けると、ExportVid がコンテンツの種類を自動で判別します。',
-    h1: 'Instagram の動画・写真をダウンロード',
-    intro: 'リール、投稿、写真、カルーセル、ストーリーズの Instagram リンクを貼り付けてください。ExportVid が種類を判別し、ダウンロードできるものを表示します。',
+      'Instagram のリール、動画、ストーリーズを MP4 で無料ダウンロード。写真やカルーセルにも対応。Instagram のリンクを貼り付けると、ExportVid がファイルを見つけます。',
+    h1: 'Instagram の動画をダウンロード',
+    intro: 'Instagram のリール、動画投稿、ストーリーズのリンクを貼り付けて、MP4 でダウンロードできます。写真投稿やカルーセルにも対応しています。',
     about: [
       'Instagram では、種類の異なるコンテンツにも似たリンクが使われています。ExportVid はリール（/reel/）、フィード投稿（/p/）、ストーリーズ、プロフィールを見分けます。',
       'カルーセル投稿では、写真と動画が 1 つずつ一覧表示されるので、必要なものだけをダウンロードできます。',
@@ -134,15 +134,15 @@ export const ja: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'リール', description: 'リールとして投稿された縦型ショート動画。' },
       { label: '動画投稿', description: '通常のフィード投稿として共有された動画。' },
-      { label: '写真', description: '画像 1 枚のフィード投稿。' },
-      { label: 'カルーセル', description: '複数の写真や動画を含む投稿。1 つずつ表示されます。' },
       { label: 'ストーリーズ', description: '公開中のストーリーズ。' },
+      { label: 'カルーセル', description: '複数の写真や動画を含む投稿。1 つずつ表示されます。' },
+      { label: '写真', description: '画像 1 枚のフィード投稿。' },
       { label: 'プロフィール画像', description: 'アカウントのプロフィール画像。' },
     ],
     faqs: [
       {
-        q: 'Instagram の動画や写真はどうやってダウンロードしますか？',
-        a: 'Instagram で投稿のリンクをコピーし、上のボックスに貼り付けて「ダウンロード」を押します。その後、保存したいファイルを選んでください。',
+        q: 'Instagram の動画はどうやってダウンロードしますか？',
+        a: 'Instagram でリールや投稿のリンクをコピーし、上のボックスに貼り付けて「ダウンロード」を選びます。あとは保存したいファイルを選ぶだけです。',
       },
       {
         q: '非公開の Instagram アカウントからダウンロードできますか？',
@@ -153,8 +153,8 @@ export const ja: Record<PlatformSlug, PlatformContent> = {
         a: 'ストーリーズを開いてリンクをコピーし、上のボックスに貼り付けます。公開中で、誰でも閲覧できるアカウントのストーリーズであればダウンロードできます。',
       },
       {
-        q: 'カルーセルの写真をすべてダウンロードできますか？',
-        a: 'はい。カルーセル内の写真や動画は、それぞれ専用のダウンロードボタン付きで一覧に表示されます。',
+        q: 'カルーセルの動画や写真はすべてダウンロードできますか？',
+        a: 'はい。カルーセル内の動画や写真はそれぞれ専用のダウンロードボタン付きで一覧に表示されます。',
       },
       {
         q: 'Instagram のハイライトはダウンロードできますか？',

@@ -122,11 +122,11 @@ export const tr: Record<PlatformSlug, PlatformContent> = {
   },
 
   'instagram-video-downloader': {
-    metaTitle: 'Instagram İndir: Reels, Video ve Fotoğraf',
+    metaTitle: 'Instagram Video İndirici: Reels, Videolar, Hikâyeler',
     metaDescription:
-      'Instagram Reels, video, fotoğraf, karusel ve hikâyeleri ücretsiz indirin. Bir Instagram bağlantısı yapıştırın, ExportVid içerik türünü algılasın.',
-    h1: 'Instagram Video ve Fotoğraf İndir',
-    intro: 'Bir Reel, gönderi, fotoğraf, karusel veya hikâye için Instagram bağlantısı yapıştırın. ExportVid türü algılar ve nelerin indirilebileceğini gösterir.',
+      'Instagram Reels, video ve hikâyelerini ücretsiz olarak MP4 biçiminde indirin. Fotoğraflar ve karuseller de çalışır. Bir Instagram bağlantısı yapıştırın, ExportVid dosyaları bulsun.',
+    h1: 'Instagram Video İndir',
+    intro: 'Bir Instagram Reel, video gönderisi veya hikâye bağlantısı yapıştırın ve MP4 olarak indirin. Fotoğraf gönderileri ve karuseller de çalışır.',
     about: [
       'Instagram, farklı içerik türleri için birbirine benzeyen bağlantılar kullanır. ExportVid bunları ayırt eder: Reels (/reel/), akış gönderileri (/p/), hikâyeler ve profiller.',
       'Karusellerde her fotoğraf ve video ayrı listelenir; böylece yalnızca istediğinizi indirirsiniz.',
@@ -134,15 +134,15 @@ export const tr: Record<PlatformSlug, PlatformContent> = {
     supportedContentTypes: [
       { label: 'Reels', description: 'Reels olarak paylaşılan kısa dikey videolar.' },
       { label: 'Video gönderileri', description: 'Normal akış gönderisi olarak paylaşılan videolar.' },
-      { label: 'Fotoğraflar', description: 'Tek görselli akış gönderileri.' },
-      { label: 'Karuseller', description: 'Birden fazla fotoğraf veya video içeren, tek tek listelenen gönderiler.' },
       { label: 'Hikâyeler', description: 'Hâlâ yayında olan hikâyeler.' },
+      { label: 'Karuseller', description: 'Birden fazla fotoğraf veya video içeren, tek tek listelenen gönderiler.' },
+      { label: 'Fotoğraflar', description: 'Tek görselli akış gönderileri.' },
       { label: 'Profil fotoğrafları', description: 'Bir hesabın profil fotoğrafı.' },
     ],
     faqs: [
       {
-        q: 'Instagram videosu veya fotoğrafı nasıl indirilir?',
-        a: 'Instagram’dan gönderi bağlantısını kopyalayın, yukarıdaki kutuya yapıştırın ve İndir’i seçin. Ardından istediğiniz dosyayı seçin.',
+        q: 'Instagram videosu nasıl indirilir?',
+        a: 'Instagram’dan Reel veya gönderi bağlantısını kopyalayın, yukarıdaki kutuya yapıştırın ve İndir’i seçin. Ardından istediğiniz dosyayı seçin.',
       },
       {
         q: 'Gizli bir Instagram hesabından indirebilir miyim?',
@@ -153,8 +153,8 @@ export const tr: Record<PlatformSlug, PlatformContent> = {
         a: 'Hikâyeyi açın, bağlantısını kopyalayın ve yukarıdaki kutuya yapıştırın. Hikâyeler, yayında oldukları ve herkesin görebildiği hesaplardan geldikleri sürece indirilebilir.',
       },
       {
-        q: 'Bir karuseldeki tüm fotoğrafları indirebilir miyim?',
-        a: 'Evet. Karuseldeki her fotoğraf veya video, kendi indirme düğmesiyle listede görünür.',
+        q: 'Bir karuseldeki tüm videoları ve fotoğrafları indirebilir miyim?',
+        a: 'Evet. Karuseldeki her video veya fotoğraf, kendi indirme düğmesiyle listede görünür.',
       },
       {
         q: 'Instagram öne çıkan hikâyelerini indirebilir miyim?',

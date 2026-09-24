@@ -30,6 +30,9 @@ const schema = z.object({
   MAX_SOURCE_DURATION_SECONDS: z.coerce.number().default(7200),
   MAX_DOWNLOAD_BYTES: z.coerce.number().default(2 * 1024 * 1024 * 1024),
   EXTRACTION_TIMEOUT_MS: z.coerce.number().default(25000),
+
+  // Cloudflare Turnstile secret. When set, every extraction needs a valid token from the website's widget.
+  TURNSTILE_SECRET_KEY: z.string().optional(),
 });
 
 const parsed = schema.safeParse(process.env);

@@ -14,7 +14,7 @@ export interface PlatformEntry {
 export const ALL_PLATFORMS: PlatformEntry[] = [
   { id: 'youtube', label: 'YouTube', href: '/youtube-video-downloader', types: ['Video', 'Shorts'] },
   { id: 'facebook', label: 'Facebook', href: '/facebook-video-downloader', types: ['Video', 'Reels'] },
-  { id: 'instagram', label: 'Instagram', href: '/instagram-video-downloader', types: ['Reels', 'Posts', 'Stories', 'Carousels'] },
+  { id: 'instagram', label: 'Instagram', href: '/instagram-video-downloader', types: ['Reels', 'Video', 'Stories', 'Carousels'] },
   { id: 'tiktok', label: 'TikTok', href: '/tiktok-video-downloader', types: ['Video'] },
   { id: 'twitter', label: 'X', href: '/x-video-downloader', types: ['Video'] },
   { id: 'reddit', label: 'Reddit', href: '/reddit-video-downloader', types: ['Video', 'GIFs'] },

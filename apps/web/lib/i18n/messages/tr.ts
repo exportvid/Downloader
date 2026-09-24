@@ -18,8 +18,8 @@ export const tr: Messages = {
     hero: {
       home: 'Ana sayfa',
       breadcrumbAria: 'Sayfa yolu',
-      placeholder: 'Bir video veya fotoğraf bağlantısı yapıştırın',
-      inputAria: 'Video veya fotoğraf bağlantısı',
+      placeholder: 'Video bağlantısı yapıştırın',
+      inputAria: 'Video bağlantısı',
       paste: 'Yapıştır',
       download: 'İndir',
       checking: 'Kontrol ediliyor',
@@ -40,10 +40,11 @@ export const tr: Messages = {
       UNSUPPORTED_URL: 'ExportVid henüz bu siteyi desteklemiyor. Desteklenen siteler listesine göz atın.',
       INVALID_URL: 'Bu bir bağlantıya benzemiyor. Gönderinin tam adresini kopyalayıp tekrar yapıştırın.',
       PRIVATE_OR_PROTECTED_CONTENT: 'Bu gönderi gizli veya giriş gerektiriyor, bu yüzden ExportVid ona erişemiyor.',
-      NOT_FOUND: 'Bu bağlantıda video veya fotoğraf bulamadık. Gönderinin hâlâ var olduğundan emin olun.',
+      NOT_FOUND: 'Bu bağlantıda video bulamadık. Gönderinin hâlâ yayında olup olmadığını kontrol edin.',
       EXTRACTION_FAILED:
         'Platform bir dosya döndürmedi. Gönderi kaldırılmış olabilir ya da platform isteği engelliyor olabilir. Bir dakika sonra tekrar deneyin.',
       RATE_LIMITED: 'Çok fazla istek gönderildi. Biraz bekleyip tekrar deneyin.',
+      VERIFICATION_FAILED: 'Tarayıcınızı doğrulayamadık. Sayfayı yenileyip tekrar deneyin.',
       TIMEOUT: 'Platform yanıt vermekte çok gecikti. Tekrar deneyin.',
       INTERNAL_ERROR: 'Bizim tarafımızda bir sorun oluştu. Tekrar deneyin.',
     },
@@ -75,21 +76,21 @@ export const tr: Messages = {
   site: {
     meta: {
       siteDescription:
-        'Sosyal medya için ücretsiz video indirici. YouTube, Facebook, Instagram, TikTok ve daha fazlasından bir bağlantı yapıştırın, videoyu veya fotoğrafı en iyi kalitede kaydedin.',
-      homeTitle: 'Sosyal Medyadan Video ve Fotoğraf İndir',
-      ogAlt: 'ExportVid: sosyal medyadan video ve fotoğraf indirin',
+        'Sosyal medya için ücretsiz video indirici. TikTok, Instagram, YouTube, Facebook, X ve daha fazlasından bir bağlantı yapıştırın, videoyu mevcut en iyi kalitede MP4 olarak kaydedin.',
+      homeTitle: 'Sosyal Medya için Ücretsiz Video İndirici',
+      ogAlt: 'ExportVid: sosyal medya için hızlı ve ücretsiz video indirici',
     },
     home: {
-      heroBadge: 'Ücretsiz video indirici',
-      heroTitle: 'Video ve fotoğraf indirin',
+      heroBadge: 'Filigransız · Kayıt gerektirmez',
+      heroTitle: 'Hızlı ve Ücretsiz Video İndirici',
       heroIntro:
-        'YouTube, Facebook, Instagram, TikTok ve daha fazlasından bir bağlantı yapıştırın. Videoyu veya fotoğrafı mevcut en iyi kalitede, filigransız alın.',
+        'TikTok, Instagram, YouTube ve daha fazlasından bir video bağlantısı yapıştırın. Videoyu mevcut en iyi kalitede MP4 olarak, ücretsiz ve filigransız kaydedin.',
       howEyebrow: 'Nasıl çalışır',
-      howTitle: 'Üç adımda nasıl indirilir',
+      howTitle: 'Üç adımda video indirin',
       steps: [
-        { title: 'Bağlantı yapıştırın', body: 'Bir video veya fotoğrafın bağlantısını kopyalayıp yukarıdaki kutuya yapıştırın.' },
-        { title: 'Kaliteyi seçin', body: 'ExportVid bağlantıyı kontrol eder ve mevcut tüm kaliteleri ve formatları listeler.' },
-        { title: 'İndirin', body: 'Dosyayı telefonunuza veya bilgisayarınıza kaydedin.' },
+        { title: 'Bağlantı yapıştırın', body: 'Bir videonun bağlantısını kopyalayıp yukarıdaki kutuya yapıştırın.' },
+        { title: 'Kaliteyi seçin', body: 'ExportVid bağlantıyı kontrol eder ve videonun mevcut tüm kalitelerini listeler.' },
+        { title: 'İndirin', body: 'MP4 dosyasını telefonunuza veya bilgisayarınıza kaydedin.' },
       ],
       whyEyebrow: 'Neden ExportVid',
       whyTitle: 'Neden ExportVid kullanmalısınız',
@@ -123,15 +124,19 @@ export const tr: Messages = {
           a: 'Hayır. Platformun sağladığı kaliteyi alırsınız ve liste tüm seçenekleri gösterir. Video ve ses ayrı dosyalar olarak geldiğinde, ExportVid onları yeniden kodlamadan birleştirir.',
         },
         { q: 'Gizli hesaplardan indirebilir miyim?', a: 'Hayır. ExportVid yalnızca herkesin görebildiği gönderilerle çalışır. Gizli veya girişle korunan içerikleri açmayı asla denemez.' },
+        {
+          q: 'Fotoğraf da indirebilir miyim?',
+          a: 'Evet, platform izin verdiğinde. Bir Instagram fotoğraf gönderisinin veya karuselin bağlantısını yapıştırın, fotoğraflar listede videoların yanında görünür.',
+        },
       ],
       faqMore: 'Daha fazla yanıtı {link} sayfasında bulabilirsiniz.',
       faqMoreLink: 'tam SSS',
       ctaTitle: 'Bir bağlantınız mı var?',
-      ctaBody: 'Yukarıya yapıştırın ve videonuzu veya fotoğrafınızı indirin.',
-      ctaButton: 'Bağlantı yapıştır',
+      ctaBody: 'Yukarıya yapıştırın ve videoyu cihazınıza kaydedin.',
+      ctaButton: 'Video bağlantısı yapıştır',
     },
     footer: {
-      tagline: 'Sosyal medya için ücretsiz video ve fotoğraf indirici.',
+      tagline: 'Sosyal medya için hızlı ve ücretsiz video indirici.',
       downloaders: 'İndiriciler',
       company: 'Şirket',
       legal: 'Yasal',
@@ -160,15 +165,15 @@ export const tr: Messages = {
     faqPage: {
       metaTitle: 'SSS: ExportVid Nasıl Çalışır',
       metaDescription:
-        'ExportVid ile video ve fotoğraf indirme hakkında yanıtlar: desteklenen siteler, filigranlar, kalite, gizli içerikler ve bir bağlantı çalışmadığında ne yapmalı.',
+        'ExportVid ile sosyal medya videolarını indirme hakkında yanıtlar: desteklenen siteler, filigranlar, video kalitesi, gizli içerik ve bir bağlantı çalışmadığında ne yapılacağı.',
       eyebrow: 'Yardım',
       title: 'Sık sorulan sorular',
       intro: 'ExportVid’in nasıl çalıştığına dair kısa yanıtlar.',
       items: [
         { q: 'ExportVid ücretsiz mi?', a: 'Evet. ExportVid ücretsizdir; ücret, abonelik veya kayıt gerektirmez.' },
         {
-          q: 'Sosyal medyadan video veya fotoğraf nasıl indirilir?',
-          a: 'Gönderinin bağlantısını kopyalayın, ana sayfadaki kutuya yapıştırın ve İndir’i seçin. ExportVid mevcut dosyaları listeler. Birini seçip cihazınıza kaydedin.',
+          q: 'Sosyal medyadan nasıl video indiririm?',
+          a: 'Videonun bağlantısını kopyalayın, ana sayfadaki kutuya yapıştırın ve İndir’i seçin. ExportVid mevcut tüm kaliteleri listeler. Birini seçip MP4 dosyasını cihazınıza kaydedin.',
         },
         { q: 'Hangi sitelerden indirebilirim?', a: '{list}. Desteklenen siteler sayfası, her biri için hangi bağlantı biçimlerinin çalıştığını gösterir.' },
         {
@@ -189,6 +194,10 @@ export const tr: Messages = {
         },
         { q: 'Bir şey kurmam gerekiyor mu?', a: 'Hayır. ExportVid tarayıcınızda, telefonda veya bilgisayarda çalışır. Kurulacak bir uygulama ya da eklenti yoktur.' },
         {
+          q: 'Fotoğraf da indirebilir miyim?',
+          a: 'Evet, platform izin verdiğinde. Bir Instagram fotoğraf gönderisinin veya karuselin bağlantısını yapıştırın, fotoğraflar listede videoların yanında görünür.',
+        },
+        {
           q: 'Bağlantım neden çalışmıyor?',
           a: 'Bağlantının tamamını kopyaladığınızı, gönderinin giriş yapmadan görünür olduğunu ve sitenin desteklenen siteler listesinde yer aldığını kontrol edin. Gönderi sorunsuzsa platform isteği engelliyor olabilir. Bir dakika sonra tekrar deneyin.',
         },
@@ -204,9 +213,9 @@ export const tr: Messages = {
     },
     supported: {
       metaTitle: 'Desteklenen Siteler',
-      metaDescription: 'ExportVid ile video ve fotoğraf indirebileceğiniz tüm siteler ve her biri için çalışan bağlantı biçimleri.',
+      metaDescription: 'ExportVid ile video indirebileceğiniz tüm siteler ve her biri için çalışan bağlantı biçimleri.',
       eyebrow: 'Desteklenen siteler',
-      title: 'İndirebileceğiniz siteler',
+      title: 'Video indirebileceğiniz siteler',
       intro: 'ExportVid’in çalıştığı tüm platformlar ve her biri için geçerli bağlantılar.',
       missing: 'İhtiyaç duyduğunuz bir site mi eksik?',
       tellUs: 'Hangisi olduğunu bize söyleyin',
